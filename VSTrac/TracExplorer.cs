@@ -152,21 +152,27 @@ namespace VSTrac
                 //TODO: load all ticket queries from registry
 
                 TicketQueryDefinition t = new TicketQueryDefinition();
-                t.Name = "All Tickets";
-                t.Filter = "id!=-1";
+                t.Name = "Active Tickets";
+                t.Filter = "status!=closed";
 
-                this.Nodes.Add(new TicketNode(t));
+                this.Nodes.Add(new TicketNode(serverDetails, t));
 
             }
         }
 
         private class TicketNode : TreeNode
         {
-            public TicketNode(TicketQueryDefinition ticketQueryDefinition)
+            public TicketNode(ServerDetails serverDetails, TicketQueryDefinition ticketQueryDefinition)
             {
                 this.Text = ticketQueryDefinition.Name;
                 this.ImageIndex = this.SelectedImageIndex = 3;
+
+                this.ServerDetails = serverDetails;
+                this.TicketDefinition = ticketQueryDefinition;
             }
+
+            public ServerDetails ServerDetails { get; set; }
+            public TicketQueryDefinition TicketDefinition { get; set; }
         }
 
         private class AttributesNode : TreeNode
@@ -284,6 +290,7 @@ namespace VSTrac
 
             // Set handlers
             clickHandlers.Add(typeof(WikiPageNode), WikiPageDoubleClick);
+            clickHandlers.Add(typeof(TicketNode), TicketDoubleClick);
 
             //TODO: Load servers from registry
             List<ServerDetails> servers = ServerDetails.LoadAll();
@@ -300,6 +307,10 @@ namespace VSTrac
 
             treeView1.EndUpdate();
         }
+        #endregion
+
+        #region Public Properties
+        public Connect VSTracConnect { get; set; }
         #endregion
 
         #region Event Handlers
@@ -320,17 +331,6 @@ namespace VSTrac
             if (clickHandlers.ContainsKey(e.Node.GetType()))
                 clickHandlers[e.Node.GetType()](sender, e);
         }
-        #endregion
-
-        #region Double Click Handlers
-        private void WikiPageDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            WikiPageNode wikiPageNode = e.Node as WikiPageNode;
-            ServerNode serverNode = e.Node.Parent.Parent as ServerNode;
-
-            Connect.OpenBrowser(serverNode.ServerDetails.Server + "/wiki/" + wikiPageNode.Text);
-        }
-        #endregion
 
         private void treeView1_AfterExpand(object sender, TreeViewEventArgs e)
         {
@@ -341,5 +341,30 @@ namespace VSTrac
                     nodeServer.Refresh();
             }
         }
+        #endregion
+
+        #region Double Click Handlers
+        private void WikiPageDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            WikiPageNode wikiPageNode = e.Node as WikiPageNode;
+            ServerNode serverNode = e.Node.Parent.Parent as ServerNode;
+
+            VSTracConnect.OpenBrowser(serverNode.ServerDetails.Server + "/wiki/" + wikiPageNode.Text);
+        }
+
+        private void TicketDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            try
+            {
+                TicketNode ticketNode = e.Node as TicketNode;
+
+                VSTracConnect.CreateTicketWindow(ticketNode.ServerDetails, ticketNode.TicketDefinition);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
     }
 }

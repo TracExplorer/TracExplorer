@@ -42,7 +42,16 @@ namespace VSTrac
             InitializeComponent();
         }
 
+        public Connect VSTracConnect { get; set; }
+        public ServerDetails ServerDetails { get; set; }
+        public TicketQueryDefinition TicketDefinition { get; set; }
+
         private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RunQuery();
+        }
+
+        public void RunQuery()
         {
             lblResults.Text = "Refreshing...";
             bgwTickets.RunWorkerAsync();
@@ -52,7 +61,7 @@ namespace VSTrac
         {
             try
             {
-                Connect.OpenBrowser("http://trac_URL/ticket/" + id);
+                VSTracConnect.OpenBrowser(ServerDetails.Server + "/ticket/" + id);
             }
             catch (Exception ex)
             {
@@ -64,7 +73,7 @@ namespace VSTrac
         {
             ServicePointManager.ServerCertificateValidationCallback = delegate(object certsender, X509Certificate cert, X509Chain chain, System.Net.Security.SslPolicyErrors error)
             {
-                if (MessageBox.Show(null, "There was an error reading the site's certificate. Do you want to continue?\r\n" + cert.ToString() + "\r\n\r\n" + error.ToString(), "Error with SSL certificate.", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show(null, "There was an error reading the site's certificate. Do you want to continue?\r\n" + cert.ToString() + "\r\n\r\n" + error.ToString(), "Error with SSL certificate.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     return true;
                 }
@@ -76,10 +85,9 @@ namespace VSTrac
             {
 
                 //TODO: Create a trac instance.
-                List<ServerDetails> servers = ServerDetails.LoadAll();
-                ITrac trac = TracCommon.GetTrac(servers[0]);
+                ITrac trac = TracCommon.GetTrac(ServerDetails);
 
-                int[] tickets = trac.queryTickets("status=new");
+                int[] tickets = trac.queryTickets(TicketDefinition.Filter);
                 List<MulticallItem> ticketItems = new List<MulticallItem>();
 
                 foreach (int id in tickets)
@@ -98,8 +106,8 @@ namespace VSTrac
                     Ticket t = new Ticket();
 
                     t.Id = int.Parse(items[0].ToString());
-                    t.Created = (DateTime)items[1];
-                    t.LastModified = (DateTime)items[2];
+                    t.Created = ParseDate(items[1]);
+                    t.LastModified = ParseDate(items[2]);
 
                     t.Status = (string)attributes["status"];
                     t.Description = (string)attributes["description"];
@@ -130,11 +138,20 @@ namespace VSTrac
             }
         }
 
+        private DateTime ParseDate(object value)
+        {
+            if (value is DateTime)
+                return (DateTime)value;
+            else
+                return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds((int)value);
+        }
+
         private void bgwTickets_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Result != null)
             {
                 allTickets = e.Result as List<Ticket>;
+                dataGridView1.AutoGenerateColumns = false;
                 dataGridView1.DataSource = allTickets;
                 lblResults.Text = string.Format("{0} Tickets returned", allTickets.Count);
             }

@@ -30,29 +30,28 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TicketView));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLastModified = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTicketType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSummary = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReporter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colResolution = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colComponent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSummary = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colKeywords = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMilestone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOwner = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTicketType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSeverity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastModified = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.dummyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -124,26 +123,26 @@
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colIcon,
             this.colId,
-            this.colCreated,
-            this.colLastModified,
+            this.colTicketType,
+            this.colSummary,
             this.colStatus,
-            this.colDescription,
             this.colReporter,
-            this.colCC,
             this.colResolution,
             this.colComponent,
-            this.colSummary,
             this.colPriority,
             this.colKeywords,
             this.colVersion,
             this.colMilestone,
             this.colOwner,
-            this.colTicketType,
-            this.colSeverity});
+            this.colSeverity,
+            this.colDescription,
+            this.colCC,
+            this.colCreated,
+            this.colLastModified});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlLight;
@@ -172,27 +171,27 @@
             // colId
             // 
             this.colId.DataPropertyName = "Id";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colId.DefaultCellStyle = dataGridViewCellStyle1;
             this.colId.HeaderText = "Id";
             this.colId.Name = "colId";
             this.colId.ReadOnly = true;
             this.colId.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colId.Width = 40;
             // 
-            // colCreated
+            // colTicketType
             // 
-            this.colCreated.DataPropertyName = "Created";
-            this.colCreated.HeaderText = "Created";
-            this.colCreated.Name = "colCreated";
-            this.colCreated.ReadOnly = true;
+            this.colTicketType.DataPropertyName = "TicketType";
+            this.colTicketType.HeaderText = "Type";
+            this.colTicketType.Name = "colTicketType";
+            this.colTicketType.ReadOnly = true;
             // 
-            // colLastModified
+            // colSummary
             // 
-            this.colLastModified.DataPropertyName = "LastModified";
-            this.colLastModified.HeaderText = "Last Modified";
-            this.colLastModified.Name = "colLastModified";
-            this.colLastModified.ReadOnly = true;
+            this.colSummary.DataPropertyName = "Summary";
+            this.colSummary.HeaderText = "Summary";
+            this.colSummary.Name = "colSummary";
+            this.colSummary.ReadOnly = true;
+            this.colSummary.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colSummary.Width = 300;
             // 
             // colStatus
             // 
@@ -201,28 +200,12 @@
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
             // 
-            // colDescription
-            // 
-            this.colDescription.DataPropertyName = "Description";
-            this.colDescription.HeaderText = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
-            this.colDescription.Visible = false;
-            // 
             // colReporter
             // 
             this.colReporter.DataPropertyName = "Reporter";
             this.colReporter.HeaderText = "Reporter";
             this.colReporter.Name = "colReporter";
             this.colReporter.ReadOnly = true;
-            // 
-            // colCC
-            // 
-            this.colCC.DataPropertyName = "CC";
-            this.colCC.HeaderText = "CC";
-            this.colCC.Name = "colCC";
-            this.colCC.ReadOnly = true;
-            this.colCC.Visible = false;
             // 
             // colResolution
             // 
@@ -237,15 +220,6 @@
             this.colComponent.HeaderText = "Component";
             this.colComponent.Name = "colComponent";
             this.colComponent.ReadOnly = true;
-            // 
-            // colSummary
-            // 
-            this.colSummary.DataPropertyName = "Summary";
-            this.colSummary.HeaderText = "Summary";
-            this.colSummary.Name = "colSummary";
-            this.colSummary.ReadOnly = true;
-            this.colSummary.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colSummary.Width = 300;
             // 
             // colPriority
             // 
@@ -283,13 +257,6 @@
             this.colOwner.Name = "colOwner";
             this.colOwner.ReadOnly = true;
             // 
-            // colTicketType
-            // 
-            this.colTicketType.DataPropertyName = "TicketType";
-            this.colTicketType.HeaderText = "Type";
-            this.colTicketType.Name = "colTicketType";
-            this.colTicketType.ReadOnly = true;
-            // 
             // colSeverity
             // 
             this.colSeverity.DataPropertyName = "Severity";
@@ -297,17 +264,47 @@
             this.colSeverity.Name = "colSeverity";
             this.colSeverity.ReadOnly = true;
             // 
+            // colDescription
+            // 
+            this.colDescription.DataPropertyName = "Description";
+            this.colDescription.HeaderText = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
+            this.colDescription.Visible = false;
+            // 
+            // colCC
+            // 
+            this.colCC.DataPropertyName = "CC";
+            this.colCC.HeaderText = "CC";
+            this.colCC.Name = "colCC";
+            this.colCC.ReadOnly = true;
+            this.colCC.Visible = false;
+            // 
+            // colCreated
+            // 
+            this.colCreated.DataPropertyName = "Created";
+            this.colCreated.HeaderText = "Created";
+            this.colCreated.Name = "colCreated";
+            this.colCreated.ReadOnly = true;
+            // 
+            // colLastModified
+            // 
+            this.colLastModified.DataPropertyName = "LastModified";
+            this.colLastModified.HeaderText = "Last Modified";
+            this.colLastModified.Name = "colLastModified";
+            this.colLastModified.ReadOnly = true;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dummyToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(121, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 26);
             // 
             // dummyToolStripMenuItem
             // 
             this.dummyToolStripMenuItem.Name = "dummyToolStripMenuItem";
-            this.dummyToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.dummyToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.dummyToolStripMenuItem.Text = "Dummy";
             // 
             // panel1
@@ -406,21 +403,21 @@
         private System.Windows.Forms.ToolStripMenuItem dummyToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn colIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCreated;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLastModified;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTicketType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSummary;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReporter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCC;
         private System.Windows.Forms.DataGridViewTextBoxColumn colResolution;
         private System.Windows.Forms.DataGridViewTextBoxColumn colComponent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSummary;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPriority;
         private System.Windows.Forms.DataGridViewTextBoxColumn colKeywords;
         private System.Windows.Forms.DataGridViewTextBoxColumn colVersion;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMilestone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOwner;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTicketType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSeverity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreated;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastModified;
     }
 }
