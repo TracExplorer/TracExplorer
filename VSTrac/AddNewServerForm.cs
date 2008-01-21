@@ -36,6 +36,8 @@ namespace VSTrac
         {
             InitializeComponent();
             lblServerCheck.Text = "";
+
+            splitContainer1.Panel1Collapsed = true;
         }
 
         public ServerDetails Result { get; set; }
@@ -109,6 +111,9 @@ namespace VSTrac
         private bool CheckTracServer()
         {
             lblServerCheck.Text = "Checking...";
+            lblServerCheck.Refresh();
+            this.Cursor = Cursors.WaitCursor;
+            btnCancel.Enabled = bntOk.Enabled = false;
 
             try
             {
@@ -119,17 +124,29 @@ namespace VSTrac
             }
             catch (Exception ex)
             {
-                lblServerCheck.Text = "Failed check. " + ex.Message;
+                lblError.Text = "Failed check. " + ex.Message;
+                splitContainer1.Panel1Collapsed = false;
                 return false;
             }
+            finally
+            {
+                lblServerCheck.Text = "";
+                lblServerCheck.Refresh();
+                this.Cursor = Cursors.Default;
+                btnCancel.Enabled = bntOk.Enabled = true;
+            }
 
-            lblServerCheck.Text = "Passed check.";
             return true;
         }
 
         private void chkAuthentication_CheckedChanged(object sender, EventArgs e)
         {
             groupBox1.Enabled = chkAuthentication.Checked;
+        }
+
+        private void AddNewServerForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

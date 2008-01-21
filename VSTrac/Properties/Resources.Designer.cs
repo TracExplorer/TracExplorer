@@ -67,6 +67,13 @@ namespace VSTrac.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap error {
+            get {
+                object obj = ResourceManager.GetObject("error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Add To Favourites.
         /// </summary>

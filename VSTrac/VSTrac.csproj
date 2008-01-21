@@ -157,6 +157,7 @@
     <None Include="Resources\closedticket.png" />
     <Content Include="LICENCE.TXT" />
     <Content Include="README.TXT" />
+    <None Include="Resources\error.png" />
     <Content Include="trac.ico" />
     <Content Include="VSTrac.AddIn" />
   </ItemGroup>
