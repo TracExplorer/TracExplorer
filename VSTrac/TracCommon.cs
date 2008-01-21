@@ -24,15 +24,32 @@ using System.Collections.Generic;
 using System.Text;
 using CookComputing.XmlRpc;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
 
 namespace VSTrac
 {
     public static class TracCommon
     {
+        static TracCommon()
+        {
+            ServicePointManager.ServerCertificateValidationCallback = delegate(object certsender, X509Certificate cert, X509Chain chain, System.Net.Security.SslPolicyErrors error)
+            {
+                //TODO: Make better message + put in resource
+                if (MessageBox.Show(null, "There was an error reading the site's certificate. Do you want to continue?\r\n" + cert.ToString() + "\r\n\r\n" + error.ToString(), "Error with SSL certificate.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            };
+
+        }
+
         public static ITrac GetTrac(ServerDetails serverDetails)
         {
             ITrac trac = XmlRpcProxyGen.Create<ITrac>();
-            trac.Proxy = WebRequest.GetSystemWebProxy();
+            trac.Proxy = WebRequest.DefaultWebProxy;
             trac.Url = serverDetails.Server + "/login/xmlrpc";
 
             if (serverDetails.Authenticated)

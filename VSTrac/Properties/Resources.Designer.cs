@@ -60,19 +60,37 @@ namespace VSTrac.Properties {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to Attributes.
-        /// </summary>
-        internal static string AttributesNode {
-            get {
-                return ResourceManager.GetString("AttributesNode", resourceCulture);
-            }
-        }
-        
         internal static System.Drawing.Bitmap closedticket {
             get {
                 object obj = ResourceManager.GetObject("closedticket", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add To Favourites.
+        /// </summary>
+        internal static string MenuAddToFav {
+            get {
+                return ResourceManager.GetString("MenuAddToFav", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string MenuDelete {
+            get {
+                return ResourceManager.GetString("MenuDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        internal static string MenuRefresh {
+            get {
+                return ResourceManager.GetString("MenuRefresh", resourceCulture);
             }
         }
         
@@ -84,7 +102,97 @@ namespace VSTrac.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waiting....
+        ///   Looks up a localized string similar to Attributes.
+        /// </summary>
+        internal static string NodeAttributes {
+            get {
+                return ResourceManager.GetString("NodeAttributes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Components.
+        /// </summary>
+        internal static string NodeComponents {
+            get {
+                return ResourceManager.GetString("NodeComponents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Milestones.
+        /// </summary>
+        internal static string NodeMilestones {
+            get {
+                return ResourceManager.GetString("NodeMilestones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Priorities.
+        /// </summary>
+        internal static string NodePriorities {
+            get {
+                return ResourceManager.GetString("NodePriorities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolutions.
+        /// </summary>
+        internal static string NodeResolutions {
+            get {
+                return ResourceManager.GetString("NodeResolutions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Severities.
+        /// </summary>
+        internal static string NodeSeverities {
+            get {
+                return ResourceManager.GetString("NodeSeverities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statuses.
+        /// </summary>
+        internal static string NodeStatuses {
+            get {
+                return ResourceManager.GetString("NodeStatuses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tickets.
+        /// </summary>
+        internal static string NodeTickets {
+            get {
+                return ResourceManager.GetString("NodeTickets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ticket Types.
+        /// </summary>
+        internal static string NodeTicketTypes {
+            get {
+                return ResourceManager.GetString("NodeTicketTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Versions.
+        /// </summary>
+        internal static string NodeVersions {
+            get {
+                return ResourceManager.GetString("NodeVersions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to waiting....
         /// </summary>
         internal static string NodeWaiting {
             get {
@@ -93,11 +201,20 @@ namespace VSTrac.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tickets.
+        ///   Looks up a localized string similar to Wiki Pages.
         /// </summary>
-        internal static string TicketsNode {
+        internal static string NodeWikiPages {
             get {
-                return ResourceManager.GetString("TicketsNode", resourceCulture);
+                return ResourceManager.GetString("NodeWikiPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new Trac server.
+        /// </summary>
+        internal static string ToolbarNewServer {
+            get {
+                return ResourceManager.GetString("ToolbarNewServer", resourceCulture);
             }
         }
         
@@ -105,15 +222,6 @@ namespace VSTrac.Properties {
             get {
                 object obj = ResourceManager.GetObject("trac", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wiki Pages.
-        /// </summary>
-        internal static string WikiPagesNode {
-            get {
-                return ResourceManager.GetString("WikiPagesNode", resourceCulture);
             }
         }
     }

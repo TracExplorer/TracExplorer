@@ -127,16 +127,52 @@
   <data name="trac" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\trac.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TicketsNode" xml:space="preserve">
+  <data name="NodeTickets" xml:space="preserve">
     <value>Tickets</value>
   </data>
-  <data name="WikiPagesNode" xml:space="preserve">
+  <data name="NodeWikiPages" xml:space="preserve">
     <value>Wiki Pages</value>
   </data>
   <data name="NodeWaiting" xml:space="preserve">
-    <value>Waiting...</value>
+    <value>waiting...</value>
   </data>
-  <data name="AttributesNode" xml:space="preserve">
+  <data name="NodeAttributes" xml:space="preserve">
     <value>Attributes</value>
+  </data>
+  <data name="MenuAddToFav" xml:space="preserve">
+    <value>Add To Favourites</value>
+  </data>
+  <data name="MenuDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="MenuRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="ToolbarNewServer" xml:space="preserve">
+    <value>Add new Trac server</value>
+  </data>
+  <data name="NodeComponents" xml:space="preserve">
+    <value>Components</value>
+  </data>
+  <data name="NodeMilestones" xml:space="preserve">
+    <value>Milestones</value>
+  </data>
+  <data name="NodeSeverities" xml:space="preserve">
+    <value>Severities</value>
+  </data>
+  <data name="NodeTicketTypes" xml:space="preserve">
+    <value>Ticket Types</value>
+  </data>
+  <data name="NodePriorities" xml:space="preserve">
+    <value>Priorities</value>
+  </data>
+  <data name="NodeResolutions" xml:space="preserve">
+    <value>Resolutions</value>
+  </data>
+  <data name="NodeStatuses" xml:space="preserve">
+    <value>Statuses</value>
+  </data>
+  <data name="NodeVersions" xml:space="preserve">
+    <value>Versions</value>
   </data>
 </root>

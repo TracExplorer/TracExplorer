@@ -82,14 +82,14 @@ namespace VSTrac
 
             public WikiPagesNode(ServerDetails serverDetails)
             {
-                this.Text = Properties.Resources.WikiPagesNode;
+                this.Text = Properties.Resources.NodeWikiPages;
                 this.ImageIndex = this.SelectedImageIndex = 2;
                 this.serverDetails = serverDetails;
             }
 
             public void Refresh()
             {
-                this.Text = string.Format("{0} ({1})", Properties.Resources.WikiPagesNode, Properties.Resources.NodeWaiting);
+                this.Text = string.Format("{0} ({1})", Properties.Resources.NodeWikiPages, Properties.Resources.NodeWaiting);
 
                 //start thread for adding wiki pages
                 bgWorker.DoWork += new DoWorkEventHandler(bgWorker_DoWork);
@@ -109,13 +109,13 @@ namespace VSTrac
                         this.Nodes.Add(new WikiPageNode(wikiPage));
                     }
 
-                    this.Text = string.Format("{0} ({1})", Properties.Resources.WikiPagesNode, wikiPages.Count.ToString());
+                    this.Text = string.Format("{0} ({1})", Properties.Resources.NodeWikiPages, wikiPages.Count.ToString());
                 }
 
                 if (e.Result is Exception)
                 {
                     Exception ex = (Exception)e.Result;
-                    this.Text = string.Format("{0} ({1})", Properties.Resources.WikiPagesNode, ex.Message);
+                    this.Text = string.Format("{0} ({1})", Properties.Resources.NodeWikiPages, ex.Message);
                 }
             }
 
@@ -146,7 +146,7 @@ namespace VSTrac
         {
             public TicketsNode(ServerDetails serverDetails)
             {
-                this.Text = Properties.Resources.TicketsNode;
+                this.Text = Properties.Resources.NodeTickets;
                 this.ImageIndex = this.SelectedImageIndex = 2;
 
                 //TODO: load all ticket queries from registry
@@ -182,14 +182,14 @@ namespace VSTrac
 
             public AttributesNode(ServerDetails serverDetails)
             {
-                this.Text = Properties.Resources.AttributesNode;
+                this.Text = Properties.Resources.NodeAttributes;
                 this.ImageIndex = this.SelectedImageIndex = 2;
                 this.serverDetails = serverDetails;
             }
 
             public void Refresh()
             {
-                this.Text = string.Format("{0} ({1})", Properties.Resources.AttributesNode, Properties.Resources.NodeWaiting);
+                this.Text = string.Format("{0} ({1})", Properties.Resources.NodeAttributes, Properties.Resources.NodeWaiting);
 
                 bgWorker = new BackgroundWorker();
                 bgWorker.DoWork += new DoWorkEventHandler(bgWorker_DoWork);
@@ -204,53 +204,60 @@ namespace VSTrac
                 {
                     Exception ex = (Exception)e.Result;
 
-                    this.Text = string.Format("{0} ({1})", Properties.Resources.AttributesNode, ex.Message);
+                    this.Text = string.Format("{0} ({1})", Properties.Resources.NodeAttributes, ex.Message);
                     return;
                 }
 
                 if (e.Result is object[])
                 {
-                    this.Text = Properties.Resources.AttributesNode;
+                    this.Text = Properties.Resources.NodeAttributes;
 
                     object[] results = (object[])e.Result;
+
                     object[] methodResults = (object[])results[0];
+                    AddAttributes(methodResults, "nodeComponents", Properties.Resources.NodeComponents);
 
-                    // Components
-                    if (methodResults.Length > 0)
-                    {
-                        List<string> components = new List<string>((string[])((object[])results[0])[0]);
-                        components.Sort();
-
-                        TreeNode nodeComponents = this.Nodes.Add("nodeComponents", string.Format("Components ({0})", components.Count), 3, 3);
-
-                        foreach (string component in components)
-                        {
-                            nodeComponents.Nodes.Add(component, component, 3, 3);
-                        }
-                    }
-                    else
-                        this.Nodes.Add("nodeComponents", "Components (0)", 3, 3);
-
-
-                    // Milestones
                     methodResults = (object[])results[1];
+                    AddAttributes(methodResults, "nodeMilestones", Properties.Resources.NodeMilestones);
 
-                    if ( methodResults.Length > 0 && ((object[])methodResults[0]).Length > 0)
-                    {
-                        List<string> milestones = new List<string>((string[])(object[])methodResults[0]);
-                        milestones.Sort();
+                    methodResults = (object[])results[2];
+                    AddAttributes(methodResults, "nodeSeverities", Properties.Resources.NodeSeverities);
 
-                        TreeNode nodeMilestones = this.Nodes.Add("nodeMilestones", string.Format("Milestones ({0})", milestones.Count), 3, 3);
+                    methodResults = (object[])results[3];
+                    AddAttributes(methodResults, "nodeTicketTypes", Properties.Resources.NodeTicketTypes);
 
-                        foreach (string milestone in milestones)
-                        {
-                            nodeMilestones.Nodes.Add(milestone, milestone, 3, 3);
-                        }
-                    }
-                    else
-                        this.Nodes.Add("nodeMilestones", "Milestones (0)", 3, 3);
+                    methodResults = (object[])results[4];
+                    AddAttributes(methodResults, "nodePriorities", Properties.Resources.NodePriorities);
+
+                    methodResults = (object[])results[5];
+                    AddAttributes(methodResults, "nodeStatuses", Properties.Resources.NodeStatuses);
+
+                    methodResults = (object[])results[6];
+                    AddAttributes(methodResults, "nodeResolutions", Properties.Resources.NodeResolutions);
+
+                    methodResults = (object[])results[7];
+                    AddAttributes(methodResults, "nodeVersions", Properties.Resources.NodeVersions);
+
 
                 }
+            }
+
+            private void AddAttributes(object[] methodResults, string nodeName, string nodeText)
+            {
+                if (methodResults.Length > 0 && ((object[])methodResults[0]).Length > 0)
+                {
+                    List<string> items = new List<string>((string[])(object[])methodResults[0]);
+                    items.Sort();
+
+                    TreeNode node = this.Nodes.Add(nodeName, string.Format("{0} ({1})", nodeText, items.Count), 2, 2);
+
+                    foreach (string item in items)
+                    {
+                        node.Nodes.Add(item, item, 3, 3);
+                    }
+                }
+                else
+                    this.Nodes.Add(nodeName, nodeText + " (0)", 2, 2);
             }
 
             void bgWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -265,6 +272,10 @@ namespace VSTrac
                     attributes.Add(new MulticallItem("ticket.milestone.getAll", new string[] {}));
                     attributes.Add(new MulticallItem("ticket.severity.getAll", new string[] {}));
                     attributes.Add(new MulticallItem("ticket.type.getAll", new string[] {}));
+                    attributes.Add(new MulticallItem("ticket.priority.getAll", new string[] { }));
+                    attributes.Add(new MulticallItem("ticket.status.getAll", new string[] { }));
+                    attributes.Add(new MulticallItem("ticket.resolution.getAll", new string[] { }));
+                    attributes.Add(new MulticallItem("ticket.version.getAll", new string[] { }));
 
                     object[] result = trac.multicall(attributes.ToArray());
 
