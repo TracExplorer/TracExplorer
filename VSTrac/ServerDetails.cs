@@ -55,9 +55,9 @@ namespace VSTrac
             try
             {
                 RegistryKey keySoftware = Registry.CurrentUser.OpenSubKey("Software", true); //I'm assuming this exists
-                RegistryKey keyVSTrac = keySoftware.CreateSubKey("VSTrac", RegistryKeyPermissionCheck.ReadWriteSubTree);
+                RegistryKey keyServers = keySoftware.CreateSubKey("VSTrac\\Servers", RegistryKeyPermissionCheck.ReadWriteSubTree);
                 
-                RegistryKey keyServer = keyVSTrac.CreateSubKey(this.Server,  RegistryKeyPermissionCheck.ReadWriteSubTree);
+                RegistryKey keyServer = keyServers.CreateSubKey(this.Server,  RegistryKeyPermissionCheck.ReadWriteSubTree);
                 keyServer.SetValue("server", this.Server);
                 keyServer.SetValue("authenticated", this.Authenticated ? 1 : 0);
                 keyServer.SetValue("username", this.Username);
@@ -76,16 +76,16 @@ namespace VSTrac
             try
             {
                 RegistryKey keySoftware = Registry.CurrentUser.OpenSubKey("Software", true); //I'm assuming this exists
-                RegistryKey keyVSTrac = keySoftware.OpenSubKey("VSTrac", true);
+                RegistryKey keyServers = keySoftware.OpenSubKey("VSTrac\\Servers", true);
 
-                if (keyVSTrac == null) // no defined servers;
+                if (keyServers == null) // no defined servers;
                     return servers;
 
-                string[] keyServers = keyVSTrac.GetSubKeyNames();
+                string[] subkeyServers = keyServers.GetSubKeyNames();
 
-                foreach (string subkeyServer in keyServers)
+                foreach (string subkeyServer in subkeyServers)
                 {
-                    RegistryKey keyServer = keyVSTrac.OpenSubKey(subkeyServer, false);
+                    RegistryKey keyServer = keyServers.OpenSubKey(subkeyServer, false);
 
                     ServerDetails server = new ServerDetails();
                     server.Server = (string)keyServer.GetValue("server");

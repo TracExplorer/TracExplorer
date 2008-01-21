@@ -46,7 +46,7 @@ namespace VSTrac
 
             if (string.IsNullOrEmpty(txtServer.Text))
             {
-                errorProvider1.SetError(txtServer, "Please enter a valid Trac url. This must include the \"/login/xmlrpc\" part.");
+                errorProvider1.SetError(txtServer, "Please enter a valid Trac url. This must NOT include the \"/login/xmlrpc\" part. eg: http://vstrac.devjavu.com");
                 valid = false;
             }
             else
@@ -88,11 +88,17 @@ namespace VSTrac
         {
             ServerDetails details = new ServerDetails();
 
-            details.Server = txtServer.Text.Trim();
+            string tempServer = txtServer.Text.Trim();
 
-            if (details.Server[details.Server.Length - 1] == '/')
-                details.Server.Remove(details.Server.Length - 1);
+            if (!tempServer.Contains(":"))
+                tempServer = "http://" + tempServer;
+                
+            Uri uriServer= new Uri(tempServer);
 
+            if (uriServer.LocalPath.Contains("login/xmlrpc"))
+                throw new ApplicationException("Please do not include the login/xmlrpc path. The basic trac path is sufficient.");
+
+            details.Server = uriServer.ToString();
             details.Authenticated = chkAuthentication.Checked;
             details.Username = txtUsername.Text;
             details.Password = txtPassword.Text;
@@ -102,13 +108,13 @@ namespace VSTrac
 
         private bool CheckTracServer()
         {
-            ServerDetails details = GetServerDetails();
-            ITrac trac = TracCommon.GetTrac(details);
-
             lblServerCheck.Text = "Checking...";
 
             try
             {
+                ServerDetails details = GetServerDetails();
+                ITrac trac = TracCommon.GetTrac(details);
+
                 object[] version = trac.getAPIVersion();
             }
             catch (Exception ex)
