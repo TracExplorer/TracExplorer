@@ -27,7 +27,19 @@ namespace VSTrac
 {
     public class TicketQueryDefinition
     {
-        public string Name { get; set; }
-        public string Filter { get; set; }
+        private string name;
+        private string filter;
+
+        public string Name
+        {
+            get { return this.name; }
+            set { this.name = value; }
+        }
+
+        public string Filter
+        {
+            get { return this.filter; }
+            set { this.filter = value; }
+        }
     }
 }

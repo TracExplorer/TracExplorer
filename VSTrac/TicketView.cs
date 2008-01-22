@@ -35,16 +35,39 @@ namespace VSTrac
 {
     public partial class TicketView : UserControl
     {
-        List<Ticket> allTickets = new List<Ticket>();
+        #region Private Variables
+        private List<Ticket> allTickets = new List<Ticket>();
+        private Connect vsTracConnect;
+        private ServerDetails serverDetails;
+        private TicketQueryDefinition ticketDefinition; 
+        #endregion
 
+        #region ctor
         public TicketView()
         {
             InitializeComponent();
+        } 
+        #endregion
+
+        #region Public Properties
+        public Connect VSTracConnect
+        {
+            get { return vsTracConnect; }
+            set { vsTracConnect = value; }
         }
 
-        public Connect VSTracConnect { get; set; }
-        public ServerDetails ServerDetails { get; set; }
-        public TicketQueryDefinition TicketDefinition { get; set; }
+        public ServerDetails ServerDetails
+        {
+            get { return serverDetails; }
+            set { serverDetails = value; }
+        }
+
+        public TicketQueryDefinition TicketDefinition
+        {
+            get { return ticketDefinition; }
+            set { ticketDefinition = value; }
+        } 
+        #endregion
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -129,12 +152,19 @@ namespace VSTrac
             }
         }
 
+        /// <summary>
+        /// Parse the date in value which could be a unix timestamp or already 
+        /// a DateTime value depending on the version of XmlRpcPlugin the trac
+        /// site is using.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private DateTime ParseDate(object value)
         {
             if (value is DateTime)
                 return (DateTime)value;
             else
-                return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds((int)value);
+                return new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds((int)value); // convert from unit timestamp
         }
 
         private void bgwTickets_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

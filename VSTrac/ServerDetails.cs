@@ -29,11 +29,40 @@ namespace VSTrac
 {
     public class ServerDetails
     {
-        public string Server { get; set; }
-        public bool Authenticated { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        #region Private Variables
+        private string server;
+        private bool authenticated;
+        private string username;
+        private string password;
+        #endregion
 
+        #region Public Properties
+        public string Server
+        {
+            get { return this.server; }
+            set { this.server = value; }
+        }
+
+        public bool Authenticated
+        {
+            get { return this.authenticated; }
+            set { this.authenticated = value; }
+        }
+
+        public string Username
+        {
+            get { return this.username; }
+            set { this.username = value; }
+        }
+
+        public string Password
+        {
+            get { return this.password; }
+            set { this.password = value; }
+        }
+        #endregion
+
+        #region ctors
         public ServerDetails()
         { }
 
@@ -49,7 +78,9 @@ namespace VSTrac
             this.Username = username;
             this.Password = password;
         }
+        #endregion
 
+        #region Save
         public void Save()
         {
             try
@@ -68,7 +99,9 @@ namespace VSTrac
                 MessageBox.Show(ex.Message, "Error saving server configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
 
+        #region LoadAll (static)
         public static List<ServerDetails> LoadAll()
         {
             List<ServerDetails> servers = new List<ServerDetails>();
@@ -104,5 +137,6 @@ namespace VSTrac
 
             return servers;
         }
+        #endregion
     }
 }

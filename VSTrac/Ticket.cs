@@ -28,24 +28,135 @@ namespace VSTrac
 {
     public class Ticket
     {
-        public Bitmap Icon { get; set; }
-        public int Id { get; set; }
-        public DateTime Created { get; set; }
-        public DateTime LastModified { get; set; }
-        
-        public string Status { get; set; }
-        public string Description { get; set; }
-        public string Reporter { get; set; }
-        public string CC { get; set; }
-        public string Resolution { get; set; }
-        public string Component { get; set; }
-        public string Summary { get; set; }
-        public string Priority { get; set; }
-        public string Keywords { get; set; }
-        public string Version { get; set; }
-        public string Milestone { get; set; }
-        public string Owner { get; set; }        
-        public string TicketType { get; set; }
-        public string Severity { get; set; }
+        #region Private Variables
+        private Bitmap icon;
+        private int id;
+        private DateTime created;
+        private DateTime lastModified;
+        private string status;
+        private string description;
+        private string reporter;
+        private string cc;
+        private string resolution;
+        private string component;
+        private string summary;
+        private string priority;
+        private string keywords;
+        private string version;
+        private string milestone;
+        private string owner;
+        private string ticketType;
+        private string severity; 
+        #endregion
+
+        #region Public Properties
+        public Bitmap Icon
+        {
+            get { return icon; }
+            set { icon = value; }
+        }
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public DateTime Created
+        {
+            get { return created; }
+            set { created = value; }
+        }
+
+        public DateTime LastModified
+        {
+            get { return lastModified; }
+            set { lastModified = value; }
+        }
+
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
+
+        public string Reporter
+        {
+            get { return reporter; }
+            set { reporter = value; }
+        }
+
+        public string CC
+        {
+            get { return cc; }
+            set { cc = value; }
+        }
+
+        public string Resolution
+        {
+            get { return resolution; }
+            set { resolution = value; }
+        }
+
+        public string Component
+        {
+            get { return component; }
+            set { component = value; }
+        }
+
+        public string Summary
+        {
+            get { return summary; }
+            set { summary = value; }
+        }
+
+        public string Priority
+        {
+            get { return priority; }
+            set { priority = value; }
+        }
+
+        public string Keywords
+        {
+            get { return keywords; }
+            set { keywords = value; }
+        }
+
+        public string Version
+        {
+            get { return version; }
+            set { version = value; }
+        }
+
+        public string Milestone
+        {
+            get { return milestone; }
+            set { milestone = value; }
+        }
+
+        public string Owner
+        {
+            get { return owner; }
+            set { owner = value; }
+        }
+
+        public string TicketType
+        {
+            get { return ticketType; }
+            set { ticketType = value; }
+        }
+
+        public string Severity
+        {
+            get { return severity; }
+            set { severity = value; }
+        } 
+        #endregion
     }
 }

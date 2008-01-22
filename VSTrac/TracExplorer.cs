@@ -292,6 +292,7 @@ namespace VSTrac
 
         #region Private Variables
         private Dictionary<Type, TreeNodeMouseClickEventHandler> clickHandlers = new Dictionary<Type, TreeNodeMouseClickEventHandler>();
+        private Connect vsTracConnect;
         #endregion
 
         #region ctor
@@ -321,7 +322,11 @@ namespace VSTrac
         #endregion
 
         #region Public Properties
-        public Connect VSTracConnect { get; set; }
+        public Connect VSTracConnect 
+        {
+            get { return vsTracConnect; }
+            set { vsTracConnect = value; }
+        }
         #endregion
 
         #region Event Handlers
