@@ -35,7 +35,36 @@ namespace VSTrac
     public partial class TracExplorer : UserControl
     {
         #region Node Types
-        private class ServerNode : TreeNode
+        private abstract class TracNode : TreeNode
+        {
+            private ServerDetails serverDetails;
+
+            public TracNode() : base()
+            { }
+
+            public TracNode(string text) : base(text)
+            { }
+
+            public TracNode(string text, TreeNode[] children) : base(text, children)
+            { }
+
+            public TracNode(string text, int imageIndex, int selectedImageIndex) : base(text, imageIndex, selectedImageIndex)
+            { }
+
+            public TracNode(string text, int imageIndex, int selectedImageIndex, TreeNode[] children) : base(text, imageIndex, selectedImageIndex, children)
+            { }
+
+            public ServerDetails ServerDetails
+            {
+                get { return this.serverDetails; }
+                set { this.serverDetails = value; }
+            }
+
+            public virtual void Refresh()
+            { }
+        }
+
+        private class ServerNode : TracNode
         {
             private WikiPagesNode nodeWikiPages;
             private TicketsNode nodeTickets;
@@ -61,11 +90,9 @@ namespace VSTrac
                 }
             }
 
-            public ServerDetails ServerDetails { get; set; }
-
             public bool DetailsLoaded { get; set; }
 
-            public void Refresh()
+            public override void Refresh()
             {
                 nodeWikiPages.Refresh();
                 //nodeTickets.Refresh();
@@ -75,26 +102,25 @@ namespace VSTrac
             }
         }
 
-        private class WikiPagesNode : TreeNode
+        private class WikiPagesNode : TracNode
         {
             BackgroundWorker bgWorker = new BackgroundWorker();
-            ServerDetails serverDetails;
 
             public WikiPagesNode(ServerDetails serverDetails)
             {
                 this.Text = Properties.Resources.NodeWikiPages;
                 this.ImageIndex = this.SelectedImageIndex = 2;
-                this.serverDetails = serverDetails;
+                this.ServerDetails = serverDetails;
             }
 
-            public void Refresh()
+            public override void Refresh()
             {
                 this.Text = string.Format("{0} ({1})", Properties.Resources.NodeWikiPages, Properties.Resources.NodeWaiting);
 
                 //start thread for adding wiki pages
                 bgWorker.DoWork += new DoWorkEventHandler(bgWorker_DoWork);
                 bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgWorker_RunWorkerCompleted);
-                bgWorker.RunWorkerAsync(serverDetails);
+                bgWorker.RunWorkerAsync(ServerDetails);
             }
 
             void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -136,13 +162,13 @@ namespace VSTrac
             }
         }
 
-        private class WikiPageNode : TreeNode
+        private class WikiPageNode : TracNode
         {
             public WikiPageNode(string wikiPage) : base(wikiPage, 3, 3)
             { }
         }
 
-        private class TicketsNode : TreeNode
+        private class TicketsNode : TracNode
         {
             public TicketsNode(ServerDetails serverDetails)
             {
@@ -156,11 +182,15 @@ namespace VSTrac
                 t.Filter = "status!=closed";
 
                 this.Nodes.Add(new TicketNode(serverDetails, t));
+            }
 
+            public override void Refresh()
+            {
+                throw new NotImplementedException();
             }
         }
 
-        private class TicketNode : TreeNode
+        private class TicketNode : TracNode
         {
             public TicketNode(ServerDetails serverDetails, TicketQueryDefinition ticketQueryDefinition)
             {
@@ -171,23 +201,27 @@ namespace VSTrac
                 this.TicketDefinition = ticketQueryDefinition;
             }
 
-            public ServerDetails ServerDetails { get; set; }
-            public TicketQueryDefinition TicketDefinition { get; set; }
+            private TicketQueryDefinition ticketDefinition;
+
+            public TicketQueryDefinition TicketDefinition
+            {
+                get { return this.ticketDefinition; }
+                set { this.ticketDefinition = value; }
+            }
         }
 
-        private class AttributesNode : TreeNode
+        private class AttributesNode : TracNode
         {
-            private ServerDetails serverDetails;
             private BackgroundWorker bgWorker;
 
             public AttributesNode(ServerDetails serverDetails)
             {
                 this.Text = Properties.Resources.NodeAttributes;
                 this.ImageIndex = this.SelectedImageIndex = 2;
-                this.serverDetails = serverDetails;
+                this.ServerDetails = serverDetails;
             }
 
-            public void Refresh()
+            public override void Refresh()
             {
                 this.Text = string.Format("{0} ({1})", Properties.Resources.NodeAttributes, Properties.Resources.NodeWaiting);
 
@@ -195,7 +229,7 @@ namespace VSTrac
                 bgWorker.DoWork += new DoWorkEventHandler(bgWorker_DoWork);
                 bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgWorker_RunWorkerCompleted);
 
-                bgWorker.RunWorkerAsync(this.serverDetails);
+                bgWorker.RunWorkerAsync(this.ServerDetails);
             }
 
             void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -304,7 +338,6 @@ namespace VSTrac
             clickHandlers.Add(typeof(WikiPageNode), WikiPageDoubleClick);
             clickHandlers.Add(typeof(TicketNode), TicketDoubleClick);
 
-            //TODO: Load servers from registry
             List<ServerDetails> servers = ServerDetails.LoadAll();
 
             treeView1.BeginUpdate();

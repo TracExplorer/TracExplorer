@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Favourites");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Trac Servers");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Favourites");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Trac Servers");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TracExplorer));
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageSmall = new System.Windows.Forms.ImageList(this.components);
@@ -40,7 +40,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addToFavouritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -50,18 +49,19 @@
             // 
             // treeView1
             // 
+            this.treeView1.ContextMenuStrip = this.contextMenuStrip1;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageSmall;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            treeNode3.Name = "nodeFavourites";
-            treeNode3.Text = "Favourites";
-            treeNode4.Name = "nodeServers";
-            treeNode4.Text = "Trac Servers";
+            treeNode1.Name = "nodeFavourites";
+            treeNode1.Text = "Favourites";
+            treeNode2.Name = "nodeServers";
+            treeNode2.Text = "Trac Servers";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode4});
+            treeNode1,
+            treeNode2});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(263, 302);
             this.treeView1.TabIndex = 0;
@@ -120,29 +120,26 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToFavouritesToolStripMenuItem,
             this.refreshToolStripMenuItem,
             this.closeToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(174, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(124, 48);
             // 
             // refreshToolStripMenuItem
             // 
+            this.refreshToolStripMenuItem.Image = global::VSTrac.Properties.Resources.refresh;
+            this.refreshToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.refreshToolStripMenuItem.Text = "Refresh";
             // 
             // closeToolStripMenuItem
             // 
+            this.closeToolStripMenuItem.Image = global::VSTrac.Properties.Resources.delete;
+            this.closeToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.closeToolStripMenuItem.Text = "Close";
-            // 
-            // addToFavouritesToolStripMenuItem
-            // 
-            this.addToFavouritesToolStripMenuItem.Name = "addToFavouritesToolStripMenuItem";
-            this.addToFavouritesToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.addToFavouritesToolStripMenuItem.Text = "Add To Favourites";
+            this.closeToolStripMenuItem.Text = "Delete";
             // 
             // TracExplorer
             // 
@@ -173,6 +170,5 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addToFavouritesToolStripMenuItem;
     }
 }
