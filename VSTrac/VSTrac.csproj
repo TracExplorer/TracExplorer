@@ -160,6 +160,7 @@
     <None Include="Resources\error.png" />
     <None Include="Resources\Delete.bmp" />
     <None Include="Resources\Refresh.bmp" />
+    <None Include="Resources\server_new.png" />
     <Content Include="trac.ico" />
     <Content Include="VSTrac.AddIn" />
   </ItemGroup>

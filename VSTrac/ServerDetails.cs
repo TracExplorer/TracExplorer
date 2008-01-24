@@ -87,8 +87,8 @@ namespace VSTrac
             {
                 RegistryKey keySoftware = Registry.CurrentUser.OpenSubKey("Software", true); //I'm assuming this exists
                 RegistryKey keyServers = keySoftware.CreateSubKey("VSTrac\\Servers", RegistryKeyPermissionCheck.ReadWriteSubTree);
-                
-                RegistryKey keyServer = keyServers.CreateSubKey(this.Server,  RegistryKeyPermissionCheck.ReadWriteSubTree);
+
+                RegistryKey keyServer = keyServers.CreateSubKey(this.Server, RegistryKeyPermissionCheck.ReadWriteSubTree);
                 keyServer.SetValue("server", this.Server);
                 keyServer.SetValue("authenticated", this.Authenticated ? 1 : 0);
                 keyServer.SetValue("username", this.Username);
@@ -136,6 +136,23 @@ namespace VSTrac
             }
 
             return servers;
+        }
+        #endregion
+
+        #region Delete
+        public void Delete()
+        {
+            try
+            {
+                RegistryKey keySoftware = Registry.CurrentUser.OpenSubKey("Software", true); //I'm assuming this exists
+                RegistryKey keyServers = keySoftware.CreateSubKey("VSTrac\\Servers", RegistryKeyPermissionCheck.ReadWriteSubTree);
+
+                keyServers.DeleteSubKey(this.server);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error saving server configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
     }

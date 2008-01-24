@@ -32,41 +32,61 @@
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Favourites");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Trac Servers");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TracExplorer));
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.ctmServers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnNewServer = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeTrac = new System.Windows.Forms.TreeView();
             this.imageSmall = new System.Windows.Forms.ImageList(this.components);
+            this.ctmServer = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnServerRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnServerDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNewTracServer = new System.Windows.Forms.ToolStripButton();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDelTracServer = new System.Windows.Forms.ToolStripButton();
+            this.ctmServers.SuspendLayout();
+            this.ctmServer.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // treeView1
+            // ctmServers
             // 
-            this.treeView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imageSmall;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
+            this.ctmServers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnNewServer});
+            this.ctmServers.Name = "ctmServers";
+            this.ctmServers.Size = new System.Drawing.Size(166, 26);
+            // 
+            // btnNewServer
+            // 
+            this.btnNewServer.Image = global::VSTrac.Properties.Resources.server_new;
+            this.btnNewServer.Name = "btnNewServer";
+            this.btnNewServer.Size = new System.Drawing.Size(165, 22);
+            this.btnNewServer.Text = "New Trac Server";
+            this.btnNewServer.Click += new System.EventHandler(this.btnNewTracServer_Click);
+            // 
+            // treeTrac
+            // 
+            this.treeTrac.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeTrac.ImageIndex = 0;
+            this.treeTrac.ImageList = this.imageSmall;
+            this.treeTrac.Location = new System.Drawing.Point(0, 0);
+            this.treeTrac.Name = "treeTrac";
             treeNode1.Name = "nodeFavourites";
             treeNode1.Text = "Favourites";
+            treeNode2.ContextMenuStrip = this.ctmServers;
             treeNode2.Name = "nodeServers";
             treeNode2.Text = "Trac Servers";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            this.treeTrac.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2});
-            this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(263, 302);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
-            this.treeView1.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterExpand);
+            this.treeTrac.SelectedImageIndex = 0;
+            this.treeTrac.Size = new System.Drawing.Size(263, 302);
+            this.treeTrac.TabIndex = 0;
+            this.treeTrac.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+            this.treeTrac.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeTrac_NodeMouseClick);
+            this.treeTrac.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterExpand);
             // 
             // imageSmall
             // 
@@ -77,12 +97,38 @@
             this.imageSmall.Images.SetKeyName(2, "VSFolder_closed.bmp");
             this.imageSmall.Images.SetKeyName(3, "VSProject_genericfile.bmp");
             // 
+            // ctmServer
+            // 
+            this.ctmServer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnServerRefresh,
+            this.btnServerDelete});
+            this.ctmServer.Name = "contextMenuStrip1";
+            this.ctmServer.Size = new System.Drawing.Size(125, 48);
+            // 
+            // btnServerRefresh
+            // 
+            this.btnServerRefresh.Image = global::VSTrac.Properties.Resources.refresh;
+            this.btnServerRefresh.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.btnServerRefresh.Name = "btnServerRefresh";
+            this.btnServerRefresh.Size = new System.Drawing.Size(124, 22);
+            this.btnServerRefresh.Text = "Refresh";
+            this.btnServerRefresh.Click += new System.EventHandler(this.btnServerRefresh_Click);
+            // 
+            // btnServerDelete
+            // 
+            this.btnServerDelete.Image = global::VSTrac.Properties.Resources.delete;
+            this.btnServerDelete.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.btnServerDelete.Name = "btnServerDelete";
+            this.btnServerDelete.Size = new System.Drawing.Size(124, 22);
+            this.btnServerDelete.Text = "Remove";
+            this.btnServerDelete.Click += new System.EventHandler(this.btnDelTracServer_Click);
+            // 
             // toolStripContainer1
             // 
             // 
             // toolStripContainer1.ContentPanel
             // 
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.treeView1);
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.treeTrac);
             this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(263, 302);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
@@ -100,7 +146,8 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNewTracServer});
+            this.btnNewTracServer,
+            this.btnDelTracServer});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(263, 25);
@@ -110,36 +157,23 @@
             // btnNewTracServer
             // 
             this.btnNewTracServer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNewTracServer.Image = ((System.Drawing.Image)(resources.GetObject("btnNewTracServer.Image")));
+            this.btnNewTracServer.Image = global::VSTrac.Properties.Resources.server_new;
             this.btnNewTracServer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNewTracServer.Name = "btnNewTracServer";
             this.btnNewTracServer.Size = new System.Drawing.Size(23, 22);
             this.btnNewTracServer.Text = "Add new Trac server";
             this.btnNewTracServer.Click += new System.EventHandler(this.btnNewTracServer_Click);
             // 
-            // contextMenuStrip1
+            // btnDelTracServer
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.refreshToolStripMenuItem,
-            this.closeToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(124, 48);
-            // 
-            // refreshToolStripMenuItem
-            // 
-            this.refreshToolStripMenuItem.Image = global::VSTrac.Properties.Resources.refresh;
-            this.refreshToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.refreshToolStripMenuItem.Text = "Refresh";
-            // 
-            // closeToolStripMenuItem
-            // 
-            this.closeToolStripMenuItem.Image = global::VSTrac.Properties.Resources.delete;
-            this.closeToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Fuchsia;
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.closeToolStripMenuItem.Text = "Delete";
+            this.btnDelTracServer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDelTracServer.Enabled = false;
+            this.btnDelTracServer.Image = global::VSTrac.Properties.Resources.delete;
+            this.btnDelTracServer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelTracServer.Name = "btnDelTracServer";
+            this.btnDelTracServer.Size = new System.Drawing.Size(23, 22);
+            this.btnDelTracServer.Text = "Remove Trac server";
+            this.btnDelTracServer.Click += new System.EventHandler(this.btnDelTracServer_Click);
             // 
             // TracExplorer
             // 
@@ -148,6 +182,8 @@
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "TracExplorer";
             this.Size = new System.Drawing.Size(263, 327);
+            this.ctmServers.ResumeLayout(false);
+            this.ctmServer.ResumeLayout(false);
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
@@ -155,20 +191,22 @@
             this.toolStripContainer1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView treeTrac;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ImageList imageSmall;
         private System.Windows.Forms.ToolStripButton btnNewTracServer;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip ctmServer;
+        private System.Windows.Forms.ToolStripMenuItem btnServerRefresh;
+        private System.Windows.Forms.ToolStripMenuItem btnServerDelete;
+        private System.Windows.Forms.ToolStripButton btnDelTracServer;
+        private System.Windows.Forms.ContextMenuStrip ctmServers;
+        private System.Windows.Forms.ToolStripMenuItem btnNewServer;
     }
 }

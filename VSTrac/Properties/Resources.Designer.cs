@@ -60,10 +60,28 @@ namespace VSTrac.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Remove.
+        /// </summary>
+        internal static string CaptionConfirmDelete {
+            get {
+                return ResourceManager.GetString("CaptionConfirmDelete", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap closedticket {
             get {
                 object obj = ResourceManager.GetObject("closedticket", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove {0}?.
+        /// </summary>
+        internal static string ConfirmDelTracServer {
+            get {
+                return ResourceManager.GetString("ConfirmDelTracServer", resourceCulture);
             }
         }
         
@@ -91,11 +109,20 @@ namespace VSTrac.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized string similar to Remove.
         /// </summary>
         internal static string MenuDelete {
             get {
                 return ResourceManager.GetString("MenuDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Trac Server.
+        /// </summary>
+        internal static string MenuNewServer {
+            get {
+                return ResourceManager.GetString("MenuNewServer", resourceCulture);
             }
         }
         
@@ -230,12 +257,10 @@ namespace VSTrac.Properties {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to Add new Trac server.
-        /// </summary>
-        internal static string ToolbarNewServer {
+        internal static System.Drawing.Bitmap server_new {
             get {
-                return ResourceManager.GetString("ToolbarNewServer", resourceCulture);
+                object obj = ResourceManager.GetObject("server_new", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

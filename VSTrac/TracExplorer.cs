@@ -340,17 +340,22 @@ namespace VSTrac
 
             List<ServerDetails> servers = ServerDetails.LoadAll();
 
-            treeView1.BeginUpdate();
+            treeTrac.BeginUpdate();
 
             foreach (ServerDetails server in servers)
             {
                 ServerNode nodeServer = new ServerNode(server);
-                treeView1.Nodes["nodeServers"].Nodes.Add(nodeServer);
+                treeTrac.Nodes["nodeServers"].Nodes.Add(nodeServer);
             }
 
-            treeView1.Nodes["nodeServers"].Expand();
+            treeTrac.Nodes["nodeServers"].Expand();
 
-            treeView1.EndUpdate();
+            treeTrac.EndUpdate();
+
+            // captions
+            btnDelTracServer.Text = btnDelTracServer.ToolTipText = btnServerDelete.Text = Properties.Resources.MenuDelete;
+            btnNewTracServer.Text = btnNewTracServer.ToolTipText = btnNewServer.Text = Properties.Resources.MenuNewServer;
+            btnServerRefresh.Text = btnServerRefresh.ToolTipText = Properties.Resources.MenuRefresh;
         }
         #endregion
 
@@ -370,7 +375,7 @@ namespace VSTrac
             {
                 form.Result.Save();
 
-                treeView1.Nodes["nodeServers"].Nodes.Add(new ServerNode(form.Result));
+                treeTrac.Nodes["nodeServers"].Nodes.Add(new ServerNode(form.Result));
                 
             }
         }
@@ -389,6 +394,40 @@ namespace VSTrac
                 if (!nodeServer.DetailsLoaded)
                     nodeServer.Refresh();
             }
+        }
+
+        private void treeTrac_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            btnDelTracServer.Enabled = (e.Node is ServerNode);
+
+            if (e.Button == MouseButtons.Right)
+            {
+                treeTrac.SelectedNode = e.Node;
+
+                if (e.Node is ServerNode)
+                {
+                    ctmServer.Show(treeTrac, e.X, e.Y);
+                    return;
+                }
+            }
+        }
+
+        private void btnDelTracServer_Click(object sender, EventArgs e)
+        {
+            ServerNode node = treeTrac.SelectedNode as ServerNode;
+
+            if (MessageBox.Show(string.Format(Properties.Resources.ConfirmDelTracServer, node.ServerDetails.Server), Properties.Resources.CaptionConfirmDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                node.ServerDetails.Delete();
+                node.Remove();
+            }
+        }
+
+        private void btnServerRefresh_Click(object sender, EventArgs e)
+        {
+            ServerNode node = treeTrac.SelectedNode as ServerNode;
+
+            node.Refresh();
         }
         #endregion
 
