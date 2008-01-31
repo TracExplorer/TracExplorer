@@ -32,6 +32,8 @@ namespace VSTrac
 {
     public partial class AddNewServerForm : Form
     {
+        private ServerDetails result;
+
         public AddNewServerForm()
         {
             InitializeComponent();
@@ -40,7 +42,11 @@ namespace VSTrac
             splitContainer1.Panel1Collapsed = true;
         }
 
-        public ServerDetails Result { get; set; }
+        public ServerDetails Result 
+        {
+          get { return result; }
+          set { result = value; }
+        }
 
         private bool IsValid()
         {

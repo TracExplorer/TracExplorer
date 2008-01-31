@@ -69,6 +69,7 @@ namespace VSTrac
             private WikiPagesNode nodeWikiPages;
             private TicketsNode nodeTickets;
             private AttributesNode nodeAttributes;
+            private bool detailsLoaded;
 
             public ServerNode(ServerDetails serverDetails) : base(serverDetails.Server, 1, 1)
             {
@@ -90,7 +91,11 @@ namespace VSTrac
                 }
             }
 
-            public bool DetailsLoaded { get; set; }
+            public bool DetailsLoaded 
+            {
+              get { return detailsLoaded; }
+              set { detailsLoaded = value; }
+            }
 
             public override void Refresh()
             {
