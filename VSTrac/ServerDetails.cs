@@ -62,6 +62,28 @@ namespace VSTrac
         }
         #endregion
 
+        #region Public Methods
+        public string XmlRpcUrl()
+        {
+            return this.server + "login/xmlrpc";
+        }
+        
+        public string WikiPageUrl(string WikiPageName)
+        {
+            return this.server + "wiki/" + WikiPageName;
+        }
+
+        public string TicketUrl(int ticketId)
+        {
+            return this.server + "ticket/" + ticketId.ToString();
+        }
+
+        public string NewTicketUrl()
+        {
+            return this.server + "newticket/";
+        }
+        #endregion
+
         #region ctors
         public ServerDetails()
         { }

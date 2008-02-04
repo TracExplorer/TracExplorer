@@ -442,7 +442,7 @@ namespace VSTrac
             WikiPageNode wikiPageNode = e.Node as WikiPageNode;
             ServerNode serverNode = e.Node.Parent.Parent as ServerNode;
 
-            VSTracConnect.OpenBrowser(serverNode.ServerDetails.Server + "/wiki/" + wikiPageNode.Text);
+            VSTracConnect.OpenBrowser(serverNode.ServerDetails.WikiPageUrl(wikiPageNode.Text));
         }
 
         private void TicketDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

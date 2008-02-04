@@ -50,7 +50,7 @@ namespace VSTrac
         {
             ITrac trac = XmlRpcProxyGen.Create<ITrac>();
             trac.Proxy = WebRequest.DefaultWebProxy;
-            trac.Url = serverDetails.Server + "/login/xmlrpc";
+            trac.Url = serverDetails.XmlRpcUrl();
 
             if (serverDetails.Authenticated)
                 trac.Credentials = new NetworkCredential(serverDetails.Username, serverDetails.Password);

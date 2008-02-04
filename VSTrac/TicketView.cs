@@ -84,7 +84,7 @@ namespace VSTrac
         {
             try
             {
-                VSTracConnect.OpenBrowser(ServerDetails.Server + "/ticket/" + id);
+                VSTracConnect.OpenBrowser(ServerDetails.TicketUrl(id));
             }
             catch (Exception ex)
             {
