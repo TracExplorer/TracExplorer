@@ -182,8 +182,11 @@ namespace VSTrac
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Ticket ticket = (Ticket)dataGridView1.Rows[e.RowIndex].DataBoundItem;
-            OpenInBrowser(ticket.Id);
+            if (e.RowIndex != -1)
+            {
+                Ticket ticket = (Ticket)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+                OpenInBrowser(ticket.Id);
+            }
         }
 
         private void dataGridView1_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
