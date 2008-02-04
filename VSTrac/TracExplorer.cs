@@ -100,7 +100,7 @@ namespace VSTrac
             public override void Refresh()
             {
                 nodeWikiPages.Refresh();
-                //nodeTickets.Refresh();
+                nodeTickets.Refresh();
                 nodeAttributes.Refresh();
 
                 DetailsLoaded = true;
@@ -179,19 +179,21 @@ namespace VSTrac
             {
                 this.Text = Properties.Resources.NodeTickets;
                 this.ImageIndex = this.SelectedImageIndex = 2;
+                this.ServerDetails = serverDetails;
 
-                //TODO: load all ticket queries from registry
-
-                TicketQueryDefinition t = new TicketQueryDefinition();
-                t.Name = "Active Tickets";
-                t.Filter = "status!=closed";
-
-                this.Nodes.Add(new TicketNode(serverDetails, t));
+                this.Refresh();
             }
 
             public override void Refresh()
             {
-                throw new NotImplementedException();
+                List<TicketQueryDefinition> ticketQueries = TicketQueryDefinition.LoadAllTicketQueries(ServerDetails);
+
+                this.Nodes.Clear();
+                foreach (TicketQueryDefinition ticketQuery in ticketQueries)
+                {
+                    TicketNode node = new TicketNode(ServerDetails, ticketQuery);
+                    this.Nodes.Add(node);
+                }
             }
         }
 
@@ -414,6 +416,12 @@ namespace VSTrac
                     ctmServer.Show(treeTrac, e.X, e.Y);
                     return;
                 }
+
+                if (e.Node is TicketsNode)
+                {
+                    ctmTickets.Show(treeTrac, e.X, e.Y);
+                    return;
+                }
             }
         }
 
@@ -459,5 +467,25 @@ namespace VSTrac
             }
         }
         #endregion
+
+        private void btnNewTicketQuery_Click(object sender, EventArgs e)
+        {
+            TicketsNode node = treeTrac.SelectedNode as TicketsNode;
+
+            AddNewTicketQueryForm form = new AddNewTicketQueryForm();
+
+            form.VsTracConnect = this.vsTracConnect;
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                TicketQueryDefinition ticketQueryDef = new TicketQueryDefinition();
+                ticketQueryDef.ServerDetails = node.ServerDetails;
+                ticketQueryDef.Name = form.TicketQueryName;
+                ticketQueryDef.Filter = form.TicketQueryFilter;
+                ticketQueryDef.Save();
+
+                node.Refresh();
+            }
+        }
     }
 }

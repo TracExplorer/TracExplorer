@@ -43,12 +43,15 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNewTracServer = new System.Windows.Forms.ToolStripButton();
             this.btnDelTracServer = new System.Windows.Forms.ToolStripButton();
+            this.ctmTickets = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnNewTicketQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.ctmServers.SuspendLayout();
             this.ctmServer.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.ctmTickets.SuspendLayout();
             this.SuspendLayout();
             // 
             // ctmServers
@@ -175,6 +178,20 @@
             this.btnDelTracServer.Text = "Remove Trac server";
             this.btnDelTracServer.Click += new System.EventHandler(this.btnDelTracServer_Click);
             // 
+            // ctmTickets
+            // 
+            this.ctmTickets.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnNewTicketQuery});
+            this.ctmTickets.Name = "ctmTickets";
+            this.ctmTickets.Size = new System.Drawing.Size(171, 48);
+            // 
+            // btnNewTicketQuery
+            // 
+            this.btnNewTicketQuery.Name = "btnNewTicketQuery";
+            this.btnNewTicketQuery.Size = new System.Drawing.Size(180, 22);
+            this.btnNewTicketQuery.Text = "New Ticket Query";
+            this.btnNewTicketQuery.Click += new System.EventHandler(this.btnNewTicketQuery_Click);
+            // 
             // TracExplorer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,6 +208,7 @@
             this.toolStripContainer1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.ctmTickets.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -208,5 +226,7 @@
         private System.Windows.Forms.ToolStripButton btnDelTracServer;
         private System.Windows.Forms.ContextMenuStrip ctmServers;
         private System.Windows.Forms.ToolStripMenuItem btnNewServer;
+        private System.Windows.Forms.ContextMenuStrip ctmTickets;
+        private System.Windows.Forms.ToolStripMenuItem btnNewTicketQuery;
     }
 }

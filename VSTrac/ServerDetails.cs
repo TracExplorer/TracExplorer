@@ -169,12 +169,19 @@ namespace VSTrac
                 RegistryKey keySoftware = Registry.CurrentUser.OpenSubKey("Software", true); //I'm assuming this exists
                 RegistryKey keyServers = keySoftware.CreateSubKey("VSTrac\\Servers", RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-                keyServers.DeleteSubKey(this.server);
+                keyServers.DeleteSubKeyTree(this.server);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error saving server configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        #endregion
+
+        #region ToString
+        public override string ToString()
+        {
+            return server;
         }
         #endregion
     }

@@ -22,13 +22,25 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Win32;
+using System.Windows.Forms;
 
 namespace VSTrac
 {
     public class TicketQueryDefinition
     {
+        #region Private Variables
+        private ServerDetails serverDetails;
         private string name;
         private string filter;
+        #endregion
+
+        #region Public Properties
+        public ServerDetails ServerDetails
+        {
+            get { return serverDetails; }
+            set { serverDetails = value; }
+        }
 
         public string Name
         {
@@ -41,5 +53,72 @@ namespace VSTrac
             get { return this.filter; }
             set { this.filter = value; }
         }
+        #endregion
+
+        #region Save
+        public void Save()
+        {
+            try
+            {
+                RegistryKey keySoftware = Registry.CurrentUser.OpenSubKey("Software", true); //I'm assuming this exists
+                RegistryKey keyServers = keySoftware.CreateSubKey("VSTrac\\Servers", RegistryKeyPermissionCheck.ReadWriteSubTree);
+                RegistryKey keyServer = keyServers.CreateSubKey(serverDetails.Server+"\\Tickets", RegistryKeyPermissionCheck.ReadWriteSubTree);
+                RegistryKey keyTicketDef = keyServer.CreateSubKey(Name, RegistryKeyPermissionCheck.ReadWriteSubTree);
+
+                keyTicketDef.SetValue("name", Name);
+                keyTicketDef.SetValue("filter", Filter);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error saving server configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region LoadAllTicketQueries
+        public static List<TicketQueryDefinition> LoadAllTicketQueries(ServerDetails serverDetails)
+        {
+            List<TicketQueryDefinition> ticketQueries = new List<TicketQueryDefinition>();
+
+            try
+            {
+                RegistryKey keySoftware = Registry.CurrentUser.OpenSubKey("Software", false);
+                RegistryKey keyServers = keySoftware.OpenSubKey("VSTrac\\Servers", false);
+                RegistryKey keyServer = keyServers.OpenSubKey(serverDetails.Server, false);
+                RegistryKey keyTickets = keyServer.OpenSubKey("Tickets", false);
+
+                if (keyTickets == null)
+                    return ticketQueries;
+
+                string[] subTicketQueries = keyTickets.GetSubKeyNames();
+
+                foreach (string ticketQuery in subTicketQueries)
+                {
+                    RegistryKey keyTicketQuery = keyTickets.OpenSubKey(ticketQuery, false);
+
+                    TicketQueryDefinition ticketQueryDef = new TicketQueryDefinition();
+                    ticketQueryDef.serverDetails = serverDetails;
+                    ticketQueryDef.Name = (string)keyTicketQuery.GetValue("name");
+                    ticketQueryDef.Filter = (string)keyTicketQuery.GetValue("filter");
+
+                    ticketQueries.Add(ticketQueryDef);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error loading ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return ticketQueries;
+        }
+        #endregion
+
+        #region ToString
+        public override string ToString()
+        {
+            return name;
+        }
+        #endregion
     }
 }
