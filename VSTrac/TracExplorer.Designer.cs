@@ -45,6 +45,9 @@
             this.btnDelTracServer = new System.Windows.Forms.ToolStripButton();
             this.ctmTickets = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnNewTicketQuery = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctmTicket = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnDelQuery = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnQueryOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.ctmServers.SuspendLayout();
             this.ctmServer.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -52,6 +55,7 @@
             this.toolStripContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.ctmTickets.SuspendLayout();
+            this.ctmTicket.SuspendLayout();
             this.SuspendLayout();
             // 
             // ctmServers
@@ -183,14 +187,38 @@
             this.ctmTickets.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNewTicketQuery});
             this.ctmTickets.Name = "ctmTickets";
-            this.ctmTickets.Size = new System.Drawing.Size(171, 48);
+            this.ctmTickets.Size = new System.Drawing.Size(171, 26);
             // 
             // btnNewTicketQuery
             // 
             this.btnNewTicketQuery.Name = "btnNewTicketQuery";
-            this.btnNewTicketQuery.Size = new System.Drawing.Size(180, 22);
+            this.btnNewTicketQuery.Size = new System.Drawing.Size(170, 22);
             this.btnNewTicketQuery.Text = "New Ticket Query";
             this.btnNewTicketQuery.Click += new System.EventHandler(this.btnNewTicketQuery_Click);
+            // 
+            // ctmTicket
+            // 
+            this.ctmTicket.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnQueryOpen,
+            this.btnDelQuery});
+            this.ctmTicket.Name = "ctmTicket";
+            this.ctmTicket.Size = new System.Drawing.Size(153, 70);
+            // 
+            // btnDelQuery
+            // 
+            this.btnDelQuery.Image = global::VSTrac.Properties.Resources.delete;
+            this.btnDelQuery.ImageTransparentColor = System.Drawing.Color.Fuchsia;
+            this.btnDelQuery.Name = "btnDelQuery";
+            this.btnDelQuery.Size = new System.Drawing.Size(152, 22);
+            this.btnDelQuery.Text = "Remove";
+            this.btnDelQuery.Click += new System.EventHandler(this.btnDelQuery_Click);
+            // 
+            // btnQueryOpen
+            // 
+            this.btnQueryOpen.Name = "btnQueryOpen";
+            this.btnQueryOpen.Size = new System.Drawing.Size(152, 22);
+            this.btnQueryOpen.Text = "Open";
+            this.btnQueryOpen.Click += new System.EventHandler(this.btnQueryOpen_Click);
             // 
             // TracExplorer
             // 
@@ -209,6 +237,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ctmTickets.ResumeLayout(false);
+            this.ctmTicket.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -228,5 +257,8 @@
         private System.Windows.Forms.ToolStripMenuItem btnNewServer;
         private System.Windows.Forms.ContextMenuStrip ctmTickets;
         private System.Windows.Forms.ToolStripMenuItem btnNewTicketQuery;
+        private System.Windows.Forms.ContextMenuStrip ctmTicket;
+        private System.Windows.Forms.ToolStripMenuItem btnDelQuery;
+        private System.Windows.Forms.ToolStripMenuItem btnQueryOpen;
     }
 }

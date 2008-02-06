@@ -422,6 +422,12 @@ namespace VSTrac
                     ctmTickets.Show(treeTrac, e.X, e.Y);
                     return;
                 }
+
+                if (e.Node is TicketNode)
+                {
+                    ctmTicket.Show(treeTrac, e.X, e.Y);
+                    return;
+                }
             }
         }
 
@@ -441,6 +447,41 @@ namespace VSTrac
             ServerNode node = treeTrac.SelectedNode as ServerNode;
 
             node.Refresh();
+        }
+
+        private void btnNewTicketQuery_Click(object sender, EventArgs e)
+        {
+            TicketsNode node = treeTrac.SelectedNode as TicketsNode;
+
+            AddNewTicketQueryForm form = new AddNewTicketQueryForm();
+
+            form.VsTracConnect = this.vsTracConnect;
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                TicketQueryDefinition ticketQueryDef = new TicketQueryDefinition();
+                ticketQueryDef.ServerDetails = node.ServerDetails;
+                ticketQueryDef.Name = form.TicketQueryName;
+                ticketQueryDef.Filter = form.TicketQueryFilter;
+                ticketQueryDef.Save();
+
+                node.Refresh();
+            }
+        }
+
+        private void btnDelQuery_Click(object sender, EventArgs e)
+        {
+            TicketNode node = treeTrac.SelectedNode as TicketNode;
+
+            node.TicketDefinition.Delete();
+            node.Remove();
+        }
+
+        private void btnQueryOpen_Click(object sender, EventArgs e)
+        {
+            TicketNode node = treeTrac.SelectedNode as TicketNode;
+
+            VSTracConnect.CreateTicketWindow(node.ServerDetails, node.TicketDefinition);
         }
         #endregion
 
@@ -467,25 +508,5 @@ namespace VSTrac
             }
         }
         #endregion
-
-        private void btnNewTicketQuery_Click(object sender, EventArgs e)
-        {
-            TicketsNode node = treeTrac.SelectedNode as TicketsNode;
-
-            AddNewTicketQueryForm form = new AddNewTicketQueryForm();
-
-            form.VsTracConnect = this.vsTracConnect;
-
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                TicketQueryDefinition ticketQueryDef = new TicketQueryDefinition();
-                ticketQueryDef.ServerDetails = node.ServerDetails;
-                ticketQueryDef.Name = form.TicketQueryName;
-                ticketQueryDef.Filter = form.TicketQueryFilter;
-                ticketQueryDef.Save();
-
-                node.Refresh();
-            }
-        }
     }
 }

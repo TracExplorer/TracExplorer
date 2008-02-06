@@ -114,6 +114,25 @@ namespace VSTrac
         }
         #endregion
 
+        #region Delete
+        public void Delete()
+        {
+            try
+            {
+                RegistryKey keySoftware = Registry.CurrentUser.OpenSubKey("Software", true); //I'm assuming this exists
+                RegistryKey keyServers = keySoftware.OpenSubKey("VSTrac\\Servers", true);
+                RegistryKey keyServer = keyServers.OpenSubKey(this.serverDetails.Server, true);
+                RegistryKey keyTickets = keyServer.OpenSubKey("Tickets", true);
+
+                keyTickets.DeleteSubKeyTree(this.name);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error deleting ticket query definition", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        } 
+        #endregion
+
         #region ToString
         public override string ToString()
         {
