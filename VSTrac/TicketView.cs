@@ -125,7 +125,7 @@ namespace VSTrac
 
                     t.Status = (string)attributes["status"];
                     t.Description = (string)attributes["description"];
-                    t.Reporter = (string)attributes["reported"];
+                    t.Reporter = (string)attributes["reporter"];
                     t.CC = (string)attributes["cc"];
                     t.Resolution = (string)attributes["resolution"];
                     t.Component = (string)attributes["component"];
