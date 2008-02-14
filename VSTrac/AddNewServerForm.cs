@@ -37,59 +37,12 @@ namespace VSTrac
         public AddNewServerForm()
         {
             InitializeComponent();
-            lblServerCheck.Text = "";
-
-            splitContainer1.Panel1Collapsed = true;
         }
 
         public ServerDetails Result 
         {
           get { return result; }
           set { result = value; }
-        }
-
-        private bool IsValid()
-        {
-            bool valid = true;
-
-            if (string.IsNullOrEmpty(txtServer.Text))
-            {
-                errorProvider1.SetError(txtServer, "Please enter a valid Trac url. This must NOT include the \"/login/xmlrpc\" part. eg: http://vstrac.devjavu.com");
-                valid = false;
-            }
-            else
-                errorProvider1.SetError(txtServer, "");
-
-            if (groupBox1.Enabled && string.IsNullOrEmpty(txtUsername.Text))
-            {
-                errorProvider1.SetError(txtUsername, "Please enter a valid username.");
-                valid = false;
-            }
-            else
-                errorProvider1.SetError(txtUsername, "");
-
-            if (groupBox1.Enabled && string.IsNullOrEmpty(txtPassword.Text))
-            {
-                errorProvider1.SetError(txtPassword, "Please enter a valid password.");
-                valid = false;
-            }
-            else
-                errorProvider1.SetError(txtPassword, "");
-
-
-            return valid;
-
-        }
-
-        private void bntOk_Click(object sender, EventArgs e)
-        {
-            if (!IsValid()) return;
-
-            if (!CheckTracServer()) return;
-
-            Result = GetServerDetails();
-
-            this.DialogResult = DialogResult.OK;
         }
 
         private ServerDetails GetServerDetails()
@@ -116,10 +69,7 @@ namespace VSTrac
 
         private bool CheckTracServer()
         {
-            lblServerCheck.Text = "Checking...";
-            lblServerCheck.Refresh();
             this.Cursor = Cursors.WaitCursor;
-            btnCancel.Enabled = bntOk.Enabled = false;
 
             try
             {
@@ -130,29 +80,37 @@ namespace VSTrac
             }
             catch (Exception ex)
             {
-                lblError.Text = "Failed check. " + ex.Message;
-                splitContainer1.Panel1Collapsed = false;
                 return false;
             }
             finally
             {
-                lblServerCheck.Text = "";
-                lblServerCheck.Refresh();
                 this.Cursor = Cursors.Default;
-                btnCancel.Enabled = bntOk.Enabled = true;
             }
 
             return true;
         }
 
-        private void chkAuthentication_CheckedChanged(object sender, EventArgs e)
+        private void ControlChangedEvent(object sender, EventArgs e)
         {
+            bool canMoveNext = true;
+
             groupBox1.Enabled = chkAuthentication.Checked;
+
+            if (txtServer.Text.Trim().Length == 0)
+                canMoveNext = false;
+
+            if (chkAuthentication.Checked && txtUsername.Text.Trim().Length == 0)
+                canMoveNext = false;
+
+            if (chkAuthentication.Checked && txtPassword.Text.Trim().Length == 0)
+                canMoveNext = false;
+
+            wizard1.NextEnabled = canMoveNext;
         }
 
-        private void AddNewServerForm_Load(object sender, EventArgs e)
+        private void wizard1_CloseFromCancel(object sender, CancelEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

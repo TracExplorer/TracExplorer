@@ -33,16 +33,6 @@ namespace VSTrac
     {
         static TracCommon()
         {
-            ServicePointManager.ServerCertificateValidationCallback = delegate(object certsender, X509Certificate cert, X509Chain chain, System.Net.Security.SslPolicyErrors error)
-            {
-                //TODO: Make better message + put in resource
-                if (MessageBox.Show(null, "There was an error reading the site's certificate. Do you want to continue?\r\n" + cert.ToString() + "\r\n\r\n" + error.ToString(), "Error with SSL certificate.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    return true;
-                }
-                else
-                    return false;
-            };
 
         }
 

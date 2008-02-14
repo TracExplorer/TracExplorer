@@ -28,57 +28,86 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNewServerForm));
-            this.txtServer = new System.Windows.Forms.TextBox();
+            this.wizard1 = new Gui.Wizard.Wizard();
+            this.wizardPage1 = new Gui.Wizard.WizardPage();
             this.label1 = new System.Windows.Forms.Label();
+            this.chkAuthentication = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.bntOk = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.chkAuthentication = new System.Windows.Forms.CheckBox();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblServerCheck = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtServer = new System.Windows.Forms.TextBox();
+            this.wizardPage2 = new Gui.Wizard.WizardPage();
             this.lblError = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.wizard1.SuspendLayout();
+            this.wizardPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.wizardPage2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // txtServer
+            // wizard1
             // 
-            this.txtServer.Location = new System.Drawing.Point(12, 16);
-            this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(328, 21);
-            this.txtServer.TabIndex = 1;
+            this.wizard1.Controls.Add(this.wizardPage1);
+            this.wizard1.Controls.Add(this.wizardPage2);
+            this.wizard1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wizard1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.wizard1.Location = new System.Drawing.Point(0, 0);
+            this.wizard1.Name = "wizard1";
+            this.wizard1.Pages.AddRange(new Gui.Wizard.WizardPage[] {
+            this.wizardPage1,
+            this.wizardPage2});
+            this.wizard1.Size = new System.Drawing.Size(411, 312);
+            this.wizard1.TabIndex = 6;
+            this.wizard1.CloseFromCancel += new System.ComponentModel.CancelEventHandler(this.wizard1_CloseFromCancel);
+            // 
+            // wizardPage1
+            // 
+            this.wizardPage1.Controls.Add(this.label1);
+            this.wizardPage1.Controls.Add(this.chkAuthentication);
+            this.wizardPage1.Controls.Add(this.groupBox1);
+            this.wizardPage1.Controls.Add(this.txtServer);
+            this.wizardPage1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wizardPage1.IsFinishPage = false;
+            this.wizardPage1.Location = new System.Drawing.Point(0, 0);
+            this.wizardPage1.Name = "wizardPage1";
+            this.wizardPage1.Size = new System.Drawing.Size(411, 264);
+            this.wizardPage1.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 0);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Trac URL";
             // 
+            // chkAuthentication
+            // 
+            this.chkAuthentication.AutoSize = true;
+            this.chkAuthentication.Location = new System.Drawing.Point(12, 51);
+            this.chkAuthentication.Name = "chkAuthentication";
+            this.chkAuthentication.Size = new System.Drawing.Size(116, 17);
+            this.chkAuthentication.TabIndex = 2;
+            this.chkAuthentication.Text = "Use authentication";
+            this.chkAuthentication.UseVisualStyleBackColor = true;
+            this.chkAuthentication.CheckedChanged += new System.EventHandler(this.ControlChangedEvent);
+            // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.txtPassword);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtUsername);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Enabled = false;
-            this.groupBox1.Location = new System.Drawing.Point(15, 65);
+            this.groupBox1.Location = new System.Drawing.Point(15, 74);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(350, 103);
+            this.groupBox1.Size = new System.Drawing.Size(384, 103);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Authentication";
@@ -89,9 +118,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPassword.Location = new System.Drawing.Point(6, 71);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(319, 21);
+            this.txtPassword.Size = new System.Drawing.Size(353, 21);
             this.txtPassword.TabIndex = 3;
             this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.TextChanged += new System.EventHandler(this.ControlChangedEvent);
             // 
             // label3
             // 
@@ -108,8 +138,9 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUsername.Location = new System.Drawing.Point(6, 32);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(319, 21);
+            this.txtUsername.Size = new System.Drawing.Size(353, 21);
             this.txtUsername.TabIndex = 1;
+            this.txtUsername.TextChanged += new System.EventHandler(this.ControlChangedEvent);
             // 
             // label2
             // 
@@ -120,123 +151,62 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Username:";
             // 
-            // bntOk
+            // txtServer
             // 
-            this.bntOk.Location = new System.Drawing.Point(290, 174);
-            this.bntOk.Name = "bntOk";
-            this.bntOk.Size = new System.Drawing.Size(75, 23);
-            this.bntOk.TabIndex = 4;
-            this.bntOk.Text = "Ok";
-            this.bntOk.UseVisualStyleBackColor = true;
-            this.bntOk.Click += new System.EventHandler(this.bntOk_Click);
+            this.txtServer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtServer.Location = new System.Drawing.Point(12, 25);
+            this.txtServer.Name = "txtServer";
+            this.txtServer.Size = new System.Drawing.Size(362, 21);
+            this.txtServer.TabIndex = 1;
+            this.txtServer.TextChanged += new System.EventHandler(this.ControlChangedEvent);
             // 
-            // btnCancel
+            // wizardPage2
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(209, 174);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // chkAuthentication
-            // 
-            this.chkAuthentication.AutoSize = true;
-            this.chkAuthentication.Location = new System.Drawing.Point(12, 42);
-            this.chkAuthentication.Name = "chkAuthentication";
-            this.chkAuthentication.Size = new System.Drawing.Size(116, 17);
-            this.chkAuthentication.TabIndex = 2;
-            this.chkAuthentication.Text = "Use authentication";
-            this.chkAuthentication.UseVisualStyleBackColor = true;
-            this.chkAuthentication.CheckedChanged += new System.EventHandler(this.chkAuthentication_CheckedChanged);
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // lblServerCheck
-            // 
-            this.lblServerCheck.AutoSize = true;
-            this.lblServerCheck.Location = new System.Drawing.Point(9, 179);
-            this.lblServerCheck.Name = "lblServerCheck";
-            this.lblServerCheck.Size = new System.Drawing.Size(62, 13);
-            this.lblServerCheck.TabIndex = 6;
-            this.lblServerCheck.Text = "Checking...";
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Info;
-            this.splitContainer1.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.splitContainer1.Panel1.Controls.Add(this.pictureBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.lblError);
-            this.splitContainer1.Panel1MinSize = 65;
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Panel2.Controls.Add(this.lblServerCheck);
-            this.splitContainer1.Panel2.Controls.Add(this.txtServer);
-            this.splitContainer1.Panel2.Controls.Add(this.chkAuthentication);
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            this.splitContainer1.Panel2.Controls.Add(this.bntOk);
-            this.splitContainer1.Size = new System.Drawing.Size(377, 274);
-            this.splitContainer1.SplitterDistance = 65;
-            this.splitContainer1.TabIndex = 7;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::VSTrac.Properties.Resources.error;
-            this.pictureBox1.Location = new System.Drawing.Point(9, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(48, 48);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.wizardPage2.Controls.Add(this.lblError);
+            this.wizardPage2.Controls.Add(this.label4);
+            this.wizardPage2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wizardPage2.IsFinishPage = false;
+            this.wizardPage2.Location = new System.Drawing.Point(0, 0);
+            this.wizardPage2.Name = "wizardPage2";
+            this.wizardPage2.Size = new System.Drawing.Size(411, 264);
+            this.wizardPage2.TabIndex = 2;
             // 
             // lblError
             // 
-            this.lblError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblError.Location = new System.Drawing.Point(68, 9);
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(12, 43);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(533, 45);
-            this.lblError.TabIndex = 0;
+            this.lblError.Size = new System.Drawing.Size(95, 13);
+            this.lblError.TabIndex = 1;
+            this.lblError.Text = "ErrorText if any...";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(62, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Checking...";
             // 
             // AddNewServerForm
             // 
-            this.AcceptButton = this.bntOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(377, 274);
-            this.Controls.Add(this.splitContainer1);
+            this.ClientSize = new System.Drawing.Size(411, 312);
+            this.Controls.Add(this.wizard1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddNewServerForm";
             this.Text = "Add New Trac Server";
-            this.Load += new System.EventHandler(this.AddNewServerForm_Load);
+            this.wizard1.ResumeLayout(false);
+            this.wizardPage1.ResumeLayout(false);
+            this.wizardPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
-            this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.wizardPage2.ResumeLayout(false);
+            this.wizardPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -247,16 +217,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button bntOk;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox chkAuthentication;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.Label lblServerCheck;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private Gui.Wizard.Wizard wizard1;
+        private Gui.Wizard.WizardPage wizardPage1;
+        private Gui.Wizard.WizardPage wizardPage2;
         private System.Windows.Forms.Label lblError;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label4;
     }
 }
