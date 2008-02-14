@@ -35,6 +35,22 @@ namespace VSTrac
         private string filter;
         #endregion
 
+        #region ctors
+        public TicketQueryDefinition()
+        { }
+
+        public TicketQueryDefinition(string name, string filter)
+        {
+            this.name = name;
+            this.filter = filter;
+        }
+
+        public TicketQueryDefinition(string name, string filter, ServerDetails serverDetails) : this(name, filter)
+        {
+            this.serverDetails = serverDetails;
+        }
+        #endregion
+
         #region Public Properties
         public ServerDetails ServerDetails
         {

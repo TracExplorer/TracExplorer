@@ -224,6 +224,7 @@
     <None Include="Resources\Delete.bmp" />
     <None Include="Resources\Refresh.bmp" />
     <None Include="Resources\server_new.png" />
+    <None Include="Resources\download_FTP_00.gif" />
     <Content Include="trac.ico" />
     <Content Include="VSTrac.AddIn" />
     <Content Include="Wizard\Wizard.bmp" />

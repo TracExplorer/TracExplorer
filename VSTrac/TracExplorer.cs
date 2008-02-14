@@ -404,8 +404,6 @@ namespace VSTrac
             AddNewServerForm form = new AddNewServerForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                form.Result.Save();
-
                 treeTrac.Nodes["nodeServers"].Nodes.Add(new ServerNode(form.Result));
                 
             }

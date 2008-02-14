@@ -8,7 +8,7 @@ This program comes with ABSOLUTELY NO WARRANTY; This is free software, and you a
 
 VSTrac is developed and released under the GPL v3 licence.
 XML-RPC.NET Copyright (c) 2006 Charles Cook
-
+Wizard Control Copyright (c) 2004 Al Gardner http://www.codeproject.com/KB/miscctrl/DesignTimeWizard.aspx
 
 
 DESCRIPTION

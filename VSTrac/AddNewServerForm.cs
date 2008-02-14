@@ -27,6 +27,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using CookComputing.XmlRpc;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
 
 namespace VSTrac
 {
@@ -45,6 +47,10 @@ namespace VSTrac
           set { result = value; }
         }
 
+        /// <summary>
+        /// Return a <see cref="ServerDetails"/> object filled with the form data.
+        /// </summary>
+        /// <returns></returns>
         private ServerDetails GetServerDetails()
         {
             ServerDetails details = new ServerDetails();
@@ -53,6 +59,9 @@ namespace VSTrac
 
             if (!tempServer.Contains(":"))
                 tempServer = "http://" + tempServer;
+
+            if (!tempServer.EndsWith("/"))
+                tempServer += "/";
                 
             Uri uriServer= new Uri(tempServer);
 
@@ -67,29 +76,20 @@ namespace VSTrac
             return details;
         }
 
-        private bool CheckTracServer()
+        private object CheckTracServer(ServerDetails details)
         {
-            this.Cursor = Cursors.WaitCursor;
+            ITrac trac = TracCommon.GetTrac(details);
 
-            try
-            {
-                ServerDetails details = GetServerDetails();
-                ITrac trac = TracCommon.GetTrac(details);
+            object[] version = trac.getAPIVersion();
 
-                object[] version = trac.getAPIVersion();
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                this.Cursor = Cursors.Default;
-            }
-
-            return true;
+            return version;
         }
 
+        /// <summary>
+        /// Basically this is the is_valid method. If anything is not valid, the next button is disabled.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ControlChangedEvent(object sender, EventArgs e)
         {
             bool canMoveNext = true;
@@ -111,6 +111,113 @@ namespace VSTrac
         private void wizard1_CloseFromCancel(object sender, CancelEventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// Start the background thread and disable all control while it works
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void wizardPage2_ShowFromNext(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            wizard1.NextEnabled = wizard1.BackEnabled = wizard1.CancelEnabled = false;
+            pictureBox1.Visible = true;
+
+            lblStatus.Text = "Checking...";
+            lblError.Text = "";
+
+            ServerDetails details = GetServerDetails();
+
+            bgwCheckServer.RunWorkerAsync(details);
+        }
+
+        private void AddNewServerForm_Load(object sender, EventArgs e)
+        {
+            wizard1.NextEnabled = false;
+        }
+
+        private void bgwCheckServer_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ServerDetails details = (ServerDetails)e.Argument;
+
+            try
+            {
+                CheckTracServer(details);
+            }
+            catch (Exception ex)
+            {
+                e.Result = ex;
+                return;
+            }
+
+            e.Result = true;
+        }
+
+        /// <summary>
+        /// Check the result. If exception report as error, otherwise report as success and enable controls.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bgwCheckServer_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result is Exception)
+            {
+                Exception ex = (Exception)e.Result;
+                lblError.Text = ex.Message;
+            }
+            else
+            {
+                wizard1.NextEnabled = true;
+                lblError.Text = "Successfully connected to Trac server.";
+            }
+
+            lblStatus.Text = "Checking done.";
+            wizard1.BackEnabled = wizard1.CancelEnabled = true;
+            pictureBox1.Visible = false;
+            this.Cursor = Cursors.Default;
+        }
+
+        /// <summary>
+        /// Add a list of default query definitions which can be chosen and added to the server node immediately
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void wizardPage3_ShowFromNext(object sender, EventArgs e)
+        {
+            List<TicketQueryDefinition> queries = new List<TicketQueryDefinition>();
+            ServerDetails details = GetServerDetails();
+
+            queries.Add(new TicketQueryDefinition("Active Tickets", "status!=closed", details));
+            queries.Add(new TicketQueryDefinition("Active Tasks", "type=task&status!=closed", details));
+            queries.Add(new TicketQueryDefinition("All Tickets", "status!=non_existant_status", details));
+            queries.Add(new TicketQueryDefinition("New Tickets", "status=new", details));
+            
+            if ( details.Authenticated )
+            {
+                queries.Add(new TicketQueryDefinition("My Active Tickets", "status!=closed&owner="+details.Username, details));
+                queries.Add(new TicketQueryDefinition("My Active Tasks", "type=task&status!=closed&owner=" + details.Username, details));
+                queries.Add(new TicketQueryDefinition("Tickets Reported By Me", "reporter=" + details.Username, details));
+            }
+
+            lstTicketQueries.BeginUpdate();
+            lstTicketQueries.Items.Clear();
+            lstTicketQueries.Items.AddRange(queries.ToArray());
+            lstTicketQueries.EndUpdate();
+        }
+
+        private void wizardPage3_CloseFromNext(object sender, Gui.Wizard.PageEventArgs e)
+        {
+            //do last bit here
+            ServerDetails details = GetServerDetails();
+            details.Save();
+
+            foreach (TicketQueryDefinition query in lstTicketQueries.CheckedItems)
+            {
+                query.Save();
+            }
+
+            this.result = GetServerDetails();
         }
     }
 }

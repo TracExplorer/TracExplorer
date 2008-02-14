@@ -36,7 +36,6 @@
             this.lblMessage1 = new System.Windows.Forms.Label();
             this.lblFingerprint = new System.Windows.Forms.Label();
             this.lblDistName = new System.Windows.Forms.Label();
-            this.lblMessage2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -120,15 +119,6 @@
             this.lblDistName.TabIndex = 7;
             this.lblDistName.Text = "Distinguished Name {0}";
             // 
-            // lblMessage2
-            // 
-            this.lblMessage2.AutoSize = true;
-            this.lblMessage2.Location = new System.Drawing.Point(66, 61);
-            this.lblMessage2.Name = "lblMessage2";
-            this.lblMessage2.Size = new System.Drawing.Size(83, 13);
-            this.lblMessage2.TabIndex = 8;
-            this.lblMessage2.Text = "Error message 2";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -145,7 +135,6 @@
             this.ClientSize = new System.Drawing.Size(450, 139);
             this.ControlBox = false;
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.lblMessage2);
             this.Controls.Add(this.lblDistName);
             this.Controls.Add(this.lblFingerprint);
             this.Controls.Add(this.lblMessage1);
@@ -158,7 +147,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CertErrorForm";
-            this.Text = "CertErrorForm";
+            this.Text = "Certification Error";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -175,7 +164,6 @@
         private System.Windows.Forms.Label lblMessage1;
         private System.Windows.Forms.Label lblFingerprint;
         private System.Windows.Forms.Label lblDistName;
-        private System.Windows.Forms.Label lblMessage2;
         private System.Windows.Forms.Label label6;
     }
 }

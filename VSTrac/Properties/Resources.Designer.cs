@@ -92,6 +92,13 @@ namespace VSTrac.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap download_FTP_00 {
+            get {
+                object obj = ResourceManager.GetObject("download_FTP_00", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap error {
             get {
                 object obj = ResourceManager.GetObject("error", resourceCulture);

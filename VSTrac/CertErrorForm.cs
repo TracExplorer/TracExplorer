@@ -68,9 +68,8 @@ namespace VSTrac
                     lblMessage1.Text = "Certificate not available";
                     break;
             }
-            
 
-            base.ShowDialog(owner);
+            base.ShowDialog();
 
             return this.DialogResult;
         }
