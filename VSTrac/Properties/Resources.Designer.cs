@@ -107,6 +107,33 @@ namespace VSTrac.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking Server Connectivity....
+        /// </summary>
+        internal static string LabelChecking {
+            get {
+                return ResourceManager.GetString("LabelChecking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server Check Failed.
+        /// </summary>
+        internal static string LabelCheckingFailure {
+            get {
+                return ResourceManager.GetString("LabelCheckingFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server Check Successful.
+        /// </summary>
+        internal static string LabelCheckingSuccess {
+            get {
+                return ResourceManager.GetString("LabelCheckingSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add To Favourites.
         /// </summary>
         internal static string MenuAddToFav {

@@ -33,9 +33,18 @@ namespace VSTrac
     {
         static TracCommon()
         {
-
+            // This delegate makes sure that non-validating SSL certificates are passed successfully.
+            ServicePointManager.ServerCertificateValidationCallback = delegate(object certsender, X509Certificate cert, X509Chain chain, System.Net.Security.SslPolicyErrors error)
+            {
+                return true;
+            };
         }
 
+        /// <summary>
+        /// Returns an <see cref="ITrac"/> instance which is connected to a <see cref="ServerDetails"/> object.
+        /// </summary>
+        /// <param name="serverDetails"></param>
+        /// <returns></returns>
         public static ITrac GetTrac(ServerDetails serverDetails)
         {
             ITrac trac = XmlRpcProxyGen.Create<ITrac>();

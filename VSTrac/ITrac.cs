@@ -217,5 +217,13 @@ namespace VSTrac
         [XmlRpcMethod("system.getAPIVersion")]
         object[] getAPIVersion();
         #endregion
+
+        #region Async
+        [XmlRpcBegin("system.getAPIVersion")]
+        IAsyncResult BeginGetAPIVersion();
+
+        [XmlRpcEnd]
+        object[] EndGetAPIVersion(IAsyncResult iasr);
+        #endregion
     }
 }

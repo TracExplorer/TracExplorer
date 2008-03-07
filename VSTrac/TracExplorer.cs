@@ -348,29 +348,6 @@ namespace VSTrac
 
             List<ServerDetails> servers = ServerDetails.LoadAll();
 
-            ServicePointManager.ServerCertificateValidationCallback = delegate(object certsender, X509Certificate cert, X509Chain chain, System.Net.Security.SslPolicyErrors error)
-            {
-                //TODO: Check registry and if exists as accept perm then return true;
-
-                CertErrorForm form = new CertErrorForm();
-                CertErrorFormResult result = form.ShowDialog(this, cert, chain, error);
-
-                switch (result)
-                {
-                    case CertErrorFormResult.AcceptPermanently:
-                        //TODO: Save to registry
-                        return true;
-
-                    case CertErrorFormResult.AcceptTemporary:
-                        return true;
-
-                    case CertErrorFormResult.Reject:
-                        return false;
-                }
-
-                return false;
-            };
-
             treeTrac.BeginUpdate();
 
             foreach (ServerDetails server in servers)

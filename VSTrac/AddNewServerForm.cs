@@ -65,7 +65,7 @@ namespace VSTrac
                 
             Uri uriServer= new Uri(tempServer);
 
-            if (uriServer.LocalPath.Contains("login/xmlrpc"))
+            if (uriServer.LocalPath.Contains("login/xmlrpc")) //TODO: Put in resource file...
                 throw new ApplicationException("Please do not include the login/xmlrpc path. The basic trac path is sufficient.");
 
             details.Server = uriServer.ToString();
@@ -74,15 +74,6 @@ namespace VSTrac
             details.Password = txtPassword.Text;
 
             return details;
-        }
-
-        private object CheckTracServer(ServerDetails details)
-        {
-            ITrac trac = TracCommon.GetTrac(details);
-
-            object[] version = trac.getAPIVersion();
-
-            return version;
         }
 
         /// <summary>
@@ -124,12 +115,37 @@ namespace VSTrac
             wizard1.NextEnabled = wizard1.BackEnabled = wizard1.CancelEnabled = false;
             pictureBox1.Visible = true;
 
-            lblStatus.Text = "Checking...";
-            lblError.Text = "";
+            lblStatus.Text = Properties.Resources.LabelChecking;
+            lblError.Text = string.Empty;
 
             ServerDetails details = GetServerDetails();
 
-            bgwCheckServer.RunWorkerAsync(details);
+            ITrac trac = TracCommon.GetTrac(details);
+
+            IAsyncResult asr = trac.BeginGetAPIVersion();
+
+            while (asr.IsCompleted == false)
+            {
+                Application.DoEvents();
+            }
+
+            try
+            {
+                object[] ret = trac.EndGetAPIVersion(asr);
+                lblStatus.Text = Properties.Resources.LabelCheckingSuccess;
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Text = Properties.Resources.LabelCheckingFailure;
+                lblError.Text = ex.Message;
+            }
+
+            wizard1.BackEnabled = wizard1.CancelEnabled = true;
+            wizard1.NextEnabled = ( lblError.Text == string.Empty );
+
+            pictureBox1.Visible = false;
+            this.Cursor = Cursors.Default;
+
         }
 
         private void AddNewServerForm_Load(object sender, EventArgs e)
@@ -137,46 +153,6 @@ namespace VSTrac
             wizard1.NextEnabled = false;
         }
 
-        private void bgwCheckServer_DoWork(object sender, DoWorkEventArgs e)
-        {
-            ServerDetails details = (ServerDetails)e.Argument;
-
-            try
-            {
-                CheckTracServer(details);
-            }
-            catch (Exception ex)
-            {
-                e.Result = ex;
-                return;
-            }
-
-            e.Result = true;
-        }
-
-        /// <summary>
-        /// Check the result. If exception report as error, otherwise report as success and enable controls.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void bgwCheckServer_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Result is Exception)
-            {
-                Exception ex = (Exception)e.Result;
-                lblError.Text = ex.Message;
-            }
-            else
-            {
-                wizard1.NextEnabled = true;
-                lblError.Text = "Successfully connected to Trac server.";
-            }
-
-            lblStatus.Text = "Checking done.";
-            wizard1.BackEnabled = wizard1.CancelEnabled = true;
-            pictureBox1.Visible = false;
-            this.Cursor = Cursors.Default;
-        }
 
         /// <summary>
         /// Add a list of default query definitions which can be chosen and added to the server node immediately
@@ -188,6 +164,7 @@ namespace VSTrac
             List<TicketQueryDefinition> queries = new List<TicketQueryDefinition>();
             ServerDetails details = GetServerDetails();
 
+            //TODO: Put these labels in resource file...
             queries.Add(new TicketQueryDefinition("Active Tickets", "status!=closed", details));
             queries.Add(new TicketQueryDefinition("Active Tasks", "type=task&status!=closed", details));
             queries.Add(new TicketQueryDefinition("All Tickets", "status!=non_existant_status", details));

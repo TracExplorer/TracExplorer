@@ -196,4 +196,13 @@
   <data name="download_FTP_00" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\download_FTP_00.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LabelChecking" xml:space="preserve">
+    <value>Checking Server Connectivity...</value>
+  </data>
+  <data name="LabelCheckingFailure" xml:space="preserve">
+    <value>Server Check Failed</value>
+  </data>
+  <data name="LabelCheckingSuccess" xml:space="preserve">
+    <value>Server Check Successful</value>
+  </data>
 </root>
