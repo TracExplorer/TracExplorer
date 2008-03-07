@@ -36,7 +36,7 @@ namespace VSTrac
     public partial class TicketView : UserControl
     {
         #region Private Variables
-        private List<Ticket> allTickets = new List<Ticket>();
+        private SortableBindingList<Ticket> allTickets = new SortableBindingList<Ticket>();
         private Connect vsTracConnect;
         private ServerDetails serverDetails;
         private TicketQueryDefinition ticketDefinition; 
@@ -76,6 +76,9 @@ namespace VSTrac
 
         public void RunQuery()
         {
+            cmbServer.ToolTipText = cmbServer.Text = serverDetails.ToString();
+            cmbTicketQuery.ToolTipText = cmbTicketQuery.Text = TicketDefinition.ToString();
+
             lblResults.Text = "Refreshing...";
             bgwTickets.RunWorkerAsync();
         }
@@ -97,8 +100,6 @@ namespace VSTrac
 
             try
             {
-
-                //TODO: Create a trac instance.
                 ITrac trac = TracCommon.GetTrac(ServerDetails);
 
                 int[] tickets = trac.queryTickets(TicketDefinition.Filter);
@@ -110,7 +111,7 @@ namespace VSTrac
                 object[] results = trac.multicall(ticketItems.ToArray());
 
                 // convert
-                List<Ticket> ticketArr = new List<Ticket>();
+                SortableBindingList<Ticket> ticketArr = new SortableBindingList<Ticket>();
 
                 foreach (object[] result in results)
                 {
@@ -171,9 +172,10 @@ namespace VSTrac
         {
             if (e.Result != null)
             {
-                allTickets = e.Result as List<Ticket>;
+                allTickets = e.Result as SortableBindingList<Ticket>;
                 dataGridView1.AutoGenerateColumns = false;
                 dataGridView1.DataSource = allTickets;
+
                 lblResults.Text = string.Format("{0} Tickets returned", allTickets.Count);
             }
             else
@@ -187,10 +189,6 @@ namespace VSTrac
                 Ticket ticket = (Ticket)dataGridView1.Rows[e.RowIndex].DataBoundItem;
                 OpenInBrowser(ticket.Id);
             }
-        }
-
-        private void dataGridView1_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
-        {
         }
     }
 }

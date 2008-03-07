@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TicketView));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmbServer = new System.Windows.Forms.ToolStripComboBox();
+            this.cmbTicketQuery = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colIcon = new System.Windows.Forms.DataGridViewImageColumn();
@@ -52,8 +55,6 @@
             this.colCC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLastModified = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.dummyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -65,7 +66,6 @@
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -76,7 +76,10 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnRefresh});
+            this.btnRefresh,
+            this.toolStripSeparator1,
+            this.cmbServer,
+            this.cmbTicketQuery});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
@@ -91,8 +94,27 @@
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(23, 22);
-            this.btnRefresh.Text = "toolStripButton1";
+            this.btnRefresh.Text = "Refresh";
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // cmbServer
+            // 
+            this.cmbServer.AutoToolTip = true;
+            this.cmbServer.Enabled = false;
+            this.cmbServer.Name = "cmbServer";
+            this.cmbServer.Size = new System.Drawing.Size(250, 25);
+            // 
+            // cmbTicketQuery
+            // 
+            this.cmbTicketQuery.AutoToolTip = true;
+            this.cmbTicketQuery.Enabled = false;
+            this.cmbTicketQuery.Name = "cmbTicketQuery";
+            this.cmbTicketQuery.Size = new System.Drawing.Size(150, 25);
             // 
             // toolStripContainer1
             // 
@@ -143,7 +165,6 @@
             this.colCC,
             this.colCreated,
             this.colLastModified});
-            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridView1.Location = new System.Drawing.Point(0, 25);
@@ -155,7 +176,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(609, 312);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            this.dataGridView1.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dataGridView1_CellContextMenuStripNeeded);
             // 
             // colIcon
             // 
@@ -286,6 +306,7 @@
             this.colCreated.HeaderText = "Created";
             this.colCreated.Name = "colCreated";
             this.colCreated.ReadOnly = true;
+            this.colCreated.Width = 150;
             // 
             // colLastModified
             // 
@@ -293,19 +314,7 @@
             this.colLastModified.HeaderText = "Last Modified";
             this.colLastModified.Name = "colLastModified";
             this.colLastModified.ReadOnly = true;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dummyToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 26);
-            // 
-            // dummyToolStripMenuItem
-            // 
-            this.dummyToolStripMenuItem.Name = "dummyToolStripMenuItem";
-            this.dummyToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-            this.dummyToolStripMenuItem.Text = "Dummy";
+            this.colLastModified.Width = 150;
             // 
             // panel1
             // 
@@ -344,7 +353,7 @@
             this.lblResults.AutoSize = true;
             this.lblResults.Location = new System.Drawing.Point(4, 3);
             this.lblResults.Name = "lblResults";
-            this.lblResults.Size = new System.Drawing.Size(93, 13);
+            this.lblResults.Size = new System.Drawing.Size(94, 13);
             this.lblResults.TabIndex = 0;
             this.lblResults.Text = "0 Tickets returned";
             // 
@@ -367,6 +376,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(168)))), ((int)(((byte)(153)))));
             this.Controls.Add(this.toolStripContainer1);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "TicketView";
             this.Padding = new System.Windows.Forms.Padding(1);
             this.Size = new System.Drawing.Size(611, 364);
@@ -378,7 +388,6 @@
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -399,8 +408,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblResults;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem dummyToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn colIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTicketType;
@@ -419,5 +426,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCC;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreated;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLastModified;
+        private System.Windows.Forms.ToolStripComboBox cmbServer;
+        private System.Windows.Forms.ToolStripComboBox cmbTicketQuery;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

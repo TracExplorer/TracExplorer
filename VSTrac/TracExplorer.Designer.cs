@@ -46,8 +46,8 @@
             this.ctmTickets = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnNewTicketQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.ctmTicket = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnDelQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.btnQueryOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDelQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.ctmServers.SuspendLayout();
             this.ctmServer.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -63,13 +63,13 @@
             this.ctmServers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNewServer});
             this.ctmServers.Name = "ctmServers";
-            this.ctmServers.Size = new System.Drawing.Size(166, 26);
+            this.ctmServers.Size = new System.Drawing.Size(160, 26);
             // 
             // btnNewServer
             // 
             this.btnNewServer.Image = global::VSTrac.Properties.Resources.server_new;
             this.btnNewServer.Name = "btnNewServer";
-            this.btnNewServer.Size = new System.Drawing.Size(165, 22);
+            this.btnNewServer.Size = new System.Drawing.Size(159, 22);
             this.btnNewServer.Text = "New Trac Server";
             this.btnNewServer.Click += new System.EventHandler(this.btnNewTracServer_Click);
             // 
@@ -110,14 +110,14 @@
             this.btnServerRefresh,
             this.btnServerDelete});
             this.ctmServer.Name = "contextMenuStrip1";
-            this.ctmServer.Size = new System.Drawing.Size(125, 48);
+            this.ctmServer.Size = new System.Drawing.Size(118, 48);
             // 
             // btnServerRefresh
             // 
             this.btnServerRefresh.Image = global::VSTrac.Properties.Resources.refresh;
             this.btnServerRefresh.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.btnServerRefresh.Name = "btnServerRefresh";
-            this.btnServerRefresh.Size = new System.Drawing.Size(124, 22);
+            this.btnServerRefresh.Size = new System.Drawing.Size(117, 22);
             this.btnServerRefresh.Text = "Refresh";
             this.btnServerRefresh.Click += new System.EventHandler(this.btnServerRefresh_Click);
             // 
@@ -126,7 +126,7 @@
             this.btnServerDelete.Image = global::VSTrac.Properties.Resources.delete;
             this.btnServerDelete.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.btnServerDelete.Name = "btnServerDelete";
-            this.btnServerDelete.Size = new System.Drawing.Size(124, 22);
+            this.btnServerDelete.Size = new System.Drawing.Size(117, 22);
             this.btnServerDelete.Text = "Remove";
             this.btnServerDelete.Click += new System.EventHandler(this.btnDelTracServer_Click);
             // 
@@ -187,12 +187,12 @@
             this.ctmTickets.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNewTicketQuery});
             this.ctmTickets.Name = "ctmTickets";
-            this.ctmTickets.Size = new System.Drawing.Size(171, 26);
+            this.ctmTickets.Size = new System.Drawing.Size(169, 26);
             // 
             // btnNewTicketQuery
             // 
             this.btnNewTicketQuery.Name = "btnNewTicketQuery";
-            this.btnNewTicketQuery.Size = new System.Drawing.Size(170, 22);
+            this.btnNewTicketQuery.Size = new System.Drawing.Size(168, 22);
             this.btnNewTicketQuery.Text = "New Ticket Query";
             this.btnNewTicketQuery.Click += new System.EventHandler(this.btnNewTicketQuery_Click);
             // 
@@ -202,29 +202,30 @@
             this.btnQueryOpen,
             this.btnDelQuery});
             this.ctmTicket.Name = "ctmTicket";
-            this.ctmTicket.Size = new System.Drawing.Size(153, 70);
+            this.ctmTicket.Size = new System.Drawing.Size(118, 48);
+            // 
+            // btnQueryOpen
+            // 
+            this.btnQueryOpen.Name = "btnQueryOpen";
+            this.btnQueryOpen.Size = new System.Drawing.Size(117, 22);
+            this.btnQueryOpen.Text = "Open";
+            this.btnQueryOpen.Click += new System.EventHandler(this.btnQueryOpen_Click);
             // 
             // btnDelQuery
             // 
             this.btnDelQuery.Image = global::VSTrac.Properties.Resources.delete;
             this.btnDelQuery.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.btnDelQuery.Name = "btnDelQuery";
-            this.btnDelQuery.Size = new System.Drawing.Size(152, 22);
+            this.btnDelQuery.Size = new System.Drawing.Size(117, 22);
             this.btnDelQuery.Text = "Remove";
             this.btnDelQuery.Click += new System.EventHandler(this.btnDelQuery_Click);
-            // 
-            // btnQueryOpen
-            // 
-            this.btnQueryOpen.Name = "btnQueryOpen";
-            this.btnQueryOpen.Size = new System.Drawing.Size(152, 22);
-            this.btnQueryOpen.Text = "Open";
-            this.btnQueryOpen.Click += new System.EventHandler(this.btnQueryOpen_Click);
             // 
             // TracExplorer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.toolStripContainer1);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "TracExplorer";
             this.Size = new System.Drawing.Size(263, 327);
             this.ctmServers.ResumeLayout(false);
