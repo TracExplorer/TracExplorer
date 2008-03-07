@@ -40,7 +40,7 @@ Please note: x is either 2005 or 2008 depending on which version of Visual Studi
 USAGE
    - Click on View\Trac Explorer
    - Click the toolbar button for Add New Trac Server
-   - Enter all details in the popup window
+   - Follow the wizard to enter the server details and to choose any set ticket queries
    - Once all the items have downloaded (the Waiting... message has disappeared) you can:
      - Open a wiki page by double clicking on it
      - Open a ticket query list by double clicking on it
