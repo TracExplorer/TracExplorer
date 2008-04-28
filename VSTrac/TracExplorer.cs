@@ -252,6 +252,7 @@ namespace VSTrac
 
                 if (e.Result is object[])
                 {
+                    this.Nodes.Clear();
                     this.Text = Properties.Resources.NodeAttributes;
 
                     object[] results = (object[])e.Result;
