@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VSTrac.Properties {
+namespace TracExplorer.VSTrac.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace VSTrac.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VSTrac.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TracExplorer.VSTrac.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,13 +66,6 @@ namespace VSTrac.Properties {
         internal static string CaptionConfirmDelete {
             get {
                 return ResourceManager.GetString("CaptionConfirmDelete", resourceCulture);
-            }
-        }
-        
-        internal static System.Drawing.Bitmap closedticket {
-            get {
-                object obj = ResourceManager.GetObject("closedticket", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -166,13 +159,6 @@ namespace VSTrac.Properties {
         internal static string MenuRefresh {
             get {
                 return ResourceManager.GetString("MenuRefresh", resourceCulture);
-            }
-        }
-        
-        internal static System.Drawing.Bitmap newticket {
-            get {
-                object obj = ResourceManager.GetObject("newticket", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

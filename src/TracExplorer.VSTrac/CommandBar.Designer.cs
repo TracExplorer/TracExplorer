@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VSTrac {
+namespace TracExplorer.VSTrac {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace VSTrac {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VSTrac.CommandBar", typeof(CommandBar).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TracExplorer.VSTrac.CommandBar", typeof(CommandBar).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

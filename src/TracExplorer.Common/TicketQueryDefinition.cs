@@ -25,7 +25,7 @@ using System.Text;
 using Microsoft.Win32;
 using System.Windows.Forms;
 
-namespace VSTrac
+namespace TracExplorer.Common
 {
     public class TicketQueryDefinition
     {

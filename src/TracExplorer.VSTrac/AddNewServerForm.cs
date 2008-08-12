@@ -29,8 +29,9 @@ using System.Windows.Forms;
 using CookComputing.XmlRpc;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+using TracExplorer.Common;
 
-namespace VSTrac
+namespace TracExplorer.VSTrac
 {
     public partial class AddNewServerForm : Form
     {

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 
-namespace VSTrac
+namespace TracExplorer.VSTrac
 {
     public enum CertErrorFormResult
     {

@@ -28,7 +28,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using System.Reflection;
 
-namespace VSTrac
+namespace TracExplorer.Common
 {
     public static class TracCommon
     {

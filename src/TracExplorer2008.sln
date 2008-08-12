@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{327FD393-65C0-4FCF-9E02-B2820BD7BEAF}"
 	ProjectSection(SolutionItems) = preProject
+		LICENCE.TXT = LICENCE.TXT
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		README.TXT = README.TXT
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracExplorer.VSTrac", "TracExplorer.VSTrac\TracExplorer.VSTrac.csproj", "{982475DE-0783-43B8-BF89-324366449D50}"

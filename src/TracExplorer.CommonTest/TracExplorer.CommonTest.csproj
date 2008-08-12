@@ -7,8 +7,8 @@
     <ProjectGuid>{CE9E3A81-FBBE-4DDC-A954-19AEEF0F3152}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VSTracTests</RootNamespace>
-    <AssemblyName>VSTracTests</AssemblyName>
+    <RootNamespace>TracExplorer.CommonTest</RootNamespace>
+    <AssemblyName>TracExplorer.CommonTest</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -61,6 +61,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TracExplorer.Common\TracExplorer.Common.csproj">
+      <Project>{A2C1F604-DF0D-4514-A2B0-8E2C30907F05}</Project>
+      <Name>TracExplorer.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

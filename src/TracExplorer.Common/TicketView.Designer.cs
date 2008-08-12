@@ -1,4 +1,4 @@
-﻿namespace VSTrac
+﻿namespace TracExplorer.Common
 {
     partial class TicketView
     {

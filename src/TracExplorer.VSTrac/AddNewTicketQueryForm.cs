@@ -26,18 +26,19 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using TracExplorer.Common;
 
-namespace VSTrac
+namespace TracExplorer.VSTrac
 {
     public partial class AddNewTicketQueryForm : Form
     {
-        private Connect vsTracConnect;
+        private ITracConnect _tracConnect;
 
         #region Public Properties
-        public Connect VsTracConnect
+        public ITracConnect TracConnect
         {
-            get { return vsTracConnect; }
-            set { vsTracConnect = value; }
+            get { return _tracConnect; }
+            set { _tracConnect = value; }
         }
 
         public string TicketQueryName
@@ -60,7 +61,7 @@ namespace VSTrac
 
         private void lnkFilterHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            vsTracConnect.OpenBrowser("http://trac.edgewall.org/wiki/TracQuery#QueryLanguage"); //TODO: Place this in config somewhere?
+            TracConnect.OpenBrowser("http://trac.edgewall.org/wiki/TracQuery#QueryLanguage"); //TODO: Place this in config somewhere?
         }
 
         private void btnOk_Click(object sender, EventArgs e)

@@ -9,8 +9,8 @@
     <StartupObject>
     </StartupObject>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <AssemblyName>VSTrac</AssemblyName>
-    <RootNamespace>VSTrac</RootNamespace>
+    <AssemblyName>TracExplorer.VSTrac</AssemblyName>
+    <RootNamespace>TracExplorer.VSTrac</RootNamespace>
     <ApplicationIcon>trac.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,7 +39,6 @@
     <Reference Include="Extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
@@ -59,7 +58,7 @@
     <Compile Include="AddNewTicketQueryForm.Designer.cs">
       <DependentUpon>AddNewTicketQueryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AssemblyInfo.cs">
+    <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CertErrorForm.cs">
@@ -76,23 +75,11 @@
     <Compile Include="Connect.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ITrac.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="ServerDetails.cs" />
-    <Compile Include="SortableBindingList.cs" />
-    <Compile Include="Ticket.cs" />
-    <Compile Include="TicketQueryDefinition.cs" />
-    <Compile Include="TicketView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TicketView.Designer.cs">
-      <DependentUpon>TicketView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TracCommon.cs" />
     <Compile Include="TracExplorer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -126,10 +113,6 @@
     <EmbeddedResource Include="CommandBar.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CommandBar.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TicketView.resx">
-      <DependentUpon>TicketView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TracExplorer.resx">
@@ -218,10 +201,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Resources\trac.ico" />
-    <None Include="Resources\newticket.png" />
-    <None Include="Resources\closedticket.png" />
-    <Content Include="LICENCE.TXT" />
-    <Content Include="README.TXT" />
     <None Include="Resources\error.png" />
     <None Include="Resources\Delete.bmp" />
     <None Include="Resources\Refresh.bmp" />
@@ -232,6 +211,12 @@
     <Content Include="VSTrac.AddIn" />
     <Content Include="Wizard\Wizard.bmp" />
     <Content Include="Wizard\wizBigOnlineFolder.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TracExplorer.Common\TracExplorer.Common.csproj">
+      <Project>{A2C1F604-DF0D-4514-A2B0-8E2C30907F05}</Project>
+      <Name>TracExplorer.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>

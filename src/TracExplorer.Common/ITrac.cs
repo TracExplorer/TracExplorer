@@ -28,7 +28,7 @@ using System.Text;
 using xmlrpc;
 using CookComputing.XmlRpc;
 
-namespace VSTrac
+namespace TracExplorer.Common
 {
     #region MulticallItem
 	public struct MulticallItem

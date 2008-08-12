@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System;
 using System.Reflection;
 
-class SortableBindingList<T> : BindingList<T>
+public class SortableBindingList<T> : BindingList<T>
 {
     private PropertyDescriptor propertyDescriptor;
     private ListSortDirection listSortDirection;

@@ -24,7 +24,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VSTrac;
+using TracExplorer.Common;
 using CookComputing.XmlRpc;
 using System.Net;
 using System.IO;
@@ -33,7 +33,7 @@ using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 using System.Reflection;
 
-namespace VSTracTests
+namespace TracExplorer.CommonTest
 {
     [TestClass]
     public class XmlRpcTests

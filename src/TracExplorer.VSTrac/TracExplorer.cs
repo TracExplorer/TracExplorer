@@ -30,8 +30,9 @@ using CookComputing.XmlRpc;
 using System.Net;
 using System.Threading;
 using System.Security.Cryptography.X509Certificates;
+using TracExplorer.Common;
 
-namespace VSTrac
+namespace TracExplorer.VSTrac
 {
     public partial class TracExplorer : UserControl
     {
@@ -335,7 +336,7 @@ namespace VSTrac
 
         #region Private Variables
         private Dictionary<Type, TreeNodeMouseClickEventHandler> clickHandlers = new Dictionary<Type, TreeNodeMouseClickEventHandler>();
-        private Connect vsTracConnect;
+        private ITracConnect _tracConnect;
         #endregion
 
         #region ctor
@@ -369,10 +370,10 @@ namespace VSTrac
         #endregion
 
         #region Public Properties
-        public Connect VSTracConnect 
+        public ITracConnect TracConnect 
         {
-            get { return vsTracConnect; }
-            set { vsTracConnect = value; }
+            get { return _tracConnect; }
+            set { _tracConnect = value; }
         }
         #endregion
 
@@ -455,7 +456,7 @@ namespace VSTrac
 
             AddNewTicketQueryForm form = new AddNewTicketQueryForm();
 
-            form.VsTracConnect = this.vsTracConnect;
+            form.TracConnect = this._tracConnect;
 
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -481,7 +482,7 @@ namespace VSTrac
         {
             TicketNode node = treeTrac.SelectedNode as TicketNode;
 
-            VSTracConnect.CreateTicketWindow(node.ServerDetails, node.TicketDefinition);
+            TracConnect.CreateTicketWindow(node.ServerDetails, node.TicketDefinition);
         }
         #endregion
 
@@ -491,7 +492,7 @@ namespace VSTrac
             WikiPageNode wikiPageNode = e.Node as WikiPageNode;
             ServerNode serverNode = e.Node.Parent.Parent as ServerNode;
 
-            VSTracConnect.OpenBrowser(serverNode.ServerDetails.WikiPageUrl(wikiPageNode.Text));
+            TracConnect.OpenBrowser(serverNode.ServerDetails.WikiPageUrl(wikiPageNode.Text));
         }
 
         private void TicketDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -500,7 +501,7 @@ namespace VSTrac
             {
                 TicketNode ticketNode = e.Node as TicketNode;
 
-                VSTracConnect.CreateTicketWindow(ticketNode.ServerDetails, ticketNode.TicketDefinition);
+                TracConnect.CreateTicketWindow(ticketNode.ServerDetails, ticketNode.TicketDefinition);
             }
             catch (Exception ex)
             {

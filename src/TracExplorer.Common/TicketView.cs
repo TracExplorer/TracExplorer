@@ -22,22 +22,20 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using CookComputing.XmlRpc;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.VisualStudio.Shell.Interop;
+using TracExplorer.Common.Properties;
+using System.Runtime.InteropServices;
 
-namespace VSTrac
+namespace TracExplorer.Common
 {
+
+    [ComVisible(true)]
     public partial class TicketView : UserControl
     {
         #region Private Variables
         private SortableBindingList<Ticket> allTickets = new SortableBindingList<Ticket>();
-        private Connect vsTracConnect;
+        private ITracConnect _tracConnect;
         private ServerDetails serverDetails;
         private TicketQueryDefinition ticketDefinition; 
         #endregion
@@ -50,10 +48,10 @@ namespace VSTrac
         #endregion
 
         #region Public Properties
-        public Connect VSTracConnect
+        public ITracConnect TracConnect
         {
-            get { return vsTracConnect; }
-            set { vsTracConnect = value; }
+            get { return _tracConnect; }
+            set { _tracConnect = value; }
         }
 
         public ServerDetails ServerDetails
@@ -83,11 +81,29 @@ namespace VSTrac
             bgwTickets.RunWorkerAsync();
         }
 
+        public List<Ticket> SelectedTickets()
+        {
+            List<Ticket> TicketList = new List<Ticket>();
+
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                if (dataGridView1.Rows[i].Selected == true)
+                {
+                    Ticket ticket = (Ticket)dataGridView1.Rows[i].DataBoundItem;
+                    TicketList.Add(ticket);
+                }
+            }
+            return TicketList;
+        }
+
         private void OpenInBrowser(int id)
         {
             try
             {
-                VSTracConnect.OpenBrowser(ServerDetails.TicketUrl(id));
+                if (TracConnect != null)
+                {
+                    TracConnect.OpenBrowser(ServerDetails.TicketUrl(id));
+                }
             }
             catch (Exception ex)
             {
@@ -139,7 +155,7 @@ namespace VSTrac
                     t.TicketType = (string)attributes["type"];
                     t.Severity = (string)attributes["severity"];
 
-                    t.Icon = string.IsNullOrEmpty(t.Resolution) ? Properties.Resources.newticket : Properties.Resources.closedticket;
+                    t.Icon = string.IsNullOrEmpty(t.Resolution) ? Resources.newticket : Resources.closedticket;
 
                     ticketArr.Add(t);
                 }
@@ -175,7 +191,7 @@ namespace VSTrac
                 allTickets = e.Result as SortableBindingList<Ticket>;
                 dataGridView1.AutoGenerateColumns = false;
                 dataGridView1.DataSource = allTickets;
-
+                
                 lblResults.Text = string.Format("{0} Tickets returned", allTickets.Count);
             }
             else

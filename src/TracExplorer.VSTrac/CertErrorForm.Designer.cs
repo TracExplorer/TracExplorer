@@ -1,4 +1,4 @@
-﻿namespace VSTrac
+﻿namespace TracExplorer.VSTrac
 {
     partial class CertErrorForm
     {
@@ -51,7 +51,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::VSTrac.Properties.Resources.error;
+            this.pictureBox1.Image = global::TracExplorer.VSTrac.Properties.Resources.error;
             this.pictureBox1.Location = new System.Drawing.Point(12, 39);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(48, 48);

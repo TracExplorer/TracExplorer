@@ -25,7 +25,7 @@ using System.Text;
 using System.Drawing;
 using System.Collections;
 
-namespace VSTrac
+namespace TracExplorer.Common
 {
     public class Ticket
     {

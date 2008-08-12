@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TracExplorer.CommonTest.Properties {
+namespace TracExplorer.Common.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TracExplorer.CommonTest.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TracExplorer.CommonTest.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TracExplorer.Common.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,9 +60,16 @@ namespace TracExplorer.CommonTest.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap avatar {
+        internal static System.Drawing.Bitmap closedticket {
             get {
-                object obj = ResourceManager.GetObject("avatar", resourceCulture);
+                object obj = ResourceManager.GetObject("closedticket", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap newticket {
+            get {
+                object obj = ResourceManager.GetObject("newticket", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
