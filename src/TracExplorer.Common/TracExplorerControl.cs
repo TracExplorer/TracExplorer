@@ -1,6 +1,6 @@
 ﻿#region GPL Licence
 /**********************************************************************
- VSTrac - Visual Studo Trac Integration
+ VSTrac - Visual Studio Trac Integration
  Copyright (C) 2008 Mladen Mihajlovic
  http://vstrac.devjavu.com/
  
@@ -22,19 +22,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using CookComputing.XmlRpc;
-using System.Net;
-using System.Threading;
-using System.Security.Cryptography.X509Certificates;
-using TracExplorer.Common;
 
-namespace TracExplorer.VSTrac
+namespace TracExplorer.Common
 {
-    public partial class TracExplorer : UserControl
+    [ComVisible(true)]
+    public partial class TracExplorerControl : UserControl
     {
         #region Node Types
         private abstract class TracNode : TreeNode
@@ -340,7 +334,7 @@ namespace TracExplorer.VSTrac
         #endregion
 
         #region ctor
-        public TracExplorer()
+        public TracExplorerControl()
         {
             InitializeComponent();
 

@@ -32,40 +32,16 @@
     <IncrementalBuild>false</IncrementalBuild>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CookComputing.XmlRpcV2, Version=2.1.0.3, Culture=neutral, PublicKeyToken=a7d6e17aa302004d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ext\xml-rpc.net\CookComputing.XmlRpcV2.dll</HintPath>
-    </Reference>
     <Reference Include="Extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddNewServerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddNewServerForm.Designer.cs">
-      <DependentUpon>AddNewServerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddNewTicketQueryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddNewTicketQueryForm.Designer.cs">
-      <DependentUpon>AddNewTicketQueryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CertErrorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CertErrorForm.Designer.cs">
-      <DependentUpon>CertErrorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CommandBar.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -80,43 +56,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="TracExplorer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TracExplorer.Designer.cs">
-      <DependentUpon>TracExplorer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Wizard\Header.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizard\HeaderDesigner.cs" />
-    <Compile Include="Wizard\InfoContainer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizard\InfoContainerDesigner.cs" />
-    <Compile Include="Wizard\InfoPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizard\InfoPageDesigner.cs" />
-    <Compile Include="Wizard\PageCollection.cs" />
-    <Compile Include="Wizard\PageEventHandler.cs" />
-    <Compile Include="Wizard\Wizard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Wizard\WizardDesigner.cs" />
-    <Compile Include="Wizard\WizardPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Wizard\WizardPageDesigner.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CommandBar.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CommandBar.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TracExplorer.resx">
-      <DependentUpon>TracExplorer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -137,14 +81,6 @@
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
-    <COMReference Include="EnvDTE90">
-      <Guid>{2CE2370E-D744-4936-A090-3FFFE667B0E1}</Guid>
-      <VersionMajor>9</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="Microsoft.VisualStudio.CommandBars">
       <Guid>{1CBA492E-7263-47BB-87FE-639000619B15}</Guid>
       <VersionMajor>8</VersionMajor>
@@ -153,64 +89,17 @@
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
-    <COMReference Include="stdole">
-      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AddNewServerForm.resx">
-      <DependentUpon>AddNewServerForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddNewTicketQueryForm.resx">
-      <DependentUpon>AddNewTicketQueryForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CertErrorForm.resx">
-      <DependentUpon>CertErrorForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wizard\Header.resx">
-      <DependentUpon>Header.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizard\InfoContainer.resx">
-      <DependentUpon>InfoContainer.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizard\InfoPage.resx">
-      <DependentUpon>InfoPage.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizard\Wizard.resx">
-      <DependentUpon>Wizard.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wizard\WizardPage.resx">
-      <DependentUpon>WizardPage.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <None Include="Resources\trac.ico" />
-    <None Include="Resources\error.png" />
-    <None Include="Resources\Delete.bmp" />
-    <None Include="Resources\Refresh.bmp" />
-    <None Include="Resources\server_new.png" />
-    <None Include="Resources\download_FTP_00.gif" />
     <None Include="vstrac.vscontent" />
     <Content Include="trac.ico" />
     <Content Include="VSTrac.AddIn" />
-    <Content Include="Wizard\Wizard.bmp" />
-    <Content Include="Wizard\wizBigOnlineFolder.gif" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TracExplorer.Common\TracExplorer.Common.csproj">

@@ -117,11 +117,86 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CaptionConfirmDelete" xml:space="preserve">
+    <value>Confirm Remove</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="closedticket" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\closedticket.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ConfirmDelTracServer" xml:space="preserve">
+    <value>Are you sure you want to remove {0}?</value>
+  </data>
+  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="download_FTP_00" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\download_FTP_00.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\error.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LabelChecking" xml:space="preserve">
+    <value>Checking Server Connectivity...</value>
+  </data>
+  <data name="LabelCheckingFailure" xml:space="preserve">
+    <value>Server Check Failed</value>
+  </data>
+  <data name="LabelCheckingSuccess" xml:space="preserve">
+    <value>Server Check Successful</value>
+  </data>
+  <data name="MenuDelete" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="MenuNewServer" xml:space="preserve">
+    <value>Add New Trac Server</value>
+  </data>
+  <data name="MenuRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
   <data name="newticket" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\newticket.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NodeAttributes" xml:space="preserve">
+    <value>Attributes</value>
+  </data>
+  <data name="NodeComponents" xml:space="preserve">
+    <value>Components</value>
+  </data>
+  <data name="NodeMilestones" xml:space="preserve">
+    <value>Milestones</value>
+  </data>
+  <data name="NodePriorities" xml:space="preserve">
+    <value>Priorities</value>
+  </data>
+  <data name="NodeResolutions" xml:space="preserve">
+    <value>Resolutions</value>
+  </data>
+  <data name="NodeSeverities" xml:space="preserve">
+    <value>Severities</value>
+  </data>
+  <data name="NodeStatuses" xml:space="preserve">
+    <value>Statuses</value>
+  </data>
+  <data name="NodeTickets" xml:space="preserve">
+    <value>Tickets</value>
+  </data>
+  <data name="NodeTicketTypes" xml:space="preserve">
+    <value>Ticket Types</value>
+  </data>
+  <data name="NodeVersions" xml:space="preserve">
+    <value>Versions</value>
+  </data>
+  <data name="NodeWaiting" xml:space="preserve">
+    <value>waiting...</value>
+  </data>
+  <data name="NodeWikiPages" xml:space="preserve">
+    <value>Wiki Pages</value>
+  </data>
+  <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refresh.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="server_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\server_new.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

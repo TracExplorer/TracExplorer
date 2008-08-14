@@ -1,9 +1,9 @@
 ﻿// Copyright (c) 2007 Tim Van Wassenhove
 // From http://www.timvw.be/presenting-the-sortablebindinglistt/
 
-using System.ComponentModel;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 
 public class SortableBindingList<T> : BindingList<T>

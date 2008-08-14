@@ -60,6 +60,15 @@ namespace TracExplorer.Common.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Remove.
+        /// </summary>
+        internal static string CaptionConfirmDelete {
+            get {
+                return ResourceManager.GetString("CaptionConfirmDelete", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap closedticket {
             get {
                 object obj = ResourceManager.GetObject("closedticket", resourceCulture);
@@ -67,9 +76,215 @@ namespace TracExplorer.Common.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove {0}?.
+        /// </summary>
+        internal static string ConfirmDelTracServer {
+            get {
+                return ResourceManager.GetString("ConfirmDelTracServer", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap delete {
+            get {
+                object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap download_FTP_00 {
+            get {
+                object obj = ResourceManager.GetObject("download_FTP_00", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap error {
+            get {
+                object obj = ResourceManager.GetObject("error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking Server Connectivity....
+        /// </summary>
+        internal static string LabelChecking {
+            get {
+                return ResourceManager.GetString("LabelChecking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server Check Failed.
+        /// </summary>
+        internal static string LabelCheckingFailure {
+            get {
+                return ResourceManager.GetString("LabelCheckingFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server Check Successful.
+        /// </summary>
+        internal static string LabelCheckingSuccess {
+            get {
+                return ResourceManager.GetString("LabelCheckingSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string MenuDelete {
+            get {
+                return ResourceManager.GetString("MenuDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Trac Server.
+        /// </summary>
+        internal static string MenuNewServer {
+            get {
+                return ResourceManager.GetString("MenuNewServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        internal static string MenuRefresh {
+            get {
+                return ResourceManager.GetString("MenuRefresh", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap newticket {
             get {
                 object obj = ResourceManager.GetObject("newticket", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attributes.
+        /// </summary>
+        internal static string NodeAttributes {
+            get {
+                return ResourceManager.GetString("NodeAttributes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Components.
+        /// </summary>
+        internal static string NodeComponents {
+            get {
+                return ResourceManager.GetString("NodeComponents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Milestones.
+        /// </summary>
+        internal static string NodeMilestones {
+            get {
+                return ResourceManager.GetString("NodeMilestones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Priorities.
+        /// </summary>
+        internal static string NodePriorities {
+            get {
+                return ResourceManager.GetString("NodePriorities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolutions.
+        /// </summary>
+        internal static string NodeResolutions {
+            get {
+                return ResourceManager.GetString("NodeResolutions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Severities.
+        /// </summary>
+        internal static string NodeSeverities {
+            get {
+                return ResourceManager.GetString("NodeSeverities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statuses.
+        /// </summary>
+        internal static string NodeStatuses {
+            get {
+                return ResourceManager.GetString("NodeStatuses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tickets.
+        /// </summary>
+        internal static string NodeTickets {
+            get {
+                return ResourceManager.GetString("NodeTickets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ticket Types.
+        /// </summary>
+        internal static string NodeTicketTypes {
+            get {
+                return ResourceManager.GetString("NodeTicketTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Versions.
+        /// </summary>
+        internal static string NodeVersions {
+            get {
+                return ResourceManager.GetString("NodeVersions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to waiting....
+        /// </summary>
+        internal static string NodeWaiting {
+            get {
+                return ResourceManager.GetString("NodeWaiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wiki Pages.
+        /// </summary>
+        internal static string NodeWikiPages {
+            get {
+                return ResourceManager.GetString("NodeWikiPages", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap refresh {
+            get {
+                object obj = ResourceManager.GetObject("refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap server_new {
+            get {
+                object obj = ResourceManager.GetObject("server_new", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

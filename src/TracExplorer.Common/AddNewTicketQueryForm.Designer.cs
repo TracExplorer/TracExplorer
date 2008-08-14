@@ -1,4 +1,4 @@
-﻿namespace TracExplorer.VSTrac
+﻿namespace TracExplorer.Common
 {
     partial class AddNewTicketQueryForm
     {

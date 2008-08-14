@@ -1,4 +1,4 @@
-﻿namespace TracExplorer.VSTrac
+﻿namespace TracExplorer.Common
 {
     partial class AddNewServerForm
     {
@@ -216,7 +216,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::TracExplorer.VSTrac.Properties.Resources.download_FTP_00;
+            this.pictureBox1.Image = global::TracExplorer.Common.Properties.Resources.download_FTP_00;
             this.pictureBox1.Location = new System.Drawing.Point(62, 34);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(272, 60);

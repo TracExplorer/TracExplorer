@@ -1,6 +1,6 @@
 ﻿#region GPL Licence
 /**********************************************************************
- VSTrac - Visual Studo Trac Integration
+ VSTrac - Visual Studio Trac Integration
  Copyright (C) 2008 Mladen Mihajlovic
  http://vstrac.devjavu.com/
  
@@ -21,9 +21,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.Win32;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace TracExplorer.Common
 {

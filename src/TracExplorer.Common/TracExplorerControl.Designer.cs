@@ -1,6 +1,6 @@
-﻿namespace TracExplorer.VSTrac
+﻿namespace TracExplorer.Common
 {
-    partial class TracExplorer
+    partial class TracExplorerControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Favourites");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Trac Servers");
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TracExplorer));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TracExplorerControl));
             this.ctmServers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnNewServer = new System.Windows.Forms.ToolStripMenuItem();
             this.treeTrac = new System.Windows.Forms.TreeView();
@@ -67,7 +67,7 @@
             // 
             // btnNewServer
             // 
-            this.btnNewServer.Image = global::TracExplorer.VSTrac.Properties.Resources.server_new;
+            this.btnNewServer.Image = global::TracExplorer.Common.Properties.Resources.server_new;
             this.btnNewServer.Name = "btnNewServer";
             this.btnNewServer.Size = new System.Drawing.Size(159, 22);
             this.btnNewServer.Text = "New Trac Server";
@@ -114,7 +114,7 @@
             // 
             // btnServerRefresh
             // 
-            this.btnServerRefresh.Image = global::TracExplorer.VSTrac.Properties.Resources.refresh;
+            this.btnServerRefresh.Image = global::TracExplorer.Common.Properties.Resources.refresh;
             this.btnServerRefresh.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.btnServerRefresh.Name = "btnServerRefresh";
             this.btnServerRefresh.Size = new System.Drawing.Size(117, 22);
@@ -123,7 +123,7 @@
             // 
             // btnServerDelete
             // 
-            this.btnServerDelete.Image = global::TracExplorer.VSTrac.Properties.Resources.delete;
+            this.btnServerDelete.Image = global::TracExplorer.Common.Properties.Resources.delete;
             this.btnServerDelete.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.btnServerDelete.Name = "btnServerDelete";
             this.btnServerDelete.Size = new System.Drawing.Size(117, 22);
@@ -164,7 +164,7 @@
             // btnNewTracServer
             // 
             this.btnNewTracServer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNewTracServer.Image = global::TracExplorer.VSTrac.Properties.Resources.server_new;
+            this.btnNewTracServer.Image = global::TracExplorer.Common.Properties.Resources.server_new;
             this.btnNewTracServer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNewTracServer.Name = "btnNewTracServer";
             this.btnNewTracServer.Size = new System.Drawing.Size(23, 22);
@@ -175,7 +175,7 @@
             // 
             this.btnDelTracServer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnDelTracServer.Enabled = false;
-            this.btnDelTracServer.Image = global::TracExplorer.VSTrac.Properties.Resources.delete;
+            this.btnDelTracServer.Image = global::TracExplorer.Common.Properties.Resources.delete;
             this.btnDelTracServer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelTracServer.Name = "btnDelTracServer";
             this.btnDelTracServer.Size = new System.Drawing.Size(23, 22);
@@ -213,7 +213,7 @@
             // 
             // btnDelQuery
             // 
-            this.btnDelQuery.Image = global::TracExplorer.VSTrac.Properties.Resources.delete;
+            this.btnDelQuery.Image = global::TracExplorer.Common.Properties.Resources.delete;
             this.btnDelQuery.ImageTransparentColor = System.Drawing.Color.Fuchsia;
             this.btnDelQuery.Name = "btnDelQuery";
             this.btnDelQuery.Size = new System.Drawing.Size(117, 22);

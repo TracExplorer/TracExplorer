@@ -1,6 +1,6 @@
 ﻿#region GPL Licence
 /**********************************************************************
- VSTrac - Visual Studo Trac Integration
+ VSTrac - Visual Studio Trac Integration
  Copyright (C) 2008 Mladen Mihajlovic
  http://vstrac.devjavu.com/
  
@@ -31,7 +31,7 @@ using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using TracExplorer.Common;
 
-namespace TracExplorer.VSTrac
+namespace TracExplorer.Common
 {
     public partial class AddNewServerForm : Form
     {

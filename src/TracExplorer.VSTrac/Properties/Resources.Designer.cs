@@ -78,27 +78,6 @@ namespace TracExplorer.VSTrac.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap delete {
-            get {
-                object obj = ResourceManager.GetObject("delete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap download_FTP_00 {
-            get {
-                object obj = ResourceManager.GetObject("download_FTP_00", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap error {
-            get {
-                object obj = ResourceManager.GetObject("error", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         /// <summary>
         ///   Looks up a localized string similar to Checking Server Connectivity....
         /// </summary>
@@ -267,20 +246,6 @@ namespace TracExplorer.VSTrac.Properties {
         internal static string NodeWikiPages {
             get {
                 return ResourceManager.GetString("NodeWikiPages", resourceCulture);
-            }
-        }
-        
-        internal static System.Drawing.Bitmap refresh {
-            get {
-                object obj = ResourceManager.GetObject("refresh", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap server_new {
-            get {
-                object obj = ResourceManager.GetObject("server_new", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
