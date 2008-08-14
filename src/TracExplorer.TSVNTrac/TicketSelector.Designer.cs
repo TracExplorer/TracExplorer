@@ -88,7 +88,7 @@
             this.Name = "TicketSelector";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Trac Explorer";
+            this.Text = "Please select your tickets";
             this.Load += new System.EventHandler(this.MyIssuesForm_Load);
             this.ResumeLayout(false);
 

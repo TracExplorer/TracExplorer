@@ -25,6 +25,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using TracExplorer.Common;
+using System.Xml;
 
 namespace TracExplorer.TSVNTrac
 {
@@ -37,11 +38,47 @@ namespace TracExplorer.TSVNTrac
 
         public string GetCommitMessage(IntPtr hParentWnd, string parameters, string commonRoot, string[] pathList, string originalMessage)
         {
+            String server;
+            String ticketQuery;
+                        
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(parameters);
+                server = doc.DocumentElement.GetAttribute("server");
+                ticketQuery = doc.DocumentElement.GetAttribute("ticketquery");
+            }
+            catch (XmlException)
+            {
+                MessageBox.Show("Parameters are invalid","Trac Explorer");
+                return originalMessage;
+            }
+
             List<ServerDetails> servers = ServerDetails.LoadAll();
 
-            List<TicketQueryDefinition> ticketQueries = TicketQueryDefinition.LoadAllTicketQueries(servers[0]);
-            
-            TicketSelector form = new TicketSelector(servers[0],ticketQueries[0]);
+            ServerDetails serverDetails;
+
+            serverDetails = servers.Find(delegate(ServerDetails obj) { return (obj.Server == server); });
+
+            if (serverDetails == null)
+            {
+                MessageBox.Show("Can't find server information!", "Trac Explorer");
+                return originalMessage;
+            }
+
+            List<TicketQueryDefinition> ticketQueries = TicketQueryDefinition.LoadAllTicketQueries(serverDetails);
+
+            TicketQueryDefinition ticketQueryDef;
+
+            ticketQueryDef = ticketQueries.Find(delegate(TicketQueryDefinition obj) { return (obj.Name == ticketQuery); });
+
+            if (ticketQueryDef == null)
+            {
+                MessageBox.Show("Can't find ticket query!", "Trac Explorer");
+                return originalMessage;
+            }
+
+            TicketSelector form = new TicketSelector(serverDetails, ticketQueryDef);
 
             if (form.ShowDialog() != DialogResult.OK)
                 return originalMessage;
@@ -61,12 +98,29 @@ namespace TracExplorer.TSVNTrac
 
         public string GetLinkText(IntPtr hParentWnd, string parameters)
         {
-            return "Choose Issue";
+            return Properties.Resources.LinkText;
         }
 
         public bool ValidateParameters(IntPtr hParentWnd, string parameters)
         {
-            return true;
+            if (parameters.Length == 0)
+            {
+                ParameterConnect parameterConnect = new ParameterConnect();
+                TracExplorerForm form = new TracExplorerForm(parameterConnect);
+                parameterConnect.ParentForm = form;
+
+                form.ShowDialog();
+
+                if (parameterConnect.Parameters != null)
+                {
+                    Clipboard.SetText(parameterConnect.Parameters);
+                }
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         #endregion
