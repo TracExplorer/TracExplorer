@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?define Property_ProductVersion = "0.1.1" ?>
+<?define Property_ProductCode = "a16c2b67-2b15-4f92-b8d3-e2bd98ab7d48" ?>
+<?define Property_UpgradeCode = "be3717b5-4eac-4d7d-ba75-c5b0e3d83782" ?>
+<?define RTMProductVersion="0.1.0" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Product Id="*" Name="TracExplorer $(var.Property_ProductVersion)" Language="1033" 
+           Version="$(var.Property_ProductVersion)" Manufacturer="vstrac.devjavu.com" UpgradeCode="$(var.Property_UpgradeCode)">
+		<Package Id="*" InstallerVersion="200" Compressed="yes" />
+
+		<Media Id="1" Cabinet="Installer.cab" EmbedCab="yes" />
+
+    <PropertyRef Id="NETFRAMEWORK20"/>
+    <Condition Message="This application requires .NET Framework 2.0. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK20]]>
+    </Condition>
+
+    <!-- Prevent downgrading -->
+    <CustomAction Id="PreventDowngrading"
+              Error="Newer version already installed." />
+    
+    <InstallExecuteSequence>
+      <Custom Action="PreventDowngrading"
+		          After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+      <RemoveExistingProducts After="InstallFinalize" />
+    </InstallExecuteSequence>
+
+    <InstallUISequence>
+      <Custom Action="PreventDowngrading"
+		          After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+    </InstallUISequence>
+
+    <Upgrade Id="$(var.Property_UpgradeCode)">
+      <UpgradeVersion Minimum="$(var.Property_ProductVersion)" IncludeMinimum="no" OnlyDetect="yes" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="$(var.RTMProductVersion)" IncludeMinimum="yes" Maximum="$(var.Property_ProductVersion)" IncludeMaximum="no" Property="UPGRADEFOUND" />
+    </Upgrade>
+
+    <Icon Id="trac.ico" SourceFile="trac.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="trac.ico" />
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION"/>
+    <UIRef Id="WixUI_Mondo" />
+    <WixVariable Id="WixUILicenseRtf" Value="license.rtf" />
+    <WixVariable Id="WixUIDialogBmp" Value="TracDialog.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="TracBanner.bmp" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLLOCATION" Name="TracExplorer">
+          <Directory Id="INSTALL_BIN" Name="bin">
+          </Directory>
+				</Directory>
+			</Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="TracExplorer"/>
+      </Directory>
+    </Directory>
+
+    <DirectoryRef Id="INSTALL_BIN">
+      <Component Id="TracExplorer.Common.dll" Guid="C3E3A6E6-23AC-4a73-8220-5503D9946110">
+        <File Source="$(var.TracExplorer.Common.TargetPath)" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="TracExplorer.TSVNTrac.dll" Guid="9B906EC1-5E59-41f9-A245-21271A746319">
+        <File Source="$(var.TracExplorer.TSVNTrac.TargetPath)" KeyPath="yes" Checksum="yes" />
+        
+        <RegistryValue Root="HKCR" Key="TracExplorer.TSVNTrac.TracProvider" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write"/>
+        <RegistryValue Root="HKCR" Key="TracExplorer.TSVNTrac.TracProvider\CLSID" Value="{05BC2E49-E116-44E3-BF43-DD90EEC031DD}" Type="string" Action="write"/>
+
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\Implemented Categories\{3494FA92-B139-4730-9591-01135D5E7831}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32\1.0.0.0" Name="Class" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32\1.0.0.0" Name="Assembly" Value="TracExplorer.TSVNTrac, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#TracExplorer.TSVNTrac.dll]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Value="mscoree.dll" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Name="ThreadingModel" Value="Both" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Name="Class" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Name="Assembly" Value="TracExplorer.TSVNTrac, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Name="CodeBase" Value="file:///[#TracExplorer.TSVNTrac.dll]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\ProgId" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Component Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Name="0" Value=".NET Category" Type="string" Action="write" />
+      </Component>
+      <Component Id="Interop.BugTraqProvider.dll" Guid="1993FBD7-9018-4593-B555-D00E07330381">
+        <File Source="..\..\ext\tortoisesvn.net\Interop.BugTraqProvider.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="TracExplorer.VSTrac.dll" Guid="F15031A0-095A-4255-840A-FA0C26E6BF56">
+        <File Source="$(var.TracExplorer.VSTrac.TargetPath)" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id='TracExplorer.VSTrac.AddIn' Guid='954A541F-7CF7-4a70-B8EC-337B495970EA'>
+        <File Source='$(var.TracExplorer.VSTrac.ProjectDir)TracExplorer.VSTrac.AddIn' KeyPath="yes" Checksum="yes" />
+        <RegistryValue Root="HKLM" Key="Software\Microsoft\VisualStudio\8.0\AutomationOptions\LookInFolders" Name="[INSTALL_BIN]" Type="string" Value="" Action="write"/>
+        <RegistryValue Root="HKLM" Key="Software\Microsoft\VisualStudio\9.0\AutomationOptions\LookInFolders" Name="[INSTALL_BIN]" Type="string" Value="" Action="write"/>
+      </Component>
+      <Component Id="CookComputing.XmlRpcV2.dll" Guid="A226D9F3-10A9-4391-924E-5B84099E70AE">
+        <File Source="..\..\ext\xml-rpc.net\CookComputing.XmlRpcV2.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="75B142AF-2BE2-4dce-B147-F8631E41B01B">
+        <util:InternetShortcut Id="OnlineDocumentationShortcut"
+                   Name="TracExplorer Online Documentation"
+                   Target="http://vstrac.devjavu.com/"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\TracExplorer" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <Feature Id="Common" Title="Common" Level="1" Absent="disallow" >
+      <ComponentRef Id="TracExplorer.Common.dll" />
+      <ComponentRef Id="ApplicationShortcut" />
+		</Feature>
+    <Feature Id="TSVNTrac" Title="Trac Provider for TortoiseSVN" Level="1" Absent="allow">
+      <ComponentRef Id="TracExplorer.TSVNTrac.dll" />
+      <ComponentRef Id="Interop.BugTraqProvider.dll"/>
+    </Feature>
+    <Feature Id="VSTrac" Title="Visual Studio Trac Integration" Level="1" Absent="allow">
+      <ComponentRef Id="TracExplorer.VSTrac.dll"/>
+      <ComponentRef Id="TracExplorer.VSTrac.AddIn"/>
+      <ComponentRef Id="CookComputing.XmlRpcV2.dll"/>
+    </Feature>
+	</Product>
+</Wix>
