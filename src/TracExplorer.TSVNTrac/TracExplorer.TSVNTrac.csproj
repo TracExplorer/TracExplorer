@@ -80,9 +80,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="TracExplorer.TSVNTrac.reg" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TracExplorer.Common\TracExplorer.Common.csproj">
       <Project>{A2C1F604-DF0D-4514-A2B0-8E2C30907F05}</Project>
       <Name>TracExplorer.Common</Name>
@@ -97,8 +94,9 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>$(windir)\Microsoft.NET\Framework\v2.0.50727\RegAsm.exe $(TargetDir)$(TargetFileName) /codebase /regfile:$(TargetDir)TracExplorer.TSVNTrac.reg
-</PostBuildEvent>
-    <PreBuildEvent>regedit /s $(ProjectDir)TracExplorer.TSVNTrac.reg</PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>

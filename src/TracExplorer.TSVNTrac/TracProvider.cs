@@ -40,20 +40,13 @@ namespace TracExplorer.TSVNTrac
         {
             String server;
             String ticketQuery;
-                        
-            try
+
+            if (!Validate(parameters, out server, out ticketQuery))
             {
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(parameters);
-                server = doc.DocumentElement.GetAttribute("server");
-                ticketQuery = doc.DocumentElement.GetAttribute("ticketquery");
-            }
-            catch (XmlException)
-            {
-                MessageBox.Show("Parameters are invalid","Trac Explorer");
+                MessageBox.Show("Parameters are invalid", "TracExplorer");
                 return originalMessage;
             }
-
+            
             List<ServerDetails> servers = ServerDetails.LoadAll();
 
             ServerDetails serverDetails;
@@ -62,7 +55,7 @@ namespace TracExplorer.TSVNTrac
 
             if (serverDetails == null)
             {
-                MessageBox.Show("Can't find server information!", "Trac Explorer");
+                MessageBox.Show("Can't find server information!", "TracExplorer");
                 return originalMessage;
             }
 
@@ -74,7 +67,7 @@ namespace TracExplorer.TSVNTrac
 
             if (ticketQueryDef == null)
             {
-                MessageBox.Show("Can't find ticket query!", "Trac Explorer");
+                MessageBox.Show("Can't find ticket query!", "TracExplorer");
                 return originalMessage;
             }
 
@@ -105,24 +98,69 @@ namespace TracExplorer.TSVNTrac
         {
             if (parameters.Length == 0)
             {
-                ParameterConnect parameterConnect = new ParameterConnect();
-                TracExplorerForm form = new TracExplorerForm(parameterConnect);
-                parameterConnect.ParentForm = form;
-
-                form.ShowDialog();
-
-                if (parameterConnect.Parameters != null)
-                {
-                    Clipboard.SetText(parameterConnect.Parameters);
-                }
+                // The IBugTraqProvider interface did not support to return a new parameter, 
+                // so we copy it to clipboard and set the validation to false
+                ShowSelectQuery();
                 return false;
             }
-            else
+            else 
             {
-                return true;
+                // Validate parameter string
+                string server;
+                string ticketQuery;
+                if (Validate(parameters, out server, out ticketQuery))
+                {
+                    return true;
+                }
+                else
+                {
+                    if (MessageBox.Show("Parameters are invalid. Open TracExplorer to select query?", "TracExplorer", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        // The IBugTraqProvider interface did not support to return a new parameter, 
+                        // so we copy it to clipboard and set the validation to false
+                        ShowSelectQuery();
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
             }
         }
 
         #endregion
+
+        private void ShowSelectQuery()
+        {
+            ParameterConnect parameterConnect = new ParameterConnect();
+            TracExplorerForm form = new TracExplorerForm(parameterConnect);
+            parameterConnect.ParentForm = form;
+
+            form.ShowDialog();
+
+            if (parameterConnect.Parameters != null)
+            {
+                Clipboard.SetText(parameterConnect.Parameters);
+            }
+        }
+
+        private bool Validate(string parameters, out string server, out string ticketQuery)
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(parameters);
+                server = doc.DocumentElement.GetAttribute("server");
+                ticketQuery = doc.DocumentElement.GetAttribute("ticketquery");
+            }
+            catch (XmlException)
+            {
+                server = "";
+                ticketQuery = "";
+                return false;
+            }
+            return true;
+        }
     }
 }

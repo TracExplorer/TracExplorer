@@ -99,7 +99,7 @@
     <None Include="Resources\trac.ico" />
     <None Include="vstrac.vscontent" />
     <Content Include="trac.ico" />
-    <Content Include="VSTrac.AddIn" />
+    <Content Include="TracExplorer.VSTrac.AddIn" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TracExplorer.Common\TracExplorer.Common.csproj">
