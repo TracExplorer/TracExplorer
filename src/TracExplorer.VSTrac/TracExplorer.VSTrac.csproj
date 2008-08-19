@@ -97,7 +97,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Resources\trac.ico" />
-    <None Include="vstrac.vscontent" />
     <Content Include="trac.ico" />
     <Content Include="TracExplorer.VSTrac.AddIn" />
   </ItemGroup>
