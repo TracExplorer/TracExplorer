@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Web;
 using System.Windows.Forms;
 
 namespace TracExplorer.Common
@@ -490,7 +491,8 @@ namespace TracExplorer.Common
             WikiPageNode wikiPageNode = e.Node as WikiPageNode;
             ServerNode serverNode = e.Node.Parent.Parent as ServerNode;
 
-            TracConnect.OpenBrowser(serverNode.ServerDetails.WikiPageUrl(wikiPageNode.Text));
+            string UrlEncoded = HttpUtility.UrlPathEncode(wikiPageNode.Text);
+            TracConnect.OpenBrowser(serverNode.ServerDetails.WikiPageUrl(UrlEncoded));
         }
 
         private void TicketDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
