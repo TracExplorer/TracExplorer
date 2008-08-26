@@ -78,7 +78,10 @@ namespace TracExplorer.Common
             cmbTicketQuery.ToolTipText = cmbTicketQuery.Text = TicketDefinition.ToString();
 
             lblResults.Text = "Refreshing...";
-            bgwTickets.RunWorkerAsync();
+            if (!bgwTickets.IsBusy) 
+ 	        {
+                bgwTickets.RunWorkerAsync();
+            }
         }
 
         public List<Ticket> SelectedTickets()

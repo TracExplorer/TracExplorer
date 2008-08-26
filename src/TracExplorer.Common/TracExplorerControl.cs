@@ -105,7 +105,7 @@ namespace TracExplorer.Common
 
         private class WikiPagesNode : TracNode
         {
-            BackgroundWorker bgWorker = new BackgroundWorker();
+            private BackgroundWorker bgWorker = new BackgroundWorker();
 
             public WikiPagesNode(ServerDetails serverDetails)
             {
@@ -121,7 +121,10 @@ namespace TracExplorer.Common
                 //start thread for adding wiki pages
                 bgWorker.DoWork += new DoWorkEventHandler(bgWorker_DoWork);
                 bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgWorker_RunWorkerCompleted);
-                bgWorker.RunWorkerAsync(ServerDetails);
+                if (!bgWorker.IsBusy)
+                {
+                    bgWorker.RunWorkerAsync(ServerDetails);
+                }
             }
 
             void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -215,7 +218,7 @@ namespace TracExplorer.Common
 
         private class AttributesNode : TracNode
         {
-            private BackgroundWorker bgWorker;
+            private BackgroundWorker bgWorker = new BackgroundWorker();
 
             public AttributesNode(ServerDetails serverDetails)
             {
@@ -228,11 +231,12 @@ namespace TracExplorer.Common
             {
                 this.Text = string.Format("{0} ({1})", Properties.Resources.NodeAttributes, Properties.Resources.NodeWaiting);
 
-                bgWorker = new BackgroundWorker();
                 bgWorker.DoWork += new DoWorkEventHandler(bgWorker_DoWork);
                 bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgWorker_RunWorkerCompleted);
-
-                bgWorker.RunWorkerAsync(this.ServerDetails);
+                if (!bgWorker.IsBusy)
+                {
+                    bgWorker.RunWorkerAsync(this.ServerDetails);
+                }
             }
 
             void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
