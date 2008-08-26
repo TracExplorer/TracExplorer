@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A2C1F604-DF0D-4514-A2B0-8E2C30907F05}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TracExplorer.Common</RootNamespace>
+    <AssemblyName>TracExplorer.Common</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CookComputing.XmlRpcV2, Version=2.1.0.3, Culture=neutral, PublicKeyToken=a7d6e17aa302004d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ext\xml-rpc.net\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddNewServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewServerForm.Designer.cs">
+      <DependentUpon>AddNewServerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddNewTicketQueryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewTicketQueryForm.Designer.cs">
+      <DependentUpon>AddNewTicketQueryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CertErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CertErrorForm.Designer.cs">
+      <DependentUpon>CertErrorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ITracConnect.cs" />
+    <Compile Include="ITrac.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ServerDetails.cs" />
+    <Compile Include="SortableBindingList.cs" />
+    <Compile Include="Ticket.cs" />
+    <Compile Include="TicketQueryDefinition.cs" />
+    <Compile Include="TicketView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TicketView.Designer.cs">
+      <DependentUpon>TicketView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TracCommon.cs" />
+    <Compile Include="TracExplorerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TracExplorerControl.Designer.cs">
+      <DependentUpon>TracExplorerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wizard\Header.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizard\HeaderDesigner.cs" />
+    <Compile Include="Wizard\InfoContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizard\InfoContainerDesigner.cs" />
+    <Compile Include="Wizard\InfoPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizard\InfoPageDesigner.cs" />
+    <Compile Include="Wizard\PageCollection.cs" />
+    <Compile Include="Wizard\PageEventHandler.cs" />
+    <Compile Include="Wizard\Wizard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wizard\WizardDesigner.cs" />
+    <Compile Include="Wizard\WizardPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Wizard\WizardPageDesigner.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AddNewServerForm.resx">
+      <DependentUpon>AddNewServerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddNewTicketQueryForm.resx">
+      <DependentUpon>AddNewTicketQueryForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CertErrorForm.resx">
+      <DependentUpon>CertErrorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TicketView.resx">
+      <DependentUpon>TicketView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TracExplorerControl.resx">
+      <DependentUpon>TracExplorerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizard\Header.resx">
+      <DependentUpon>Header.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizard\InfoContainer.resx">
+      <DependentUpon>InfoContainer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizard\InfoPage.resx">
+      <DependentUpon>InfoPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizard\Wizard.resx">
+      <DependentUpon>Wizard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wizard\WizardPage.resx">
+      <DependentUpon>WizardPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\closedticket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newticket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\server_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download_FTP_00.gif" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
