@@ -95,7 +95,7 @@ namespace TracExplorer.Common
             trac.Url = serverDetails.XmlRpcUrl();
 
             if (serverDetails.Authenticated)
-                trac.Credentials = new NetworkCredential(serverDetails.Username, serverDetails.Password);
+                trac.Credentials = new NetworkCredential(serverDetails.Username, serverDetails.GetPassword());
 
             return trac;
         }

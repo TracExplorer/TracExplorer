@@ -186,7 +186,7 @@ namespace TracExplorer.Common
 
             public override void Refresh()
             {
-                List<TicketQueryDefinition> ticketQueries = TicketQueryDefinition.LoadAllTicketQueries(ServerDetails);
+                List<TicketQueryDefinition> ticketQueries = ServerDetails.TicketQueries;
 
                 this.Nodes.Clear();
                 foreach (TicketQueryDefinition ticketQuery in ticketQueries)
@@ -347,11 +347,11 @@ namespace TracExplorer.Common
             clickHandlers.Add(typeof(WikiPageNode), WikiPageDoubleClick);
             clickHandlers.Add(typeof(TicketNode), TicketDoubleClick);
 
-            List<ServerDetails> servers = ServerDetails.LoadAll();
+            CommonRoot servers = CommonRoot.Instance;
 
             treeTrac.BeginUpdate();
 
-            foreach (ServerDetails server in servers)
+            foreach (ServerDetails server in servers.Servers)
             {
                 ServerNode nodeServer = new ServerNode(server);
                 treeTrac.Nodes["nodeServers"].Nodes.Add(nodeServer);
@@ -437,7 +437,8 @@ namespace TracExplorer.Common
 
             if (MessageBox.Show(string.Format(Properties.Resources.ConfirmDelTracServer, node.ServerDetails.Server), Properties.Resources.CaptionConfirmDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                node.ServerDetails.Delete();
+                CommonRoot.Instance.Servers.Remove(node.ServerDetails);
+                CommonRoot.SaveInstance();
                 node.Remove();
             }
         }
@@ -460,10 +461,11 @@ namespace TracExplorer.Common
             if (form.ShowDialog() == DialogResult.OK)
             {
                 TicketQueryDefinition ticketQueryDef = new TicketQueryDefinition();
-                ticketQueryDef.ServerDetails = node.ServerDetails;
                 ticketQueryDef.Name = form.TicketQueryName;
                 ticketQueryDef.Filter = form.TicketQueryFilter;
-                ticketQueryDef.Save();
+
+                node.ServerDetails.TicketQueries.Add(ticketQueryDef);
+                CommonRoot.SaveInstance();
 
                 node.Refresh();
             }
@@ -472,8 +474,8 @@ namespace TracExplorer.Common
         private void btnDelQuery_Click(object sender, EventArgs e)
         {
             TicketNode node = treeTrac.SelectedNode as TicketNode;
-
-            node.TicketDefinition.Delete();
+            node.ServerDetails.TicketQueries.Remove(node.TicketDefinition);
+            CommonRoot.SaveInstance();
             node.Remove();
         }
 

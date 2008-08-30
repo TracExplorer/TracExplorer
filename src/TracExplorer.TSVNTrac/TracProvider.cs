@@ -47,11 +47,11 @@ namespace TracExplorer.TSVNTrac
                 return originalMessage;
             }
             
-            List<ServerDetails> servers = ServerDetails.LoadAll();
+            CommonRoot servers = CommonRoot.Instance;
 
             ServerDetails serverDetails;
 
-            serverDetails = servers.Find(delegate(ServerDetails obj) { return (obj.Server == server); });
+            serverDetails = servers.Servers.Find(delegate(ServerDetails obj) { return (obj.Server == server); });
 
             if (serverDetails == null)
             {
@@ -59,7 +59,7 @@ namespace TracExplorer.TSVNTrac
                 return originalMessage;
             }
 
-            List<TicketQueryDefinition> ticketQueries = TicketQueryDefinition.LoadAllTicketQueries(serverDetails);
+            List<TicketQueryDefinition> ticketQueries = serverDetails.TicketQueries;
 
             TicketQueryDefinition ticketQueryDef;
 

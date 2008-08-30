@@ -19,10 +19,10 @@
 **********************************************************************/
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using Microsoft.Win32;
+using System;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace TracExplorer.Common
 {
@@ -32,8 +32,11 @@ namespace TracExplorer.Common
         private string server;
         private bool authenticated;
         private string username;
-        private string password;
+        private byte[] encryptPassword;
+        private List<TicketQueryDefinition> ticketQueries = new List<TicketQueryDefinition>();
         #endregion
+
+        static private byte[] entropy = { 17, 6, 19, 74 };
 
         #region Public Properties
         public string Server
@@ -53,11 +56,41 @@ namespace TracExplorer.Common
             get { return this.username; }
             set { this.username = value; }
         }
-
-        public string Password
+ 
+        public string GetPassword()
         {
-            get { return this.password; }
-            set { this.password = value; }
+            if (this.encryptPassword != null)
+            {
+                byte[] cipherBytes = ProtectedData.Unprotect(this.encryptPassword, entropy, DataProtectionScope.CurrentUser);
+                return Encoding.Unicode.GetString(cipherBytes);
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        public void SetPassword(string value)
+        {
+            byte[] cipherBytes;
+    
+            // Convert the string value.
+            cipherBytes = Encoding.Unicode.GetBytes(value);
+
+            // Encrypt the string value (cipher text).
+            this.encryptPassword = ProtectedData.Protect(cipherBytes, entropy, DataProtectionScope.CurrentUser);
+        }
+    
+        public byte[] EncryptPassword
+        {
+            get { return this.encryptPassword; }
+            set { this.encryptPassword = value; }
+        }
+
+        public List<TicketQueryDefinition> TicketQueries
+        {
+            get { return ticketQueries; }
+            set { ticketQueries = value; }
         }
         #endregion
 
@@ -97,85 +130,11 @@ namespace TracExplorer.Common
         {
             this.Authenticated = true;
             this.Username = username;
-            this.Password = password;
+            this.SetPassword(password);
         }
         #endregion
 
-        #region Save
-        public void Save()
-        {
-            try
-            {
-                RegistryKey keySoftware = Registry.CurrentUser.OpenSubKey("Software", true); //I'm assuming this exists
-                RegistryKey keyServers = keySoftware.CreateSubKey("VSTrac\\Servers", RegistryKeyPermissionCheck.ReadWriteSubTree);
 
-                RegistryKey keyServer = keyServers.CreateSubKey(this.Server, RegistryKeyPermissionCheck.ReadWriteSubTree);
-                keyServer.SetValue("server", this.Server);
-                keyServer.SetValue("authenticated", this.Authenticated ? 1 : 0);
-                keyServer.SetValue("username", this.Username);
-                keyServer.SetValue("password", this.Password);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error saving server configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        #endregion
-
-        #region LoadAll (static)
-        public static List<ServerDetails> LoadAll()
-        {
-            List<ServerDetails> servers = new List<ServerDetails>();
-
-            try
-            {
-                RegistryKey keySoftware = Registry.CurrentUser.OpenSubKey("Software", true); //I'm assuming this exists
-                RegistryKey keyServers = keySoftware.OpenSubKey("VSTrac\\Servers", true);
-
-                if (keyServers == null) // no defined servers;
-                    return servers;
-
-                string[] subkeyServers = keyServers.GetSubKeyNames();
-
-                foreach (string subkeyServer in subkeyServers)
-                {
-                    RegistryKey keyServer = keyServers.OpenSubKey(subkeyServer, false);
-
-                    ServerDetails server = new ServerDetails();
-                    server.Server = (string)keyServer.GetValue("server");
-                    server.Authenticated = (int)keyServer.GetValue("authenticated") == 1 ? true : false;
-                    server.Username = (string)keyServer.GetValue("username");
-                    server.Password = (string)keyServer.GetValue("password");
-
-                    servers.Add(server);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error loading server configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return servers;
-        }
-        #endregion
-
-        #region Delete
-        public void Delete()
-        {
-            try
-            {
-                RegistryKey keySoftware = Registry.CurrentUser.OpenSubKey("Software", true); //I'm assuming this exists
-                RegistryKey keyServers = keySoftware.CreateSubKey("VSTrac\\Servers", RegistryKeyPermissionCheck.ReadWriteSubTree);
-
-                keyServers.DeleteSubKeyTree(this.server);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error saving server configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        #endregion
 
         #region ToString
         public override string ToString()

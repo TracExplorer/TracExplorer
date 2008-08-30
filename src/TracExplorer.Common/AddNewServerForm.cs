@@ -72,7 +72,7 @@ namespace TracExplorer.Common
             details.Server = uriServer.ToString();
             details.Authenticated = chkAuthentication.Checked;
             details.Username = txtUsername.Text;
-            details.Password = txtPassword.Text;
+            details.SetPassword(txtPassword.Text);
 
             return details;
         }
@@ -166,16 +166,16 @@ namespace TracExplorer.Common
             ServerDetails details = GetServerDetails();
 
             //TODO: Put these labels in resource file...
-            queries.Add(new TicketQueryDefinition("Active Tickets", "status!=closed", details));
-            queries.Add(new TicketQueryDefinition("Active Tasks", "type=task&status!=closed", details));
-            queries.Add(new TicketQueryDefinition("All Tickets", "status!=non_existant_status", details));
-            queries.Add(new TicketQueryDefinition("New Tickets", "status=new", details));
+            queries.Add(new TicketQueryDefinition("Active Tickets", "status!=closed"));
+            queries.Add(new TicketQueryDefinition("Active Tasks", "type=task&status!=closed"));
+            queries.Add(new TicketQueryDefinition("All Tickets", "status!=non_existant_status"));
+            queries.Add(new TicketQueryDefinition("New Tickets", "status=new"));
             
             if ( details.Authenticated )
             {
-                queries.Add(new TicketQueryDefinition("My Active Tickets", "status!=closed&owner="+details.Username, details));
-                queries.Add(new TicketQueryDefinition("My Active Tasks", "type=task&status!=closed&owner=" + details.Username, details));
-                queries.Add(new TicketQueryDefinition("Tickets Reported By Me", "reporter=" + details.Username, details));
+                queries.Add(new TicketQueryDefinition("My Active Tickets", "status!=closed&owner="+details.Username));
+                queries.Add(new TicketQueryDefinition("My Active Tasks", "type=task&status!=closed&owner=" + details.Username));
+                queries.Add(new TicketQueryDefinition("Tickets Reported By Me", "reporter=" + details.Username));
             }
 
             lstTicketQueries.BeginUpdate();
@@ -188,14 +188,16 @@ namespace TracExplorer.Common
         {
             //do last bit here
             ServerDetails details = GetServerDetails();
-            details.Save();
-
+                        
             foreach (TicketQueryDefinition query in lstTicketQueries.CheckedItems)
             {
-                query.Save();
+                details.TicketQueries.Add(query);
             }
 
-            this.result = GetServerDetails();
+            CommonRoot.Instance.Servers.Add(details);
+            CommonRoot.SaveInstance();
+
+            this.result = details;
         }
     }
 }
