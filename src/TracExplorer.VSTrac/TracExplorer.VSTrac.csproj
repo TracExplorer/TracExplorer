@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualBasic.Compatibility" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -96,7 +97,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ResourcesUI\ResourceUI.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourcesUI\ResourceUI.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="Resources\trac.ico" />
+    <Content Include="ResourcesUI\1.bmp" />
+    <Content Include="Resources\trac_VS2005.bmp" />
+    <Content Include="Resources\trac_VS2008.bmp" />
     <Content Include="trac.ico" />
     <Content Include="TracExplorer.VSTrac.AddIn" />
   </ItemGroup>

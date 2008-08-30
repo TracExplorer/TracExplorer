@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?define Property_ProductVersion = "0.1.1" ?>
+<?define Property_ProductVersion = "0.1.0" ?>
 <?define Property_ProductCode = "a16c2b67-2b15-4f92-b8d3-e2bd98ab7d48" ?>
 <?define Property_UpgradeCode = "be3717b5-4eac-4d7d-ba75-c5b0e3d83782" ?>
-<?define RTMProductVersion="0.1.0" ?>
+<?define RTMProductVersion="0.0.0" ?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension"
@@ -51,6 +51,8 @@
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLLOCATION" Name="TracExplorer">
           <Directory Id="INSTALL_BIN" Name="bin">
+            <Directory Id="INSTALL_BIN_de" Name="de"/>
+            <Directory Id="INSTALL_BIN_en" Name="en"/>
           </Directory>
 				</Directory>
 			</Directory>
@@ -100,6 +102,16 @@
         <File Source="..\..\ext\xml-rpc.net\CookComputing.XmlRpcV2.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
+    <DirectoryRef Id="INSTALL_BIN_en">
+      <Component Id="en_TracExplorer.VSTrac.resources.dll" Guid="749FFCF6-5877-4037-AF7A-4417B6A6D311">
+        <File Id="en_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)en\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALL_BIN_de">
+      <Component Id="de_TracExplorer.VSTrac.resources.dll" Guid="1F383D02-D93F-484a-9AB2-936853A9CBD1">
+        <File Id="de_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)de\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </DirectoryRef>
 
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="ApplicationShortcut" Guid="75B142AF-2BE2-4dce-B147-F8631E41B01B">
@@ -123,6 +135,8 @@
       <ComponentRef Id="TracExplorer.VSTrac.dll"/>
       <ComponentRef Id="TracExplorer.VSTrac.AddIn"/>
       <ComponentRef Id="CookComputing.XmlRpcV2.dll"/>
+      <ComponentRef Id="en_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="de_TracExplorer.VSTrac.resources.dll"/>
     </Feature>
 	</Product>
 </Wix>

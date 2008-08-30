@@ -255,5 +255,19 @@ namespace TracExplorer.VSTrac.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap trac_VS2005 {
+            get {
+                object obj = ResourceManager.GetObject("trac_VS2005", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap trac_VS2008 {
+            get {
+                object obj = ResourceManager.GetObject("trac_VS2008", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

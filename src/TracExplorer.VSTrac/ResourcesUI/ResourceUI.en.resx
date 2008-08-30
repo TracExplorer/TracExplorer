@@ -118,76 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="trac" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\trac.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NodeTickets" xml:space="preserve">
-    <value>Tickets</value>
-  </data>
-  <data name="NodeWikiPages" xml:space="preserve">
-    <value>Wiki Pages</value>
-  </data>
-  <data name="NodeWaiting" xml:space="preserve">
-    <value>waiting...</value>
-  </data>
-  <data name="NodeAttributes" xml:space="preserve">
-    <value>Attributes</value>
-  </data>
-  <data name="MenuAddToFav" xml:space="preserve">
-    <value>Add To Favourites</value>
-  </data>
-  <data name="MenuDelete" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="MenuRefresh" xml:space="preserve">
-    <value>Refresh</value>
-  </data>
-  <data name="NodeComponents" xml:space="preserve">
-    <value>Components</value>
-  </data>
-  <data name="NodeMilestones" xml:space="preserve">
-    <value>Milestones</value>
-  </data>
-  <data name="NodeSeverities" xml:space="preserve">
-    <value>Severities</value>
-  </data>
-  <data name="NodeTicketTypes" xml:space="preserve">
-    <value>Ticket Types</value>
-  </data>
-  <data name="NodePriorities" xml:space="preserve">
-    <value>Priorities</value>
-  </data>
-  <data name="NodeResolutions" xml:space="preserve">
-    <value>Resolutions</value>
-  </data>
-  <data name="NodeStatuses" xml:space="preserve">
-    <value>Statuses</value>
-  </data>
-  <data name="NodeVersions" xml:space="preserve">
-    <value>Versions</value>
-  </data>
-  <data name="ConfirmDelTracServer" xml:space="preserve">
-    <value>Are you sure you want to remove {0}?</value>
-  </data>
-  <data name="CaptionConfirmDelete" xml:space="preserve">
-    <value>Confirm Remove</value>
-  </data>
-  <data name="MenuNewServer" xml:space="preserve">
-    <value>Add New Trac Server</value>
-  </data>
-  <data name="LabelChecking" xml:space="preserve">
-    <value>Checking Server Connectivity...</value>
-  </data>
-  <data name="LabelCheckingFailure" xml:space="preserve">
-    <value>Server Check Failed</value>
-  </data>
-  <data name="LabelCheckingSuccess" xml:space="preserve">
-    <value>Server Check Successful</value>
-  </data>
-  <data name="trac_VS2005" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\trac_VS2005.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="trac_VS2008" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\trac_VS2008.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>1.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
