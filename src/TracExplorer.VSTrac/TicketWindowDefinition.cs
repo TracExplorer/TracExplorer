@@ -22,14 +22,46 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Forms;
+using TracExplorer.Common;
+using EnvDTE;
+using System.Xml.Serialization;
 
-namespace TracExplorer.Common
+namespace TracExplorer.VSTrac
 {
-    public interface ITracConnect
+    public class TicketWindowDefinition
     {
-        void OpenBrowser(string url);
+        private string guid;
 
-        void CreateTicketWindow(ServerDetails serverDetails, TicketQueryDefinition ticketDef, string guid);
+        public string Guid
+        {
+            get { return guid; }
+            set { guid = value; }
+        }
+
+        private string serverName;
+
+        public string ServerName
+        {
+            get { return serverName; }
+            set { serverName = value; }
+        }
+
+        private string ticketQueryName;
+
+        public string TicketQueryName
+        {
+            get { return ticketQueryName; }
+            set { ticketQueryName = value; }
+        }
+
+        private Window toolWindow;
+
+        [XmlIgnore()]
+        public Window ToolWindow
+        {
+            get { return toolWindow; }
+            set { toolWindow = value; }
+        }
+        
     }
 }

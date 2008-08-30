@@ -53,6 +53,13 @@
           <Directory Id="INSTALL_BIN" Name="bin">
             <Directory Id="INSTALL_BIN_de" Name="de"/>
             <Directory Id="INSTALL_BIN_en" Name="en"/>
+            <Directory Id="INSTALL_BIN_es" Name="es"/>
+            <Directory Id="INSTALL_BIN_fr" Name="fr"/>
+            <Directory Id="INSTALL_BIN_it" Name="it"/>
+            <Directory Id="INSTALL_BIN_ja" Name="ja"/>
+            <Directory Id="INSTALL_BIN_ko" Name="ko"/>
+            <Directory Id="INSTALL_BIN_zh_CHS" Name="zh-CHS"/>
+            <Directory Id="INSTALL_BIN_zh_CHT" Name="zh-CHT"/>
           </Directory>
 				</Directory>
 			</Directory>
@@ -102,14 +109,49 @@
         <File Source="..\..\ext\xml-rpc.net\CookComputing.XmlRpcV2.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
+    <DirectoryRef Id="INSTALL_BIN_de">
+      <Component Id="de_TracExplorer.VSTrac.resources.dll" Guid="1F383D02-D93F-484a-9AB2-936853A9CBD1">
+        <File Id="de_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)de\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </DirectoryRef>
     <DirectoryRef Id="INSTALL_BIN_en">
       <Component Id="en_TracExplorer.VSTrac.resources.dll" Guid="749FFCF6-5877-4037-AF7A-4417B6A6D311">
         <File Id="en_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)en\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
-    <DirectoryRef Id="INSTALL_BIN_de">
-      <Component Id="de_TracExplorer.VSTrac.resources.dll" Guid="1F383D02-D93F-484a-9AB2-936853A9CBD1">
-        <File Id="de_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)de\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
+    <DirectoryRef Id="INSTALL_BIN_es">
+      <Component Id="es_TracExplorer.VSTrac.resources.dll" Guid="E1E3FE94-464A-4eea-922A-D275F06A1243">
+        <File Id="es_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)es\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALL_BIN_fr">
+      <Component Id="fr_TracExplorer.VSTrac.resources.dll" Guid="E9109F65-AAFA-4aea-8C18-9622EFB23F2D">
+        <File Id="fr_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)fr\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALL_BIN_it">
+      <Component Id="it_TracExplorer.VSTrac.resources.dll" Guid="DA63597C-F1FA-40b9-90F1-75690E29EEA2">
+        <File Id="it_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)it\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALL_BIN_ja">
+      <Component Id="ja_TracExplorer.VSTrac.resources.dll" Guid="A7483695-2DFA-43a3-84E1-37E5A137D376">
+        <File Id="ja_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)ja\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALL_BIN_ko">
+      <Component Id="ko_TracExplorer.VSTrac.resources.dll" Guid="8EA98CAD-627B-4993-9EF8-D4A4C1BE8205">
+        <File Id="ko_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)ko\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALL_BIN_zh_CHS">
+      <Component Id="zh_CHS_TracExplorer.VSTrac.resources.dll" Guid="165AC4F3-D03D-487e-83E4-D599891CC5B4">
+        <File Id="zh_CHS_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)zh-CHS\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALL_BIN_zh_CHT">
+      <Component Id="zh_CHT_TracExplorer.VSTrac.resources.dll" Guid="17436D4B-35BE-4388-B428-5F5CCECB7C56">
+        <File Id="zh_CHT_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)zh-CHT\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
 
@@ -135,8 +177,15 @@
       <ComponentRef Id="TracExplorer.VSTrac.dll"/>
       <ComponentRef Id="TracExplorer.VSTrac.AddIn"/>
       <ComponentRef Id="CookComputing.XmlRpcV2.dll"/>
-      <ComponentRef Id="en_TracExplorer.VSTrac.resources.dll"/>
       <ComponentRef Id="de_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="en_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="es_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="fr_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="it_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="ja_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="ko_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="zh_CHS_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="zh_CHT_TracExplorer.VSTrac.resources.dll"/>
     </Feature>
 	</Product>
 </Wix>

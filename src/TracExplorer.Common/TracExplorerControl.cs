@@ -483,7 +483,7 @@ namespace TracExplorer.Common
         {
             TicketNode node = treeTrac.SelectedNode as TicketNode;
 
-            TracConnect.CreateTicketWindow(node.ServerDetails, node.TicketDefinition);
+            TracConnect.CreateTicketWindow(node.ServerDetails, node.TicketDefinition, null);
         }
         #endregion
 
@@ -503,7 +503,7 @@ namespace TracExplorer.Common
             {
                 TicketNode ticketNode = e.Node as TicketNode;
 
-                TracConnect.CreateTicketWindow(ticketNode.ServerDetails, ticketNode.TicketDefinition);
+                TracConnect.CreateTicketWindow(ticketNode.ServerDetails, ticketNode.TicketDefinition, null);
             }
             catch (Exception ex)
             {

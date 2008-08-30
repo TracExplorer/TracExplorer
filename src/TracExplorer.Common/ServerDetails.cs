@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace TracExplorer.Common
 {
@@ -57,28 +58,31 @@ namespace TracExplorer.Common
             set { this.username = value; }
         }
  
-        public string GetPassword()
+        [XmlIgnore()]
+        public string Password
         {
-            if (this.encryptPassword != null)
+            get 
             {
-                byte[] cipherBytes = ProtectedData.Unprotect(this.encryptPassword, entropy, DataProtectionScope.CurrentUser);
-                return Encoding.Unicode.GetString(cipherBytes);
+                if (this.encryptPassword != null)
+                {
+                    byte[] cipherBytes = ProtectedData.Unprotect(this.encryptPassword, entropy, DataProtectionScope.CurrentUser);
+                    return Encoding.Unicode.GetString(cipherBytes);
+                }
+                else
+                {
+                    return "";
+                }
             }
-            else
+            set
             {
-                return "";
+                byte[] cipherBytes;
+
+                // Convert the string value.
+                cipherBytes = Encoding.Unicode.GetBytes(value);
+
+                // Encrypt the string value (cipher text).
+                this.encryptPassword = ProtectedData.Protect(cipherBytes, entropy, DataProtectionScope.CurrentUser);
             }
-        }
-
-        public void SetPassword(string value)
-        {
-            byte[] cipherBytes;
-    
-            // Convert the string value.
-            cipherBytes = Encoding.Unicode.GetBytes(value);
-
-            // Encrypt the string value (cipher text).
-            this.encryptPassword = ProtectedData.Protect(cipherBytes, entropy, DataProtectionScope.CurrentUser);
         }
     
         public byte[] EncryptPassword
@@ -130,7 +134,7 @@ namespace TracExplorer.Common
         {
             this.Authenticated = true;
             this.Username = username;
-            this.SetPassword(password);
+            this.Password = password;
         }
         #endregion
 

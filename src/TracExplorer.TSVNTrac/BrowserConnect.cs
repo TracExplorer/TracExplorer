@@ -36,7 +36,7 @@ namespace TracExplorer.TSVNTrac
             Process.Start(url);
         }
 
-        public void CreateTicketWindow(ServerDetails serverDetails, TicketQueryDefinition ticketDef)
+        public void CreateTicketWindow(ServerDetails serverDetails, TicketQueryDefinition ticketDef, string guid)
         {
             // Not implemented!
         }

@@ -54,7 +54,7 @@ namespace TracExplorer.TSVNTrac
             Process.Start(url);
         }
 
-        public void CreateTicketWindow(ServerDetails serverDetails, TicketQueryDefinition ticketDef)
+        public void CreateTicketWindow(ServerDetails serverDetails, TicketQueryDefinition ticketDef, string guid)
         {
             Parameters = string.Format("<TSVNTrac server=\"{0}\" ticketquery=\"{1}\"/>", serverDetails.Server, ticketDef.Name);
 

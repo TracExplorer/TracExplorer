@@ -72,7 +72,7 @@ namespace TracExplorer.Common
             details.Server = uriServer.ToString();
             details.Authenticated = chkAuthentication.Checked;
             details.Username = txtUsername.Text;
-            details.SetPassword(txtPassword.Text);
+            details.Password = txtPassword.Text;
 
             return details;
         }
