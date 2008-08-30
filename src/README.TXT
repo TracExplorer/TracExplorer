@@ -45,7 +45,20 @@ USAGE
      - Open a wiki page by double clicking on it
      - Open a ticket query list by double clicking on it
      - In the ticket view, you can open the ticket in the internal browser by double clicking on the ticket.
+     
+
+DEBUGGING
+
+VSTrac:
+   - Select project properties / Debug
+     - Start external program: "c:\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\devenv.exe"
+     - Command line arguments: "/resetaddin TracExlporer.VSTrac.Connect"
+   - Change the addin file in your TracExplorer installation:
+     - Modify the assembly path to your binary : e.g. <Assembly>T:\TracExplorer\trunk\bin\Debug\TracExplorer.VSTrac.dll</Assembly>
    
+TSVNTrac:
+   - Register your TracExplorer.TSVNTrac.dll
+   - Choose debug "Attach to process.."
    
    
 OPEN SOURCE / BUG REPORTING
