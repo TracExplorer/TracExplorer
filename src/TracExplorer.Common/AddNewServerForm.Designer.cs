@@ -30,6 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNewServerForm));
             this.wizard1 = new Gui.Wizard.Wizard();
+            this.wizardPage3 = new Gui.Wizard.WizardPage();
+            this.chkSelectAll = new System.Windows.Forms.CheckBox();
+            this.lstTicketQueries = new System.Windows.Forms.CheckedListBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.wizardPage2 = new Gui.Wizard.WizardPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblError = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.wizardPage1 = new Gui.Wizard.WizardPage();
             this.label1 = new System.Windows.Forms.Label();
             this.chkAuthentication = new System.Windows.Forms.CheckBox();
@@ -39,27 +47,20 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtServer = new System.Windows.Forms.TextBox();
-            this.wizardPage3 = new Gui.Wizard.WizardPage();
-            this.lstTicketQueries = new System.Windows.Forms.CheckedListBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.wizardPage2 = new Gui.Wizard.WizardPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblError = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.wizard1.SuspendLayout();
-            this.wizardPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.wizardPage3.SuspendLayout();
             this.wizardPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.wizardPage1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // wizard1
             // 
             this.wizard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.wizard1.Controls.Add(this.wizardPage3);
             this.wizard1.Controls.Add(this.wizardPage2);
             this.wizard1.Controls.Add(this.wizardPage1);
-            this.wizard1.Controls.Add(this.wizardPage3);
             this.wizard1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.wizard1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.wizard1.Location = new System.Drawing.Point(0, 0);
@@ -71,6 +72,90 @@
             this.wizard1.Size = new System.Drawing.Size(411, 312);
             this.wizard1.TabIndex = 0;
             this.wizard1.CloseFromCancel += new System.ComponentModel.CancelEventHandler(this.wizard1_CloseFromCancel);
+            // 
+            // wizardPage3
+            // 
+            this.wizardPage3.Controls.Add(this.chkSelectAll);
+            this.wizardPage3.Controls.Add(this.lstTicketQueries);
+            this.wizardPage3.Controls.Add(this.label4);
+            this.wizardPage3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wizardPage3.IsFinishPage = true;
+            this.wizardPage3.Location = new System.Drawing.Point(0, 0);
+            this.wizardPage3.Name = "wizardPage3";
+            this.wizardPage3.Size = new System.Drawing.Size(411, 264);
+            this.wizardPage3.TabIndex = 3;
+            this.wizardPage3.CloseFromNext += new Gui.Wizard.PageEventHandler(this.wizardPage3_CloseFromNext);
+            this.wizardPage3.ShowFromNext += new System.EventHandler(this.wizardPage3_ShowFromNext);
+            // 
+            // chkSelectAll
+            // 
+            this.chkSelectAll.AutoSize = true;
+            this.chkSelectAll.Location = new System.Drawing.Point(16, 239);
+            this.chkSelectAll.Name = "chkSelectAll";
+            this.chkSelectAll.Size = new System.Drawing.Size(118, 17);
+            this.chkSelectAll.TabIndex = 2;
+            this.chkSelectAll.Text = "Select / deselect all";
+            this.chkSelectAll.UseVisualStyleBackColor = true;
+            this.chkSelectAll.CheckedChanged += new System.EventHandler(this.chkSelectAll_CheckedChanged);
+            // 
+            // lstTicketQueries
+            // 
+            this.lstTicketQueries.FormattingEnabled = true;
+            this.lstTicketQueries.Location = new System.Drawing.Point(12, 69);
+            this.lstTicketQueries.Name = "lstTicketQueries";
+            this.lstTicketQueries.Size = new System.Drawing.Size(387, 164);
+            this.lstTicketQueries.TabIndex = 0;
+            this.lstTicketQueries.SelectedValueChanged += new System.EventHandler(this.lstTicketQueries_SelectedValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(13, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(386, 62);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Please select which ticket queries you would like automatically added for this se" +
+                "rver. You can add more yourself once the server has been added the the Trac Expl" +
+                "orer.";
+            // 
+            // wizardPage2
+            // 
+            this.wizardPage2.Controls.Add(this.pictureBox1);
+            this.wizardPage2.Controls.Add(this.lblError);
+            this.wizardPage2.Controls.Add(this.lblStatus);
+            this.wizardPage2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wizardPage2.IsFinishPage = false;
+            this.wizardPage2.Location = new System.Drawing.Point(0, 0);
+            this.wizardPage2.Name = "wizardPage2";
+            this.wizardPage2.Size = new System.Drawing.Size(411, 264);
+            this.wizardPage2.TabIndex = 2;
+            this.wizardPage2.ShowFromNext += new System.EventHandler(this.wizardPage2_ShowFromNext);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::TracExplorer.Common.Properties.Resources.download_FTP_00;
+            this.pictureBox1.Location = new System.Drawing.Point(62, 34);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(272, 60);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
+            // lblError
+            // 
+            this.lblError.Location = new System.Drawing.Point(12, 34);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(387, 217);
+            this.lblError.TabIndex = 1;
+            this.lblError.Text = "ErrorText if any...";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(12, 9);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(62, 13);
+            this.lblStatus.TabIndex = 0;
+            this.lblStatus.Text = "Checking...";
             // 
             // wizardPage1
             // 
@@ -170,77 +255,6 @@
             this.txtServer.TabIndex = 1;
             this.txtServer.TextChanged += new System.EventHandler(this.ControlChangedEvent);
             // 
-            // wizardPage3
-            // 
-            this.wizardPage3.Controls.Add(this.lstTicketQueries);
-            this.wizardPage3.Controls.Add(this.label4);
-            this.wizardPage3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wizardPage3.IsFinishPage = true;
-            this.wizardPage3.Location = new System.Drawing.Point(0, 0);
-            this.wizardPage3.Name = "wizardPage3";
-            this.wizardPage3.Size = new System.Drawing.Size(411, 264);
-            this.wizardPage3.TabIndex = 3;
-            this.wizardPage3.CloseFromNext += new Gui.Wizard.PageEventHandler(this.wizardPage3_CloseFromNext);
-            this.wizardPage3.ShowFromNext += new System.EventHandler(this.wizardPage3_ShowFromNext);
-            // 
-            // lstTicketQueries
-            // 
-            this.lstTicketQueries.FormattingEnabled = true;
-            this.lstTicketQueries.Location = new System.Drawing.Point(12, 69);
-            this.lstTicketQueries.Name = "lstTicketQueries";
-            this.lstTicketQueries.Size = new System.Drawing.Size(387, 180);
-            this.lstTicketQueries.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(13, 13);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(386, 62);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Please select which ticket queries you would like automatically added for this se" +
-                "rver. You can add more yourself once the server has been added the the Trac Expl" +
-                "orer.";
-            // 
-            // wizardPage2
-            // 
-            this.wizardPage2.Controls.Add(this.pictureBox1);
-            this.wizardPage2.Controls.Add(this.lblError);
-            this.wizardPage2.Controls.Add(this.lblStatus);
-            this.wizardPage2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wizardPage2.IsFinishPage = false;
-            this.wizardPage2.Location = new System.Drawing.Point(0, 0);
-            this.wizardPage2.Name = "wizardPage2";
-            this.wizardPage2.Size = new System.Drawing.Size(411, 264);
-            this.wizardPage2.TabIndex = 2;
-            this.wizardPage2.ShowFromNext += new System.EventHandler(this.wizardPage2_ShowFromNext);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::TracExplorer.Common.Properties.Resources.download_FTP_00;
-            this.pictureBox1.Location = new System.Drawing.Point(62, 34);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(272, 60);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
-            // lblError
-            // 
-            this.lblError.Location = new System.Drawing.Point(12, 34);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(387, 217);
-            this.lblError.TabIndex = 1;
-            this.lblError.Text = "ErrorText if any...";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(12, 9);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(62, 13);
-            this.lblStatus.TabIndex = 0;
-            this.lblStatus.Text = "Checking...";
-            // 
             // AddNewServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -256,14 +270,15 @@
             this.Text = "Add New Trac Server";
             this.Load += new System.EventHandler(this.AddNewServerForm_Load);
             this.wizard1.ResumeLayout(false);
+            this.wizardPage3.ResumeLayout(false);
+            this.wizardPage3.PerformLayout();
+            this.wizardPage2.ResumeLayout(false);
+            this.wizardPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.wizardPage1.ResumeLayout(false);
             this.wizardPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.wizardPage3.ResumeLayout(false);
-            this.wizardPage2.ResumeLayout(false);
-            this.wizardPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -287,5 +302,6 @@
         private Gui.Wizard.WizardPage wizardPage3;
         private System.Windows.Forms.CheckedListBox lstTicketQueries;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox chkSelectAll;
     }
 }

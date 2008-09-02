@@ -199,5 +199,48 @@ namespace TracExplorer.Common
 
             this.result = details;
         }
+
+        private void chkSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSelectAll.CheckState == CheckState.Checked)
+            {
+                for (int i = 0; i < lstTicketQueries.Items.Count; i++)
+                {
+                    lstTicketQueries.SetItemChecked(i, true);
+                }
+            }
+            else if (chkSelectAll.CheckState == CheckState.Unchecked)
+            {
+                for (int i = 0; i < lstTicketQueries.Items.Count; i++)
+                {
+                    lstTicketQueries.SetItemChecked(i, false);
+                }
+            }
+        }
+
+        private void lstTicketQueries_SelectedValueChanged(object sender, EventArgs e)
+        {
+            int count = 0;
+
+            for (int i = 0; i < lstTicketQueries.Items.Count; i++)
+            {
+                if (lstTicketQueries.GetItemChecked(i))
+                {
+                    count++;
+                }
+            }
+            if (count == 0)
+            {
+                chkSelectAll.CheckState = CheckState.Unchecked;
+            }
+            else if (count == lstTicketQueries.Items.Count)
+            {
+                chkSelectAll.CheckState = CheckState.Checked;
+            }
+            else
+            {
+                chkSelectAll.CheckState = CheckState.Indeterminate;
+            }
+        }
     }
 }
