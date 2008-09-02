@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AddNewServerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +183,9 @@
     <None Include="Resources\delete.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\GlobalAssemblyInfo.cs.in">
+      <Link>Properties\GlobalAssemblyInfo.cs.in</Link>
+    </None>
     <None Include="Resources\download_FTP_00.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -190,4 +196,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PreBuildEvent>"$(ProjectDir)..\..\build\version_scm.bat" "$(ProjectDir).\..\.." "$(ProjectDir)..\GlobalAssemblyInfo.cs.in" "$(ProjectDir)..\GlobalAssemblyInfo.cs"</PreBuildEvent>
+  </PropertyGroup>
 </Project>

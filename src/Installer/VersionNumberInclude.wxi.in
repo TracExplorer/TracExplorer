@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include Id="VersionNumberInclude">
+  <!-- Manual settings -->
+  <?define MajorVersion="0" ?>
+  <?define MinorVersion="1" ?>
+  <?define MicroVersion="0" ?>
+  <!-- SerStatusVersion to "Beta", "Alpha". For "Release" leave it blank -->
+  <?define StatusVersion="Beta" ?>
+  
+
+  <!-- Automatic settings by SubWCRev from TortoiseSVN -->
+  <?define BuildVersion="$WCREV$" ?>
+  <?if $(var.BUILD) = "Debug" ?>
+    <?define RepositoryInformation="$WCURL$$WCMIXED?, Mixed version:$$WCMODS?, Local Modifications:$, Debug"?>
+  <?else ?>
+    <?define RepositoryInformation="$WCURL$$WCMIXED?, Mixed version:$$WCMODS?, Local Modifications:$, Release"?>
+  <?endif ?>
+
+</Include>

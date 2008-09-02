@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?define Property_UpgradeCode = "be3717b5-4eac-4d7d-ba75-c5b0e3d83782" ?>
+<?define RTMProductVersion="0.0.0" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  
+  <?include Includes.wxi?>
+	<Product Id="*" 
+           Name="$(var.ProductName) $(var.VersionNumberUserVisible) $(var.StatusVersion)" 
+           Language="1033" 
+           Version="$(var.VersionNumberInternal)" 
+           Manufacturer="$(var.PackageManufacturer)" 
+           UpgradeCode="$(var.Property_UpgradeCode)">
+    
+		<Package Id="*" 
+             InstallerVersion="200" 
+             Keywords="$(var.PackageKeywords)"
+		         Description="$(var.PackageDescription)"
+		         Comments="$(var.PackageComments)"
+		         Manufacturer="$(var.PackageManufacturer)"
+             Compressed="yes" />
+
+		<Media Id="1" Cabinet="Installer.cab" EmbedCab="yes" />
+
+    <PropertyRef Id="NETFRAMEWORK20"/>
+    <Condition Message="This application requires .NET Framework 2.0. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK20]]>
+    </Condition>
+
+    <!-- Prevent downgrading -->
+    <CustomAction Id="PreventDowngrading"
+              Error="Newer version already installed." />
+    
+    <InstallExecuteSequence>
+      <!-- AppSearch must be done before RemoveExistingProducts and before FindRelatedProducts -->
+      <AppSearch Sequence="1"></AppSearch>
+      <LaunchConditions After="AppSearch" />
+      <RemoveExistingProducts After="InstallValidate"><![CDATA[PREVIOUSVERSIONSINSTALLED]]></RemoveExistingProducts>
+    </InstallExecuteSequence>
+
+    <InstallUISequence>
+      <Custom Action="PreventDowngrading"
+		          After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+    </InstallUISequence>
+
+    <Upgrade Id="$(var.Property_UpgradeCode)">
+      <!-- upgrade is flagged if current-install is newer than or equal to package - TODO: should make a dialog appear asking user to confirm downgrade.  -->
+      <UpgradeVersion Property="NEWPRODUCTFOUND" Minimum="$(var.VersionNumberInternal)" IncludeMinimum="no" OnlyDetect="yes" />
+      <!-- flag is set if the install will trigger an upgrade of an existing install -->
+      <UpgradeVersion Property="PREVIOUSVERSIONSINSTALLED" Maximum="$(var.VersionNumberInternal)" IncludeMaximum="no" />
+    </Upgrade>
+
+    <Icon Id="trac.ico" SourceFile="trac.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="trac.ico" />
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION"/>
+    <UIRef Id="WixUI_Mondo" />
+    <WixVariable Id="WixUILicenseRtf" Value="license.rtf" />
+    <WixVariable Id="WixUIDialogBmp" Value="TracDialog.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="TracBanner.bmp" />
+
+    <Feature Id="Common" Title="Common" Level="1" Absent="disallow" >
+      <ComponentRef Id="TracExplorer.Common.dll" />
+      <ComponentRef Id="ApplicationShortcut" />
+		</Feature>
+    <Feature Id="TSVNTrac" Title="Trac Provider for TortoiseSVN" Level="1" Absent="allow">
+      <ComponentRef Id="TracExplorer.TSVNTrac.dll" />
+      <ComponentRef Id="Interop.BugTraqProvider.dll"/>
+    </Feature>
+    <Feature Id="VSTrac" Title="Visual Studio Trac Integration" Level="1" Absent="allow">
+      <ComponentRef Id="TracExplorer.VSTrac.dll"/>
+      <ComponentRef Id="TracExplorer.VSTrac.AddIn"/>
+      <ComponentRef Id="CookComputing.XmlRpcV2.dll"/>
+      <ComponentRef Id="de_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="en_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="es_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="fr_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="it_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="ja_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="ko_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="zh_CHS_TracExplorer.VSTrac.resources.dll"/>
+      <ComponentRef Id="zh_CHT_TracExplorer.VSTrac.resources.dll"/>
+    </Feature>
+	</Product>
+</Wix>

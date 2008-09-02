@@ -1,0 +1,30 @@
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+#if DEBUG
+[assembly: AssemblyDescription("$WCURL$$WCMIXED?, Mixed version:$$WCMODS?, Local Modifications:$, Debug")]
+#else
+[assembly: AssemblyDescription("$WCURL$$WCMIXED?, Mixed version:$$WCMODS?, Local Modifications:$, Release")]
+#endif
+[assembly: AssemblyCompany("TracExplorer")]
+[assembly: AssemblyCopyright("Copyright ©  2008")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyProduct("TracExplorer Suite")]
+
+
+
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+[assembly: AssemblyVersion(              /*  Major.Minor.Build */ "0.1.0.$WCREV$")]
+[assembly: AssemblyFileVersion(          /*  Major.Minor.Build */ "0.1.0.$WCREV$")]
+[assembly: AssemblyInformationalVersion( /*  Major.Minor.Build */ "0.1.0.$WCREV$")]

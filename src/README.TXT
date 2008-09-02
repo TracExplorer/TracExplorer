@@ -24,6 +24,7 @@ This is still alpha software in that features are still being decided on and dev
 
 
 INSTALLATION
+============
 
 On XP:
    - Copy all files to your My Documents\Visual Studio 200x\Addins
@@ -35,9 +36,10 @@ On Vista:
    
 Please note: x is either 2005 or 2008 depending on which version of Visual Studio you have installed. It works on either.
 
-
    
 USAGE
+=====
+
    - Click on View\Trac Explorer
    - Click the toolbar button for Add New Trac Server
    - Follow the wizard to enter the server details and to choose any set ticket queries
@@ -46,8 +48,20 @@ USAGE
      - Open a ticket query list by double clicking on it
      - In the ticket view, you can open the ticket in the internal browser by double clicking on the ticket.
      
+     
+RELEASE PROCEDURE
+=================
+   - Update version number in "GlobalAssemblyInfo.cs.in" & "VersionNumberInclude.wxi.in"
+   - Tag the actual version
+   - Switch to the tag
+   - Rebuild application
+   - Rename the msi-file to e.g. "TracExplorer 0.1.0.msi"
+   - Upload file to SourceForge
+   - Announce the new release on SourceForge
+   - Close milestone and add new version (trac)
 
 DEBUGGING
+=========
 
 VSTrac:
    - Select project properties / Debug
@@ -62,6 +76,7 @@ TSVNTrac:
    
    
 OPEN SOURCE / BUG REPORTING
+===========================
 VSTrac is an open source project. If you would like to help out or just log a bug/suggestion, please visit the main site at http://vstrac.devjavu.com/
 
 
