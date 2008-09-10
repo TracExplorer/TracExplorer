@@ -1,6 +1,6 @@
-﻿VSTrac - Visual Studio Trac Integration Addin
+﻿Trac Explorer
 Copyright (C) 2007-2008 Mladen Mihajlovic
-http://vstrac.devjavu.com/
+http://tracexplorer.devjavu.com/
 
 
 LICENCE
