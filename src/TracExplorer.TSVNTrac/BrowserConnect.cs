@@ -1,8 +1,8 @@
 ﻿#region GPL Licence
 /**********************************************************************
- Trac Explorer - Visual Studio Trac Integration
+ TracExplorer - Trac Integration for Visual Studio and TortoiseSvn
  Copyright (C) 2008 Jan Linnenkohl
- http://vstrac.devjavu.com/
+ http://tracexplorer.devjavu.com/
  
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

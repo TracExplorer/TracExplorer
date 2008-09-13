@@ -1,8 +1,8 @@
 ﻿#region GPL Licence
 /**********************************************************************
- VSTrac - Visual Studio Trac Integration
+ TracExplorer - Trac Integration for Visual Studio and TortoiseSvn
  Copyright (C) 2008 Mladen Mihajlovic
- http://vstrac.devjavu.com/
+ http://tracexplorer.devjavu.com/
  
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -91,7 +91,7 @@ namespace TracExplorer.CommonTest
 
             SetAllowUnsafeHeaderParsing();
             //trac = TracCommon.GetTrac(servers[1]); // get the first server from the registry
-            trac = TracCommon.GetTrac(new ServerDetails("http://vstrac.devjavu.com/", "vstrac.devjavu@gmail.com", "testing"));
+            trac = TracCommon.GetTrac(new ServerDetails("http://tracexplorer.devjavu.com/", "vstrac.devjavu@gmail.com", "testing"));
 
             xmlrpc.Tracer tracer = new xmlrpc.Tracer();
             tracer.Attach(trac);
