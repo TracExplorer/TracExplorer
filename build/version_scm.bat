@@ -6,9 +6,9 @@ rem Param %2: File INPUT
 rem Param %3: File OUTPUT
 
 rem Search for subwcrev.exe from TortoiseSVN
-if not exist %ProgramFiles%\TortoiseSVN\bin\SubWCRev.exe goto error_no_subwcrev
+if not exist "%ProgramFiles%\TortoiseSVN\bin\SubWCRev.exe" goto error_no_subwcrev
 
-%ProgramFiles%\TortoiseSVN\bin\SubWCRev.exe %1 %2 %3 -f
+"%ProgramFiles%\TortoiseSVN\bin\SubWCRev.exe" %1 %2 %3 -f
 
 goto end
 
