@@ -33,8 +33,15 @@ namespace TracExplorer.Common
     public partial class AddNewTicketQueryForm : Form
     {
         private ITracConnect _tracConnect;
+        private TicketQueryDefinition _ticketDefinition;
 
         #region Public Properties
+        public TicketQueryDefinition TicketDefinition
+        {
+            get { return _ticketDefinition; }
+            set { _ticketDefinition = value; }
+        }
+        
         public ITracConnect TracConnect
         {
             get { return _tracConnect; }
@@ -54,20 +61,42 @@ namespace TracExplorer.Common
         }
         #endregion
 
-        public AddNewTicketQueryForm()
+        public AddNewTicketQueryForm(ITracConnect tracConnect)
         {
+            this.TracConnect = tracConnect;
             InitializeComponent();
+        }
+
+        public AddNewTicketQueryForm(ITracConnect tracConnect, TicketQueryDefinition ticketDefinition)
+        {
+            this.TicketDefinition = ticketDefinition;
+            this.TracConnect = tracConnect;
+            InitializeComponent();
+
+            this.TicketQueryFilter = this.TicketDefinition.Filter;
+            this.TicketQueryName = this.TicketDefinition.Name;
+            
         }
 
         private void lnkFilterHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            TracConnect.OpenBrowser("http://trac.edgewall.org/wiki/TracQuery#QueryLanguage"); //TODO: Place this in config somewhere?
+            if (TracConnect != null)
+            {
+                TracConnect.OpenBrowser("http://trac.edgewall.org/wiki/TracQuery#QueryLanguage"); //TODO: Place this in config somewhere?
+            }
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
             if (!IsValid())
                 return;
+
+            if (_ticketDefinition == null)
+            {
+                _ticketDefinition = new TicketQueryDefinition();
+            }
+            this.TicketDefinition.Filter = this.TicketQueryFilter;
+            this.TicketDefinition.Name = this.TicketQueryName;
 
             this.DialogResult = DialogResult.OK;
         }

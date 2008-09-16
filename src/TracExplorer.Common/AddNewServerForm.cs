@@ -30,32 +30,46 @@ using CookComputing.XmlRpc;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using TracExplorer.Common;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace TracExplorer.Common
 {
     public partial class AddNewServerForm : Form
     {
-        private ServerDetails result;
+        private ServerDetails _server;
+        private bool _editMode = false;
+        private MemoryStream _memoryStream = new MemoryStream();
 
         public AddNewServerForm()
         {
+            _server = new ServerDetails();
+            InitializeComponent();
+        }
+
+        public AddNewServerForm(ServerDetails server)
+        {
+            _editMode = true;
+            _server = server;
+
+            XmlSerializer s = new XmlSerializer(typeof(ServerDetails));
+            s.Serialize(_memoryStream, server);
+
             InitializeComponent();
         }
 
         public ServerDetails Result 
         {
-          get { return result; }
-          set { result = value; }
+          get { return _server; }
+          set { _server = value; }
         }
 
         /// <summary>
         /// Return a <see cref="ServerDetails"/> object filled with the form data.
         /// </summary>
         /// <returns></returns>
-        private ServerDetails GetServerDetails()
+        private void UpdateServerDetails()
         {
-            ServerDetails details = new ServerDetails();
-
             string tempServer = txtServer.Text.Trim();
 
             if (!tempServer.Contains(":"))
@@ -69,12 +83,10 @@ namespace TracExplorer.Common
             if (uriServer.LocalPath.Contains("login/xmlrpc")) //TODO: Put in resource file...
                 throw new ApplicationException("Please do not include the login/xmlrpc path. The basic trac path is sufficient.");
 
-            details.Server = uriServer.ToString();
-            details.Authenticated = chkAuthentication.Checked;
-            details.Username = txtUsername.Text;
-            details.Password = txtPassword.Text;
-
-            return details;
+            _server.Server = uriServer.ToString();
+            _server.Authenticated = chkAuthentication.Checked;
+            _server.Username = txtUsername.Text;
+            _server.Password = txtPassword.Text;
         }
 
         /// <summary>
@@ -102,6 +114,13 @@ namespace TracExplorer.Common
 
         private void wizard1_CloseFromCancel(object sender, CancelEventArgs e)
         {
+            if (_editMode)
+            {
+                // Reload values from memory
+                XmlSerializer s = new XmlSerializer(typeof(ServerDetails));
+                _memoryStream.Position = 0;
+                _server = (ServerDetails)s.Deserialize(_memoryStream);
+            }
             this.Close();
         }
 
@@ -119,9 +138,9 @@ namespace TracExplorer.Common
             lblStatus.Text = Properties.Resources.LabelChecking;
             lblError.Text = string.Empty;
 
-            ServerDetails details = GetServerDetails();
+            UpdateServerDetails();
 
-            ITrac trac = TracCommon.GetTrac(details);
+            ITrac trac = TracCommon.GetTrac(_server);
 
             IAsyncResult asr = trac.BeginGetAPIVersion();
 
@@ -151,7 +170,20 @@ namespace TracExplorer.Common
 
         private void AddNewServerForm_Load(object sender, EventArgs e)
         {
-            wizard1.NextEnabled = false;
+            if (_server != null) 
+            { 
+                this.Text = Properties.Resources.CaptionEditServer; 
+                txtServer.Text = _server.Server; 
+                txtUsername.Text = _server.Username; 
+                txtPassword.Text = _server.Password; 
+                chkAuthentication.Checked = _server.Authenticated; 
+ 
+                wizard1.NextEnabled = true; 
+            } 
+            else 
+            { 
+                wizard1.NextEnabled = false; 
+            } 
         }
 
 
@@ -162,42 +194,57 @@ namespace TracExplorer.Common
         /// <param name="e"></param>
         private void wizardPage3_ShowFromNext(object sender, EventArgs e)
         {
-            List<TicketQueryDefinition> queries = new List<TicketQueryDefinition>();
-            ServerDetails details = GetServerDetails();
-
-            //TODO: Put these labels in resource file...
-            queries.Add(new TicketQueryDefinition("Active Tickets", "status!=closed"));
-            queries.Add(new TicketQueryDefinition("Active Tasks", "type=task&status!=closed"));
-            queries.Add(new TicketQueryDefinition("All Tickets", "status!=non_existant_status"));
-            queries.Add(new TicketQueryDefinition("New Tickets", "status=new"));
+            List<TicketQueryDefinition> queries = new List<TicketQueryDefinition> ();
             
-            if ( details.Authenticated )
+            //TODO: Put these labels in resource file...
+            AddOnlyNewQuery(queries, new TicketQueryDefinition("Active Tickets", "status!=closed"));
+            AddOnlyNewQuery(queries, new TicketQueryDefinition("Active Tasks", "type=task&status!=closed"));
+            AddOnlyNewQuery(queries, new TicketQueryDefinition("All Tickets", "status!=non_existant_status"));
+            AddOnlyNewQuery(queries,new TicketQueryDefinition("New Tickets", "status=new"));
+            
+            if ( _server.Authenticated )
             {
-                queries.Add(new TicketQueryDefinition("My Active Tickets", "status!=closed&owner="+details.Username));
-                queries.Add(new TicketQueryDefinition("My Active Tasks", "type=task&status!=closed&owner=" + details.Username));
-                queries.Add(new TicketQueryDefinition("Tickets Reported By Me", "reporter=" + details.Username));
+                AddOnlyNewQuery(queries, new TicketQueryDefinition("My Active Tickets", "status!=closed&owner=" + _server.Username));
+                AddOnlyNewQuery(queries, new TicketQueryDefinition("My Active Tasks", "type=task&status!=closed&owner=" + _server.Username));
+                AddOnlyNewQuery(queries, new TicketQueryDefinition("Tickets Reported By Me", "reporter=" + _server.Username));
             }
 
             lstTicketQueries.BeginUpdate();
             lstTicketQueries.Items.Clear();
+            lstTicketQueries.Items.AddRange(_server.TicketQueries.ToArray());
+             
+            for (int i = 0; i < lstTicketQueries.Items.Count; i++)
+            {
+                lstTicketQueries.SetItemChecked(i,true);
+            }
             lstTicketQueries.Items.AddRange(queries.ToArray());
             lstTicketQueries.EndUpdate();
         }
 
+        private void AddOnlyNewQuery(List<TicketQueryDefinition> queries, TicketQueryDefinition newQuery)
+        {
+            TicketQueryDefinition ticketQuery = _server.TicketQueries.Find(delegate(TicketQueryDefinition obj) { return (obj.Name == newQuery.Name); });
+
+            if (ticketQuery == null)
+            {
+                queries.Add(newQuery);
+            }
+        }
+
         private void wizardPage3_CloseFromNext(object sender, Gui.Wizard.PageEventArgs e)
         {
-            //do last bit here
-            ServerDetails details = GetServerDetails();
-                        
+            // Add selected ticket queries
+            _server.TicketQueries.Clear();
             foreach (TicketQueryDefinition query in lstTicketQueries.CheckedItems)
             {
-                details.TicketQueries.Add(query);
+                _server.TicketQueries.Add(query);
             }
 
-            CommonRoot.Instance.Servers.Add(details);
+            if (!_editMode)
+            {
+                CommonRoot.Instance.Servers.Add(_server);
+            }
             CommonRoot.SaveInstance();
-
-            this.result = details;
         }
 
         private void chkSelectAll_CheckedChanged(object sender, EventArgs e)

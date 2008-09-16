@@ -100,6 +100,8 @@ namespace TracExplorer.Common
                 nodeTickets.Refresh();
                 nodeAttributes.Refresh();
 
+                this.Text = this.ServerDetails.Server;
+
                 DetailsLoaded = true;
             }
         }
@@ -214,6 +216,11 @@ namespace TracExplorer.Common
             {
                 get { return this.ticketDefinition; }
                 set { this.ticketDefinition = value; }
+            }
+
+            public override void Refresh()
+            {
+                this.Text = this.TicketDefinition.Name;
             }
         }
 
@@ -454,16 +461,11 @@ namespace TracExplorer.Common
         {
             TicketsNode node = treeTrac.SelectedNode as TicketsNode;
 
-            AddNewTicketQueryForm form = new AddNewTicketQueryForm();
-
-            form.TracConnect = this._tracConnect;
+            AddNewTicketQueryForm form = new AddNewTicketQueryForm(this._tracConnect);
 
             if (form.ShowDialog() == DialogResult.OK)
             {
-                TicketQueryDefinition ticketQueryDef = new TicketQueryDefinition();
-                ticketQueryDef.Name = form.TicketQueryName;
-                ticketQueryDef.Filter = form.TicketQueryFilter;
-
+                TicketQueryDefinition ticketQueryDef = form.TicketDefinition;
                 node.ServerDetails.TicketQueries.Add(ticketQueryDef);
                 CommonRoot.SaveInstance();
 
@@ -511,5 +513,31 @@ namespace TracExplorer.Common
             }
         }
         #endregion
+
+
+        private void mnuQueryEdit_Click(object sender, EventArgs e)
+        {
+            TicketNode node = treeTrac.SelectedNode as TicketNode;
+
+            AddNewTicketQueryForm form = new AddNewTicketQueryForm(this._tracConnect,node.TicketDefinition);
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                CommonRoot.SaveInstance();
+
+                node.Refresh();
+            }
+        }
+
+        private void mnuServerEdit_Click(object sender, EventArgs e)
+        {
+            ServerNode node = treeTrac.SelectedNode as ServerNode;
+
+            AddNewServerForm form = new AddNewServerForm(node.ServerDetails);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                node.Refresh();
+            }
+        }
     }
 }

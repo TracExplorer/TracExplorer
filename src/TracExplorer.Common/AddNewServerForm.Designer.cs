@@ -58,9 +58,9 @@
             // wizard1
             // 
             this.wizard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.wizard1.Controls.Add(this.wizardPage3);
-            this.wizard1.Controls.Add(this.wizardPage2);
             this.wizard1.Controls.Add(this.wizardPage1);
+            this.wizard1.Controls.Add(this.wizardPage2);
+            this.wizard1.Controls.Add(this.wizardPage3);
             this.wizard1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.wizard1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.wizard1.Location = new System.Drawing.Point(0, 0);
