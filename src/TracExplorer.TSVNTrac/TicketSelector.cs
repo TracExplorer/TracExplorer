@@ -34,13 +34,14 @@ namespace TracExplorer.TSVNTrac
     {
         private List<Ticket> _ticketsAffected = new List<Ticket>();
 
-        public TicketSelector(ServerDetails serverDetails, TicketQueryDefinition ticketDefinition)
+        public TicketSelector(ServerDetails serverDetails, TicketQueryDefinition ticketDefinition, Selection selection)
         {
             InitializeComponent();
         
             ticketView.ServerDetails = serverDetails;
             ticketView.TicketDefinition = ticketDefinition;
             ticketView.TracConnect = new BrowserConnect();
+            ticketView.SelectionItems = selection.Items;
             ticketView.RunQuery();
         }
 

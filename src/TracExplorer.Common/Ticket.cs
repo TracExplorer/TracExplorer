@@ -44,7 +44,8 @@ namespace TracExplorer.Common
         private string milestone;
         private string owner;
         private string ticketType;
-        private string severity; 
+        private string severity;
+        private string selection;
         #endregion
 
         #region Public Properties
@@ -154,6 +155,12 @@ namespace TracExplorer.Common
         {
             get { return severity; }
             set { severity = value; }
+        }
+
+        public string Selection
+        {
+            get { return selection; }
+            set { selection = value; }
         } 
         #endregion
     }

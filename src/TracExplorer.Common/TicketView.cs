@@ -37,7 +37,8 @@ namespace TracExplorer.Common
         private SortableBindingList<Ticket> allTickets = new SortableBindingList<Ticket>();
         private ITracConnect _tracConnect;
         private ServerDetails serverDetails;
-        private TicketQueryDefinition ticketDefinition; 
+        private TicketQueryDefinition ticketDefinition;
+        private SortableBindingList<string> selectionItems;
         #endregion
 
         #region ctor
@@ -64,7 +65,13 @@ namespace TracExplorer.Common
         {
             get { return ticketDefinition; }
             set { ticketDefinition = value; }
-        } 
+        }
+
+        public SortableBindingList<string> SelectionItems
+        {
+            get { return selectionItems; }
+            set { selectionItems = value; }
+        }
         #endregion
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -72,8 +79,19 @@ namespace TracExplorer.Common
             RunQuery();
         }
 
+        private void InitSelection()
+        {
+            if (SelectionItems != null)
+            {
+                colSelection.DataSource = SelectionItems;
+                colSelection.Visible = true;
+            }
+        }
+        
         public void RunQuery()
         {
+            InitSelection();
+
             cmbServer.ToolTipText = cmbServer.Text = serverDetails.ToString();
             cmbTicketQuery.ToolTipText = cmbTicketQuery.Text = TicketDefinition.ToString();
 
@@ -90,9 +108,10 @@ namespace TracExplorer.Common
 
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
-                if (dataGridView1.Rows[i].Selected == true)
+                Ticket ticket = (Ticket)dataGridView1.Rows[i].DataBoundItem;
+
+                if (ticket.Selection != null && ticket.Selection.Length != 0)
                 {
-                    Ticket ticket = (Ticket)dataGridView1.Rows[i].DataBoundItem;
                     TicketList.Add(ticket);
                 }
             }

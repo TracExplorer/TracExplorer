@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A2C1F604-DF0D-4514-A2B0-8E2C30907F05}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -76,6 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Selection.cs" />
     <Compile Include="ServerDetails.cs" />
     <Compile Include="CommonRoot.cs" />
     <Compile Include="SortableBindingList.cs" />

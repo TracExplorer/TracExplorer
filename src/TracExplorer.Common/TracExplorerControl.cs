@@ -29,8 +29,33 @@ using System.Windows.Forms;
 namespace TracExplorer.Common
 {
     [ComVisible(true)]
+    [DefaultEvent("TicketQueryClick")]
     public partial class TracExplorerControl : UserControl
     {
+        public class TicketQueryArgs : EventArgs
+        {
+            private ServerDetails _serverDetails;
+
+            public ServerDetails ServerDetails
+            {
+                get { return _serverDetails; }
+                set { _serverDetails = value; }
+            }
+            private TicketQueryDefinition _ticketQuery;
+
+            public TicketQueryDefinition TicketQuery
+            {
+                get { return _ticketQuery; }
+                set { _ticketQuery = value; }
+            }
+
+            public TicketQueryArgs(ServerDetails serverDetails, TicketQueryDefinition ticketQuery)
+            {
+                _ticketQuery = ticketQuery;
+                _serverDetails = serverDetails;
+            }
+        }
+
         #region Node Types
         private abstract class TracNode : TreeNode
         {
@@ -341,9 +366,13 @@ namespace TracExplorer.Common
         #endregion
 
         #region Private Variables
-        private Dictionary<Type, TreeNodeMouseClickEventHandler> clickHandlers = new Dictionary<Type, TreeNodeMouseClickEventHandler>();
+        private Dictionary<Type, TreeNodeMouseClickEventHandler> doubleClickHandlers = new Dictionary<Type, TreeNodeMouseClickEventHandler>();
         private ITracConnect _tracConnect;
         #endregion
+
+        public delegate void TicketQueryClickEvent(object sender, TicketQueryArgs e);
+        public event TicketQueryClickEvent TicketQueryClick;
+
 
         #region ctor
         public TracExplorerControl()
@@ -351,8 +380,8 @@ namespace TracExplorer.Common
             InitializeComponent();
 
             // Set handlers
-            clickHandlers.Add(typeof(WikiPageNode), WikiPageDoubleClick);
-            clickHandlers.Add(typeof(TicketNode), TicketDoubleClick);
+            doubleClickHandlers.Add(typeof(WikiPageNode), WikiPageDoubleClick);
+            doubleClickHandlers.Add(typeof(TicketNode), TicketDoubleClick);
 
             CommonRoot servers = CommonRoot.Instance;
 
@@ -396,8 +425,8 @@ namespace TracExplorer.Common
 
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (clickHandlers.ContainsKey(e.Node.GetType()))
-                clickHandlers[e.Node.GetType()](sender, e);
+            if (doubleClickHandlers.ContainsKey(e.Node.GetType()))
+                doubleClickHandlers[e.Node.GetType()](sender, e);
         }
 
         private void treeView1_AfterExpand(object sender, TreeViewEventArgs e)
@@ -436,6 +465,19 @@ namespace TracExplorer.Common
                     return;
                 }
             }
+            else if (e.Button == MouseButtons.Left)
+            {
+                if (e.Node is TicketNode)
+                {
+                    TicketNode ticketNode = e.Node as TicketNode;
+                    if (TicketQueryClick != null)
+                    {
+                        TicketQueryClick(this, new TicketQueryArgs(ticketNode.ServerDetails, ticketNode.TicketDefinition));
+                    }
+                    return;
+                }
+            }
+
         }
 
         private void btnDelTracServer_Click(object sender, EventArgs e)
@@ -504,7 +546,6 @@ namespace TracExplorer.Common
             try
             {
                 TicketNode ticketNode = e.Node as TicketNode;
-
                 TracConnect.CreateTicketWindow(ticketNode.ServerDetails, ticketNode.TicketDefinition, null);
             }
             catch (Exception ex)

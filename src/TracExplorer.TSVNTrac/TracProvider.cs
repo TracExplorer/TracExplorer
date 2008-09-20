@@ -40,8 +40,9 @@ namespace TracExplorer.TSVNTrac
         {
             String server;
             String ticketQuery;
+            Selection selection = new Selection();
 
-            if (!Validate(parameters, out server, out ticketQuery))
+            if (!Validate(parameters, out server, out ticketQuery, out selection))
             {
                 MessageBox.Show("Parameters are invalid", "TracExplorer");
                 return originalMessage;
@@ -71,7 +72,13 @@ namespace TracExplorer.TSVNTrac
                 return originalMessage;
             }
 
-            TicketSelector form = new TicketSelector(serverDetails, ticketQueryDef);
+            if (selection.Items.Count <= 1)
+            {
+                MessageBox.Show("Can't find selection definitions!", "TracExplorer");
+                return originalMessage;
+            }
+            
+            TicketSelector form = new TicketSelector(serverDetails, ticketQueryDef, selection);
 
             if (form.ShowDialog() != DialogResult.OK)
                 return originalMessage;
@@ -80,10 +87,12 @@ namespace TracExplorer.TSVNTrac
             if (originalMessage.Length != 0 && !originalMessage.EndsWith("\n"))
                 result.AppendLine();
 
+            // Correct wrong format in new line
+            selection.Format = selection.Format.Replace("\\n", "\n");
+
             foreach (Ticket ticket in form.TicketsFixed)
             {
-                result.AppendFormat("Fixed #{0}: {1}", ticket.Id, ticket.Summary);
-                result.AppendLine();
+                result.AppendFormat(selection.Format, ticket.Selection, ticket.Id, ticket.Summary);
             }
 
             return result.ToString();
@@ -108,7 +117,9 @@ namespace TracExplorer.TSVNTrac
                 // Validate parameter string
                 string server;
                 string ticketQuery;
-                if (Validate(parameters, out server, out ticketQuery))
+                Selection selection;
+
+                if (Validate(parameters, out server, out ticketQuery, out selection))
                 {
                     return true;
                 }
@@ -133,19 +144,64 @@ namespace TracExplorer.TSVNTrac
 
         private void ShowSelectQuery()
         {
-            ParameterConnect parameterConnect = new ParameterConnect();
-            TracExplorerForm form = new TracExplorerForm(parameterConnect);
-            parameterConnect.ParentForm = form;
+            BrowserConnect parameterConnect = new BrowserConnect();
+            AddNewProviderForm form = new AddNewProviderForm(parameterConnect);
 
-            form.ShowDialog();
-
-            if (parameterConnect.Parameters != null)
+            if (form.ShowDialog() == DialogResult.OK)
             {
-                Clipboard.SetText(parameterConnect.Parameters);
+                String parameters = AddDefaultSelections(form.Parameters, form.Selection);
+                Clipboard.SetText(parameters);
+                MessageBox.Show("Please paste clipboard text into parameter field!", "Trac Explorer");
             }
         }
 
-        private bool Validate(string parameters, out string server, out string ticketQuery)
+        private String AddDefaultSelections(string parameters, Selection selection)
+        {
+            try
+            {
+                // Add default Selection definitions:
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(parameters);
+
+                AddSelection(ref doc, selection);
+               
+                return doc.OuterXml;
+
+            }
+            catch (XmlException)
+            {
+                return null;
+            }
+        }
+
+        private bool AddSelection(ref XmlDocument doc, Selection selection)
+        {
+            try
+            {
+                XmlElement childElement = doc.CreateElement("Selection");
+
+                XmlAttribute formatAttribute = doc.CreateAttribute("Format");
+                formatAttribute.Value = selection.Format;
+                childElement.Attributes.Append(formatAttribute);
+
+                foreach (string item in selection.Items)
+                {
+                    XmlElement itemElement = doc.CreateElement("Item");
+                    itemElement.InnerText = item;
+                    childElement.AppendChild(itemElement);
+                }                
+
+                doc.DocumentElement.AppendChild(childElement);
+                return true;
+            }
+            catch (XmlException)
+            {
+                return false;
+            }
+        }
+
+
+        private bool Validate(string parameters, out string server, out string ticketQuery, out Selection selection)
         {
             try
             {
@@ -153,11 +209,27 @@ namespace TracExplorer.TSVNTrac
                 doc.LoadXml(parameters);
                 server = doc.DocumentElement.GetAttribute("server");
                 ticketQuery = doc.DocumentElement.GetAttribute("ticketquery");
+
+                selection = new Selection();
+
+                // Add empty selection
+                selection.Items.Add("");
+
+                XmlElement childSelection = (XmlElement) doc.DocumentElement.FirstChild;
+
+                selection.Format = childSelection.GetAttribute("Format");
+                
+                foreach (XmlElement childElement in childSelection.ChildNodes)
+                {
+                    String item = childElement.InnerText;
+                    selection.Items.Add(item);
+                }
             }
             catch (XmlException)
             {
                 server = "";
                 ticketQuery = "";
+                selection = new Selection();
                 return false;
             }
             return true;
