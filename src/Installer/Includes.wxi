@@ -10,7 +10,7 @@
 
   <?define PackageKeywords="SourceCodeManagement;Bugtracking" ?>
   <?define PackageDescription="Trac Integration for Visual Studio and TortoiseSVN" ?>
-  <?define PackageComments="TracExplorer $(var.VersionNumberUserVisible), $(var.RepositoryInformation)" ?>
+  <?define PackageComments="TracExplorer $(var.VersionNumberUserVisible) $(var.StatusVersion), $(var.RepositoryInformation)" ?>
 	<?define PackageManufacturer="Jan Linnenkohl" ?>
 	<?define TracExplorerOrg="http://tracexplorer.devjavu.com/"?>
 
