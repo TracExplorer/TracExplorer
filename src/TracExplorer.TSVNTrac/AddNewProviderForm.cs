@@ -64,14 +64,17 @@ namespace TracExplorer.TSVNTrac
             }
             if (count == 0)
             {
+                wizard1.NextEnabled = false;
                 chkSelectAll.CheckState = CheckState.Unchecked;
             }
             else if (count == lstSelectionStatus.Items.Count)
             {
+                wizard1.NextEnabled = true;
                 chkSelectAll.CheckState = CheckState.Checked;
             }
             else
             {
+                wizard1.NextEnabled = true;
                 chkSelectAll.CheckState = CheckState.Indeterminate;
             }
         }
@@ -118,6 +121,14 @@ namespace TracExplorer.TSVNTrac
             lstSelectionStatus.Items.Clear();
             lstSelectionStatus.Items.AddRange(selectionList.ToArray());
             lstSelectionStatus.EndUpdate();
+        }
+
+        private void wizardPage2_ShowFromNext(object sender, EventArgs e)
+        {
+            if (chkSelectAll.CheckState == CheckState.Unchecked)
+            {
+                wizard1.NextEnabled = false;
+            }
         }
     }
 }

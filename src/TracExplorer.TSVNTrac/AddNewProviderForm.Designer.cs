@@ -33,17 +33,17 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.textFormat = new System.Windows.Forms.TextBox();
             this.wizard1 = new Gui.Wizard.Wizard();
-            this.wizardPage1 = new Gui.Wizard.WizardPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tracExplorerControl = new TracExplorer.Common.TracExplorerControl();
             this.wizardPage2 = new Gui.Wizard.WizardPage();
             this.lblFormat = new System.Windows.Forms.Label();
             this.chkSelectAll = new System.Windows.Forms.CheckBox();
             this.lstSelectionStatus = new System.Windows.Forms.CheckedListBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.wizardPage1 = new Gui.Wizard.WizardPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tracExplorerControl = new TracExplorer.Common.TracExplorerControl();
             this.wizard1.SuspendLayout();
-            this.wizardPage1.SuspendLayout();
             this.wizardPage2.SuspendLayout();
+            this.wizardPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textFormat
@@ -72,39 +72,6 @@
             this.wizard1.TabIndex = 1;
             this.wizard1.Load += new System.EventHandler(this.wizard1_Load);
             // 
-            // wizardPage1
-            // 
-            this.wizardPage1.Controls.Add(this.label1);
-            this.wizardPage1.Controls.Add(this.tracExplorerControl);
-            this.wizardPage1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wizardPage1.IsFinishPage = false;
-            this.wizardPage1.Location = new System.Drawing.Point(0, 0);
-            this.wizardPage1.Name = "wizardPage1";
-            this.wizardPage1.Size = new System.Drawing.Size(411, 280);
-            this.wizardPage1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Please select ticket query";
-            // 
-            // tracExplorerControl
-            // 
-            this.tracExplorerControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tracExplorerControl.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tracExplorerControl.Location = new System.Drawing.Point(3, 24);
-            this.tracExplorerControl.Name = "tracExplorerControl";
-            this.tracExplorerControl.Size = new System.Drawing.Size(405, 253);
-            this.tracExplorerControl.TabIndex = 2;
-            this.tracExplorerControl.TracConnect = null;
-            this.tracExplorerControl.TicketQueryClick += new TracExplorer.Common.TracExplorerControl.TicketQueryClickEvent(this.tracExplorerControl_TicketQueryClick);
-            // 
             // wizardPage2
             // 
             this.wizardPage2.Controls.Add(this.lblFormat);
@@ -119,6 +86,7 @@
             this.wizardPage2.Size = new System.Drawing.Size(411, 280);
             this.wizardPage2.TabIndex = 2;
             this.wizardPage2.CloseFromNext += new Gui.Wizard.PageEventHandler(this.wizardPage2_CloseFromNext);
+            this.wizardPage2.ShowFromNext += new System.EventHandler(this.wizardPage2_ShowFromNext);
             // 
             // lblFormat
             // 
@@ -165,6 +133,39 @@
             this.label4.Text = "Please choose selection status which you want to be able to select in the ticket " +
                 "queries.";
             // 
+            // wizardPage1
+            // 
+            this.wizardPage1.Controls.Add(this.label1);
+            this.wizardPage1.Controls.Add(this.tracExplorerControl);
+            this.wizardPage1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wizardPage1.IsFinishPage = false;
+            this.wizardPage1.Location = new System.Drawing.Point(0, 0);
+            this.wizardPage1.Name = "wizardPage1";
+            this.wizardPage1.Size = new System.Drawing.Size(411, 280);
+            this.wizardPage1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Please select ticket query";
+            // 
+            // tracExplorerControl
+            // 
+            this.tracExplorerControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tracExplorerControl.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tracExplorerControl.Location = new System.Drawing.Point(3, 24);
+            this.tracExplorerControl.Name = "tracExplorerControl";
+            this.tracExplorerControl.Size = new System.Drawing.Size(405, 253);
+            this.tracExplorerControl.TabIndex = 2;
+            this.tracExplorerControl.TracConnect = null;
+            this.tracExplorerControl.TicketQueryClick += new TracExplorer.Common.TracExplorerControl.TicketQueryClickEvent(this.tracExplorerControl_TicketQueryClick);
+            // 
             // AddNewProviderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -177,10 +178,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add new Trac provider";
             this.wizard1.ResumeLayout(false);
-            this.wizardPage1.ResumeLayout(false);
-            this.wizardPage1.PerformLayout();
             this.wizardPage2.ResumeLayout(false);
             this.wizardPage2.PerformLayout();
+            this.wizardPage1.ResumeLayout(false);
+            this.wizardPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
