@@ -71,6 +71,7 @@
              Description ="Common files"
              Level="1" Absent="disallow" >
       <ComponentRef Id="TracExplorer.Common.dll" />
+      <ComponentRef Id="CookComputing.XmlRpcV2.dll"/>
       <ComponentRef Id="ApplicationShortcut" />
 		</Feature>
     <Feature Id="TSVNTrac" Title="Trac Provider for TortoiseSVN" 
@@ -84,7 +85,6 @@
              Level="1" Absent="allow">
       <ComponentRef Id="TracExplorer.VSTrac.dll"/>
       <ComponentRef Id="TracExplorer.VSTrac.AddIn"/>
-      <ComponentRef Id="CookComputing.XmlRpcV2.dll"/>
       <ComponentRef Id="de_TracExplorer.VSTrac.resources.dll"/>
       <ComponentRef Id="en_TracExplorer.VSTrac.resources.dll"/>
       <ComponentRef Id="es_TracExplorer.VSTrac.resources.dll"/>
