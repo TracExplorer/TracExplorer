@@ -31,6 +31,7 @@ namespace TracExplorer.Common
 {
 
     [ComVisible(true)]
+    [DefaultEvent("TicketQueryUpdate")]
     public partial class TicketView : UserControl
     {
         #region Private Variables
@@ -39,7 +40,11 @@ namespace TracExplorer.Common
         private ServerDetails serverDetails;
         private TicketQueryDefinition ticketDefinition;
         private SortableBindingList<string> selectionItems;
+        private object parentWindow;
         #endregion
+
+        public delegate void TicketQueryUpdateEvent(object sender, TicketQueryArgs e);
+        public event TicketQueryUpdateEvent TicketQueryUpdate;
 
         #region ctor
         public TicketView()
@@ -72,6 +77,12 @@ namespace TracExplorer.Common
             get { return selectionItems; }
             set { selectionItems = value; }
         }
+
+        public object ParentWindow
+        {
+            get { return parentWindow; }
+            set { parentWindow = value; }
+        }
         #endregion
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -87,15 +98,30 @@ namespace TracExplorer.Common
                 colSelection.Visible = true;
             }
         }
+
+        private void InitTicketQueries()
+        {
+            if (ServerDetails != null)
+            {
+                cmbTicketQuery.Items.Clear();
+
+                foreach (TicketQueryDefinition item in ServerDetails.TicketQueries)
+                {
+                    cmbTicketQuery.Items.Add(item.Name);
+                }
+            }
+        }
         
         public void RunQuery()
         {
+            InitTicketQueries();
             InitSelection();
 
             cmbServer.ToolTipText = cmbServer.Text = serverDetails.ToString();
             cmbTicketQuery.ToolTipText = cmbTicketQuery.Text = TicketDefinition.ToString();
 
             lblResults.Text = "Refreshing...";
+            cmbTicketQuery.Enabled = false;
             if (!bgwTickets.IsBusy) 
  	        {
                 bgwTickets.RunWorkerAsync();
@@ -139,7 +165,7 @@ namespace TracExplorer.Common
             try
             {
                 ITrac trac = TracCommon.GetTrac(ServerDetails);
-
+                
                 int[] tickets = trac.queryTickets(TicketDefinition.Filter);
                 List<MulticallItem> ticketItems = new List<MulticallItem>();
 
@@ -213,11 +239,15 @@ namespace TracExplorer.Common
                 allTickets = e.Result as SortableBindingList<Ticket>;
                 dataGridView1.AutoGenerateColumns = false;
                 dataGridView1.DataSource = allTickets;
-                
+
                 lblResults.Text = string.Format("{0} Tickets returned", allTickets.Count);
             }
             else
+            {
                 lblResults.Text = "Error refreshing. Please check server connection and try again.";
+            }
+
+            cmbTicketQuery.Enabled = true;
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -226,6 +256,26 @@ namespace TracExplorer.Common
             {
                 Ticket ticket = (Ticket)dataGridView1.Rows[e.RowIndex].DataBoundItem;
                 OpenInBrowser(ticket.Id);
+            }
+        }
+
+        private void cmbTicketQuery_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TicketQueryDefinition ticketQueryDef;
+
+            ticketQueryDef = serverDetails.TicketQueries.Find(delegate(TicketQueryDefinition obj) { return (obj.Name == cmbTicketQuery.SelectedItem.ToString()); });
+
+            // Check if query is valid
+            if ((ticketQueryDef != null) && (ticketDefinition != ticketQueryDef))
+            {
+                ticketDefinition = ticketQueryDef;
+
+                if (TicketQueryUpdate != null)
+                {
+                    TicketQueryUpdate(this, new TicketQueryArgs(ServerDetails, ticketQueryDef));
+                }
+
+                RunQuery();
             }
         }
     }

@@ -37,14 +37,8 @@
             this.cmbTicketQuery = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.selectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lblResults = new System.Windows.Forms.Label();
-            this.imgTickets = new System.Windows.Forms.ImageList(this.components);
-            this.bgwTickets = new System.ComponentModel.BackgroundWorker();
             this.colSelection = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.selectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colIcon = new System.Windows.Forms.DataGridViewImageColumn();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTicketType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +57,12 @@
             this.colCC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLastModified = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblResults = new System.Windows.Forms.Label();
+            this.imgTickets = new System.Windows.Forms.ImageList(this.components);
+            this.bgwTickets = new System.ComponentModel.BackgroundWorker();
             this.toolStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -115,9 +115,10 @@
             // cmbTicketQuery
             // 
             this.cmbTicketQuery.AutoToolTip = true;
-            this.cmbTicketQuery.Enabled = false;
+            this.cmbTicketQuery.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTicketQuery.Name = "cmbTicketQuery";
             this.cmbTicketQuery.Size = new System.Drawing.Size(150, 26);
+            this.cmbTicketQuery.SelectedIndexChanged += new System.EventHandler(this.cmbTicketQuery_SelectedIndexChanged);
             // 
             // toolStripContainer1
             // 
@@ -181,64 +182,6 @@
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
-            // selectionBindingSource
-            // 
-            this.selectionBindingSource.DataSource = typeof(string);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.panel1.Size = new System.Drawing.Size(609, 25);
-            this.panel1.TabIndex = 1;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(168)))), ((int)(((byte)(153)))));
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 1);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
-            this.panel2.Size = new System.Drawing.Size(609, 23);
-            this.panel2.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Info;
-            this.panel3.Controls.Add(this.lblResults);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 1);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(609, 21);
-            this.panel3.TabIndex = 0;
-            // 
-            // lblResults
-            // 
-            this.lblResults.AutoSize = true;
-            this.lblResults.Location = new System.Drawing.Point(4, 3);
-            this.lblResults.Name = "lblResults";
-            this.lblResults.Size = new System.Drawing.Size(94, 13);
-            this.lblResults.TabIndex = 0;
-            this.lblResults.Text = "0 Tickets returned";
-            // 
-            // imgTickets
-            // 
-            this.imgTickets.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgTickets.ImageStream")));
-            this.imgTickets.TransparentColor = System.Drawing.Color.Transparent;
-            this.imgTickets.Images.SetKeyName(0, "newticket.png");
-            this.imgTickets.Images.SetKeyName(1, "editedticket.png");
-            this.imgTickets.Images.SetKeyName(2, "closedticket.png");
-            // 
-            // bgwTickets
-            // 
-            this.bgwTickets.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwTickets_DoWork);
-            this.bgwTickets.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwTickets_RunWorkerCompleted);
-            // 
             // colSelection
             // 
             this.colSelection.DataPropertyName = "Selection";
@@ -247,6 +190,10 @@
             this.colSelection.Name = "colSelection";
             this.colSelection.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colSelection.Visible = false;
+            // 
+            // selectionBindingSource
+            // 
+            this.selectionBindingSource.DataSource = typeof(string);
             // 
             // colIcon
             // 
@@ -386,6 +333,60 @@
             this.colLastModified.Name = "colLastModified";
             this.colLastModified.ReadOnly = true;
             this.colLastModified.Width = 150;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            this.panel1.Size = new System.Drawing.Size(609, 25);
+            this.panel1.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(168)))), ((int)(((byte)(153)))));
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 1);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            this.panel2.Size = new System.Drawing.Size(609, 23);
+            this.panel2.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.Info;
+            this.panel3.Controls.Add(this.lblResults);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 1);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(609, 21);
+            this.panel3.TabIndex = 0;
+            // 
+            // lblResults
+            // 
+            this.lblResults.AutoSize = true;
+            this.lblResults.Location = new System.Drawing.Point(4, 3);
+            this.lblResults.Name = "lblResults";
+            this.lblResults.Size = new System.Drawing.Size(94, 13);
+            this.lblResults.TabIndex = 0;
+            this.lblResults.Text = "0 Tickets returned";
+            // 
+            // imgTickets
+            // 
+            this.imgTickets.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgTickets.ImageStream")));
+            this.imgTickets.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgTickets.Images.SetKeyName(0, "newticket.png");
+            this.imgTickets.Images.SetKeyName(1, "editedticket.png");
+            this.imgTickets.Images.SetKeyName(2, "closedticket.png");
+            // 
+            // bgwTickets
+            // 
+            this.bgwTickets.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwTickets_DoWork);
+            this.bgwTickets.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwTickets_RunWorkerCompleted);
             // 
             // TicketView
             // 

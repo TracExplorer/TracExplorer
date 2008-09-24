@@ -81,6 +81,7 @@
     <Compile Include="CommonRoot.cs" />
     <Compile Include="SortableBindingList.cs" />
     <Compile Include="Ticket.cs" />
+    <Compile Include="TicketQueryArgs.cs" />
     <Compile Include="TicketQueryDefinition.cs" />
     <Compile Include="TicketView.cs">
       <SubType>UserControl</SubType>

@@ -32,30 +32,6 @@ namespace TracExplorer.Common
     [DefaultEvent("TicketQueryClick")]
     public partial class TracExplorerControl : UserControl
     {
-        public class TicketQueryArgs : EventArgs
-        {
-            private ServerDetails _serverDetails;
-
-            public ServerDetails ServerDetails
-            {
-                get { return _serverDetails; }
-                set { _serverDetails = value; }
-            }
-            private TicketQueryDefinition _ticketQuery;
-
-            public TicketQueryDefinition TicketQuery
-            {
-                get { return _ticketQuery; }
-                set { _ticketQuery = value; }
-            }
-
-            public TicketQueryArgs(ServerDetails serverDetails, TicketQueryDefinition ticketQuery)
-            {
-                _ticketQuery = ticketQuery;
-                _serverDetails = serverDetails;
-            }
-        }
-
         #region Node Types
         private abstract class TracNode : TreeNode
         {
