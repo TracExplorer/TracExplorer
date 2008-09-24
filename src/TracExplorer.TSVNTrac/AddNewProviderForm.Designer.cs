@@ -115,6 +115,7 @@
             this.lstSelectionStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstSelectionStatus.CheckOnClick = true;
             this.lstSelectionStatus.FormattingEnabled = true;
             this.lstSelectionStatus.Location = new System.Drawing.Point(12, 51);
             this.lstSelectionStatus.Name = "lstSelectionStatus";

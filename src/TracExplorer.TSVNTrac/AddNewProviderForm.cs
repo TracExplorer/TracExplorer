@@ -41,6 +41,7 @@ namespace TracExplorer.TSVNTrac
                 {
                     lstSelectionStatus.SetItemChecked(i, true);
                 }
+                wizard1.NextEnabled = true;
             }
             else if (chkSelectAll.CheckState == CheckState.Unchecked)
             {
@@ -48,6 +49,7 @@ namespace TracExplorer.TSVNTrac
                 {
                     lstSelectionStatus.SetItemChecked(i, false);
                 }
+                wizard1.NextEnabled = false;
             }
         }
 
@@ -91,7 +93,7 @@ namespace TracExplorer.TSVNTrac
             }
         }
 
-        private void tracExplorerControl_TicketQueryClick(object sender, TracExplorerControl.TicketQueryArgs e)
+        private void tracExplorerControl_TicketQueryClick(object sender, TicketQueryArgs e)
         {
             Parameters = string.Format("<TSVNTrac server=\"{0}\" ticketquery=\"{1}\"/>", e.ServerDetails.Server, e.TicketQuery.Name);
                         
