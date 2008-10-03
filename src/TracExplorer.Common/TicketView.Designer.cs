@@ -63,6 +63,8 @@
             this.lblResults = new System.Windows.Forms.Label();
             this.imgTickets = new System.Windows.Forms.ImageList(this.components);
             this.bgwTickets = new System.ComponentModel.BackgroundWorker();
+            this.searchTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.searchLabel = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -82,7 +84,9 @@
             this.btnRefresh,
             this.toolStripSeparator1,
             this.cmbServer,
-            this.cmbTicketQuery});
+            this.cmbTicketQuery,
+            this.searchTextBox,
+            this.searchLabel});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
@@ -388,6 +392,20 @@
             this.bgwTickets.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwTickets_DoWork);
             this.bgwTickets.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwTickets_RunWorkerCompleted);
             // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(100, 26);
+            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
+            // 
+            // searchLabel
+            // 
+            this.searchLabel.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.searchLabel.Name = "searchLabel";
+            this.searchLabel.Size = new System.Drawing.Size(52, 23);
+            this.searchLabel.Text = "Search";
+            // 
             // TicketView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -450,5 +468,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCC;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreated;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLastModified;
+        private System.Windows.Forms.ToolStripTextBox searchTextBox;
+        private System.Windows.Forms.ToolStripLabel searchLabel;
     }
 }

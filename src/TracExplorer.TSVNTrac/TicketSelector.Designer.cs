@@ -38,7 +38,7 @@
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(372, 294);
+            this.cancelButton.Location = new System.Drawing.Point(538, 349);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 1;
@@ -49,7 +49,7 @@
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(291, 294);
+            this.okButton.Location = new System.Drawing.Point(457, 349);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 2;
@@ -67,8 +67,10 @@
             this.ticketView.Location = new System.Drawing.Point(2, 2);
             this.ticketView.Name = "ticketView";
             this.ticketView.Padding = new System.Windows.Forms.Padding(1);
+            this.ticketView.ParentWindow = null;
+            this.ticketView.SelectionItems = null;
             this.ticketView.ServerDetails = null;
-            this.ticketView.Size = new System.Drawing.Size(455, 286);
+            this.ticketView.Size = new System.Drawing.Size(621, 341);
             this.ticketView.TabIndex = 4;
             this.ticketView.TicketDefinition = null;
             this.ticketView.TracConnect = null;
@@ -77,7 +79,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(459, 329);
+            this.ClientSize = new System.Drawing.Size(625, 384);
             this.Controls.Add(this.ticketView);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);

@@ -36,6 +36,7 @@ namespace TracExplorer.Common
     {
         #region Private Variables
         private SortableBindingList<Ticket> allTickets = new SortableBindingList<Ticket>();
+        private SortableBindingList<Ticket> searchTickets = new SortableBindingList<Ticket>();
         private ITracConnect _tracConnect;
         private ServerDetails serverDetails;
         private TicketQueryDefinition ticketDefinition;
@@ -122,6 +123,9 @@ namespace TracExplorer.Common
 
             lblResults.Text = "Refreshing...";
             cmbTicketQuery.Enabled = false;
+            searchLabel.Enabled = false;
+            searchTextBox.Enabled = false;
+            searchTextBox.Text = "";
             if (!bgwTickets.IsBusy) 
  	        {
                 bgwTickets.RunWorkerAsync();
@@ -248,6 +252,8 @@ namespace TracExplorer.Common
             }
 
             cmbTicketQuery.Enabled = true;
+            searchLabel.Enabled = true;
+            searchTextBox.Enabled = true;
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -276,6 +282,31 @@ namespace TracExplorer.Common
                 }
 
                 RunQuery();
+            }
+        }
+
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = searchTextBox.Text;
+            searchText = searchText.ToLowerInvariant();
+
+            if (searchText == "")
+            {
+                dataGridView1.DataSource = allTickets;
+                lblResults.Text = string.Format("{0} Tickets returned", allTickets.Count);
+            }
+            else
+            {
+                searchTickets.Clear();
+                foreach (Ticket ticket in allTickets)
+                {
+                    if (ticket.Summary.ToLowerInvariant().Contains(searchText))
+                    {
+                        searchTickets.Add(ticket);
+                    }
+                }
+                dataGridView1.DataSource = searchTickets;
+                lblResults.Text = string.Format("{0} from {1} Tickets filtered", searchTickets.Count, allTickets.Count);
             }
         }
     }
