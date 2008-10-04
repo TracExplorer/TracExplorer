@@ -5,7 +5,7 @@
   <?define MinorVersion="1" ?>
   <?define MicroVersion="0" ?>
   <!-- SerStatusVersion to "Beta", "Alpha". For "Release" leave it blank -->
-  <?define StatusVersion="RC2" ?>
+  <?define StatusVersion="" ?>
   
 
   <!-- Automatic settings by SubWCRev from TortoiseSVN -->
