@@ -81,8 +81,9 @@ namespace TracExplorer.Common
             Uri uriServer= new Uri(tempServer);
 
             if (uriServer.LocalPath.Contains("login/xmlrpc")) //TODO: Put in resource file...
-                throw new ApplicationException("Please do not include the login/xmlrpc path. The basic trac path is sufficient.");
-
+            {
+                MessageBox.Show("Please do not include the login/xmlrpc path. The basic trac path is sufficient.");
+            }
             _server.Server = uriServer.ToString();
             _server.Authenticated = chkAuthentication.Checked;
             _server.Username = txtUsername.Text;
