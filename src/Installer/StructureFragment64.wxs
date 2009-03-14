@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <?include Includes.wxi?>
+  <?if $(sys.BUILDARCH) = "x64" ?>
+	  <Fragment Id="StructureFragment64">
+      <DirectoryRef Id="TARGETDIR">
+        <Directory Id="ProgramFiles64Folder">
+          <Directory Id="INSTALLLOCATION64" Name="TracExplorer">
+            <Directory Id="INSTALL_BIN64" Name="bin">
+            </Directory>
+          </Directory>
+        </Directory>
+      </DirectoryRef>
+
+      <DirectoryRef Id="INSTALL_BIN64">
+        <Component Id="TracExplorer.Common.dll64" Guid="D17D291F-8806-4d1e-B91B-D27DEE7ADFD1" Win64="yes">
+          <File Id="TracExplorer.Common.dll64" Source="$(var.SolutionDir)..\bin\$(var.TracExplorer.Common.Configuration)\$(var.TracExplorer.Common.TargetFileName)" KeyPath="yes" Checksum="yes"/>
+        </Component>
+        <Component Id="TracExplorer.TSVNTrac.dll64" Guid="B1361F1E-D33D-408e-A7BA-AD341CB6564D" Win64="yes">
+          <File Id="TracExplorer.TSVNTrac.dll64" Source="$(var.SolutionDir)..\bin\$(var.TracExplorer.TSVNTrac.Configuration)\$(var.TracExplorer.TSVNTrac.TargetFileName)" KeyPath="yes" Checksum="yes" />
+          <RegistryValue Root="HKCR" Key="TracExplorer.TSVNTrac.TracProvider" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write"/>
+          <RegistryValue Root="HKCR" Key="TracExplorer.TSVNTrac.TracProvider\CLSID" Value="{05BC2E49-E116-44E3-BF43-DD90EEC031DD}" Type="string" Action="write"/>
+
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\Implemented Categories\{3494FA92-B139-4730-9591-01135D5E7831}" Value="" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32\1.0.0.0" Name="Class" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32\1.0.0.0" Name="Assembly" Value="TracExplorer.TSVNTrac, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32\1.0.0.0" Name="CodeBase" Value="file:///[#TracExplorer.TSVNTrac.dll64]" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Value="mscoree.dll" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Name="ThreadingModel" Value="Both" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Name="Class" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Name="Assembly" Value="TracExplorer.TSVNTrac, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\InprocServer32" Name="CodeBase" Value="file:///[#TracExplorer.TSVNTrac.dll64]" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\ProgId" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="Component Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Name="0" Value=".NET Category" Type="string" Action="write" />
+        </Component>
+        <Component Id="Interop.BugTraqProvider.dll64" Guid="B2C41EF2-7A82-46e7-BEEE-49FAE8C449CC" Win64="yes">
+          <File Id="Interop.BugTraqProvider.dll64" Source="$(var.SolutionDir)..\bin\$(var.TracExplorer.Common.Configuration)\Interop.BugTraqProvider.dll" KeyPath="yes" Checksum="yes"/>
+        </Component>
+        <Component Id="CookComputing.XmlRpcV2.dll64" Guid="A867CDD6-EEF5-4d05-AE54-4FAA069ED4E4" Win64="yes">
+          <File Id="CookComputing.XmlRpcV2.dll64" Source="$(var.SolutionDir)..\bin\$(var.TracExplorer.Common.Configuration)\CookComputing.XmlRpcV2.dll" KeyPath="yes" Checksum="yes"/>
+        </Component>
+      </DirectoryRef>
+	  </Fragment>
+  <?endif?>
+</Wix>

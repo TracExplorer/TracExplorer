@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <?include Includes.wxi?>
 	<Fragment Id="StructureFragment">
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
@@ -24,12 +25,11 @@
     </Directory>
 
     <DirectoryRef Id="INSTALL_BIN">
-      <Component Id="TracExplorer.Common.dll" Guid="C3E3A6E6-23AC-4a73-8220-5503D9946110">
-        <File Source="$(var.TracExplorer.Common.TargetPath)" KeyPath="yes" Checksum="yes"/>
+      <Component Id="TracExplorer.Common.dll" Guid="C3E3A6E6-23AC-4a73-8220-5503D9946110" Win64="no">
+        <File Id="TracExplorer.Common.dll" Source="$(var.TracExplorer.Common.TargetPath)" KeyPath="yes" Checksum="yes"/>
       </Component>
-      <Component Id="TracExplorer.TSVNTrac.dll" Guid="9B906EC1-5E59-41f9-A245-21271A746319">
+      <Component Id="TracExplorer.TSVNTrac.dll" Guid="9B906EC1-5E59-41f9-A245-21271A746319" Win64="no">
         <File Source="$(var.TracExplorer.TSVNTrac.TargetPath)" KeyPath="yes" Checksum="yes" />
-
         <RegistryValue Root="HKCR" Key="TracExplorer.TSVNTrac.TracProvider" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write"/>
         <RegistryValue Root="HKCR" Key="TracExplorer.TSVNTrac.TracProvider\CLSID" Value="{05BC2E49-E116-44E3-BF43-DD90EEC031DD}" Type="string" Action="write"/>
 
@@ -49,69 +49,69 @@
         <RegistryValue Root="HKCR" Key="CLSID\{05BC2E49-E116-44E3-BF43-DD90EEC031DD}\ProgId" Value="TracExplorer.TSVNTrac.TracProvider" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Component Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Name="0" Value=".NET Category" Type="string" Action="write" />
       </Component>
-      <Component Id="Interop.BugTraqProvider.dll" Guid="1993FBD7-9018-4593-B555-D00E07330381">
+      <Component Id="Interop.BugTraqProvider.dll" Guid="1993FBD7-9018-4593-B555-D00E07330381" Win64="no">
         <File Source="..\..\ext\tortoisesvn.net\Interop.BugTraqProvider.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
-      <Component Id="TracExplorer.VSTrac.dll" Guid="F15031A0-095A-4255-840A-FA0C26E6BF56">
+      <Component Id="TracExplorer.VSTrac.dll" Guid="F15031A0-095A-4255-840A-FA0C26E6BF56" Win64="no">
         <File Source="$(var.TracExplorer.VSTrac.TargetPath)" KeyPath="yes" Checksum="yes"/>
       </Component>
-      <Component Id='TracExplorer.VSTrac.AddIn' Guid='954A541F-7CF7-4a70-B8EC-337B495970EA'>
+      <Component Id='TracExplorer.VSTrac.AddIn' Guid='954A541F-7CF7-4a70-B8EC-337B495970EA' Win64="no">
         <File Source='$(var.TracExplorer.VSTrac.ProjectDir)TracExplorer.VSTrac.AddIn' KeyPath="yes" Checksum="yes" />
         <RegistryValue Root="HKLM" Key="Software\Microsoft\VisualStudio\8.0\AutomationOptions\LookInFolders" Name="[INSTALL_BIN]" Type="string" Value="" Action="write"/>
         <RegistryValue Root="HKLM" Key="Software\Microsoft\VisualStudio\9.0\AutomationOptions\LookInFolders" Name="[INSTALL_BIN]" Type="string" Value="" Action="write"/>
       </Component>
-      <Component Id="CookComputing.XmlRpcV2.dll" Guid="A226D9F3-10A9-4391-924E-5B84099E70AE">
+      <Component Id="CookComputing.XmlRpcV2.dll" Guid="A226D9F3-10A9-4391-924E-5B84099E70AE" Win64="no">
         <File Source="..\..\ext\xml-rpc.net\CookComputing.XmlRpcV2.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="INSTALL_BIN_de">
-      <Component Id="de_TracExplorer.VSTrac.resources.dll" Guid="1F383D02-D93F-484a-9AB2-936853A9CBD1">
+      <Component Id="de_TracExplorer.VSTrac.resources.dll" Guid="1F383D02-D93F-484a-9AB2-936853A9CBD1" Win64="no">
         <File Id="de_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)de\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="INSTALL_BIN_en">
-      <Component Id="en_TracExplorer.VSTrac.resources.dll" Guid="749FFCF6-5877-4037-AF7A-4417B6A6D311">
+      <Component Id="en_TracExplorer.VSTrac.resources.dll" Guid="749FFCF6-5877-4037-AF7A-4417B6A6D311" Win64="no">
         <File Id="en_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)en\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="INSTALL_BIN_es">
-      <Component Id="es_TracExplorer.VSTrac.resources.dll" Guid="E1E3FE94-464A-4eea-922A-D275F06A1243">
+      <Component Id="es_TracExplorer.VSTrac.resources.dll" Guid="E1E3FE94-464A-4eea-922A-D275F06A1243" Win64="no">
         <File Id="es_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)es\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="INSTALL_BIN_fr">
-      <Component Id="fr_TracExplorer.VSTrac.resources.dll" Guid="E9109F65-AAFA-4aea-8C18-9622EFB23F2D">
+      <Component Id="fr_TracExplorer.VSTrac.resources.dll" Guid="E9109F65-AAFA-4aea-8C18-9622EFB23F2D" Win64="no">
         <File Id="fr_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)fr\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="INSTALL_BIN_it">
-      <Component Id="it_TracExplorer.VSTrac.resources.dll" Guid="DA63597C-F1FA-40b9-90F1-75690E29EEA2">
+      <Component Id="it_TracExplorer.VSTrac.resources.dll" Guid="DA63597C-F1FA-40b9-90F1-75690E29EEA2" Win64="no">
         <File Id="it_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)it\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="INSTALL_BIN_ja">
-      <Component Id="ja_TracExplorer.VSTrac.resources.dll" Guid="A7483695-2DFA-43a3-84E1-37E5A137D376">
+      <Component Id="ja_TracExplorer.VSTrac.resources.dll" Guid="A7483695-2DFA-43a3-84E1-37E5A137D376" Win64="no">
         <File Id="ja_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)ja\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="INSTALL_BIN_ko">
-      <Component Id="ko_TracExplorer.VSTrac.resources.dll" Guid="8EA98CAD-627B-4993-9EF8-D4A4C1BE8205">
+      <Component Id="ko_TracExplorer.VSTrac.resources.dll" Guid="8EA98CAD-627B-4993-9EF8-D4A4C1BE8205" Win64="no">
         <File Id="ko_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)ko\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="INSTALL_BIN_zh_CHS">
-      <Component Id="zh_CHS_TracExplorer.VSTrac.resources.dll" Guid="165AC4F3-D03D-487e-83E4-D599891CC5B4">
+      <Component Id="zh_CHS_TracExplorer.VSTrac.resources.dll" Guid="165AC4F3-D03D-487e-83E4-D599891CC5B4" Win64="no">
         <File Id="zh_CHS_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)zh-CHS\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
     <DirectoryRef Id="INSTALL_BIN_zh_CHT">
-      <Component Id="zh_CHT_TracExplorer.VSTrac.resources.dll" Guid="17436D4B-35BE-4388-B428-5F5CCECB7C56">
+      <Component Id="zh_CHT_TracExplorer.VSTrac.resources.dll" Guid="17436D4B-35BE-4388-B428-5F5CCECB7C56" Win64="no">
         <File Id="zh_CHT_TracExplorer.VSTrac.resources.dll" Source="$(var.TracExplorer.VSTrac.TargetDir)zh-CHT\TracExplorer.VSTrac.resources.dll" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
 
     <DirectoryRef Id="ApplicationProgramsFolder">
-      <Component Id="ApplicationShortcut" Guid="75B142AF-2BE2-4dce-B147-F8631E41B01B">
+      <Component Id="ApplicationShortcut" Guid="75B142AF-2BE2-4dce-B147-F8631E41B01B" Win64="no">
         <util:InternetShortcut Id="OnlineDocumentationShortcut"
                    Name="TracExplorer Online Documentation"
                    Target="http://tracexplorer.devjavu.com/"/>

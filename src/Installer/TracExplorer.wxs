@@ -7,7 +7,7 @@
   
   <?include Includes.wxi?>
 	<Product Id="*" 
-           Name="$(var.ProductName) $(var.VersionNumberUserVisible) $(var.StatusVersion)" 
+           Name="$(var.ProductName) $(var.VersionNumberUserVisible) $(var.PlatformUserVisible) $(var.StatusVersion)" 
            Language="1033" 
            Version="$(var.VersionNumberInternal)" 
            Manufacturer="TracExplorer" 
@@ -19,11 +19,18 @@
 		         Description="$(var.PackageDescription)"
 		         Comments="$(var.PackageComments)"
 		         Manufacturer="$(var.PackageManufacturer)"
+             Platforms="$(var.PackagePlatform)"
              Compressed="yes" />
 
 		<Media Id="1" Cabinet="Installer.cab" EmbedCab="yes" />
 
     <PropertyRef Id="NETFRAMEWORK20"/>
+
+    <?if $(var.Platform) = "x86" ?>
+      <Condition Message="TracExplorer installation on a 64-bit operating system requires the 64-bit TracExplorer installation package. Please get the 64-bit installer and try again.">
+        <![CDATA[Not VersionNT64]]>
+      </Condition>
+    <?endif?>
     <Condition Message="This application requires .NET Framework 2.0. Please install the .NET Framework then run this installer again.">
       <![CDATA[Installed OR NETFRAMEWORK20]]>
     </Condition>
@@ -71,12 +78,20 @@
              Description ="Common files"
              Level="1" Absent="disallow" >
       <ComponentRef Id="TracExplorer.Common.dll" />
+      <?if $(sys.BUILDARCH) = "x64" ?>
+        <ComponentRef Id="TracExplorer.Common.dll64" />
+        <ComponentRef Id="CookComputing.XmlRpcV2.dll64"/>
+      <?endif?>
       <ComponentRef Id="CookComputing.XmlRpcV2.dll"/>
       <ComponentRef Id="ApplicationShortcut" />
 		</Feature>
     <Feature Id="TSVNTrac" Title="Trac Provider for TortoiseSVN" 
              Description ="Uses the IBugTraqProvider from TortoiseSVN to select Trac tickets in the commit dialog"
              Level="1" Absent="allow">
+      <?if $(sys.BUILDARCH) = "x64" ?>
+        <ComponentRef Id="TracExplorer.TSVNTrac.dll64" />
+        <ComponentRef Id="Interop.BugTraqProvider.dll64"/>
+      <?endif?>
       <ComponentRef Id="TracExplorer.TSVNTrac.dll" />
       <ComponentRef Id="Interop.BugTraqProvider.dll"/>
     </Feature>

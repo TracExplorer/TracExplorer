@@ -14,4 +14,20 @@
 	<?define PackageManufacturer="Jan Linnenkohl" ?>
 	<?define TracExplorerOrg="http://tracexplorer.devjavu.com/"?>
 
+
+  <!-- Platform specifics ........................................................... -->
+  <?if $(sys.BUILDARCH) = "x64" ?>
+    <?define Win64YesNo="yes" ?>
+    <?define ReleasePath="Release64" ?>
+    <?define PlatformPathExtension="x64" ?>
+    <?define PackagePlatform="x64" ?>
+    <?define PlatformUserVisible="(64 bit)" ?>
+  <?else?>
+    <?define Win64YesNo="no" ?>
+    <?define ReleasePath="Release" ?>
+    <?define PlatformPathExtension="win32" ?>
+    <?define PackagePlatform="Intel" ?>
+    <?define PlatformUserVisible="(32 bit)" ?>
+  <?endif?>
+
 </Include>
