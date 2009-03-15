@@ -32,7 +32,7 @@ namespace TracExplorer.TSVNTrac
     [ComVisible(true),
      Guid("05BC2E49-E116-44e3-BF43-DD90EEC031DD"),
      ClassInterface(ClassInterfaceType.None)]
-    public class TracProvider : Interop.BugTraqProvider.IBugTraqProvider
+    public class TracProvider : Interop.BugTraqProvider.IBugTraqProvider2
     {
         #region IBugTraqProvider Members
 
@@ -234,5 +234,47 @@ namespace TracExplorer.TSVNTrac
             }
             return true;
         }
+
+        #region IBugTraqProvider2 Members
+
+        public string CheckCommit(IntPtr hParentWnd, string parameters, string commonURL, string commonRoot, string[] pathList, string commitMessage)
+        {
+            return "";
+        }
+
+        public string GetCommitMessage2(IntPtr hParentWnd, string parameters, string commonURL, string commonRoot, string[] pathList, string originalMessage, string bugID, out string bugIDOut, out string[] revPropNames, out string[] revPropValues)
+        {
+            bugIDOut = "";
+            revPropNames = null;
+            revPropValues = null;
+            return GetCommitMessage(hParentWnd, parameters, commonRoot, pathList, originalMessage);
+        }
+
+        public bool HasOptions()
+        {
+            return true;
+        }
+
+        public string OnCommitFinished(IntPtr hParentWnd, string commonRoot, string[] pathList, string logMessage, int revision)
+        {
+            return "";
+        }
+
+        public string ShowOptionsDialog(IntPtr hParentWnd, string parameters)
+        {
+            BrowserConnect parameterConnect = new BrowserConnect();
+            AddNewProviderForm form = new AddNewProviderForm(parameterConnect);
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                return AddDefaultSelections(form.Parameters, form.Selection);
+            }
+            else
+            {
+                return parameters;
+            }
+        }
+
+        #endregion
     }
 }
