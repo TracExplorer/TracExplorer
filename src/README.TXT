@@ -38,6 +38,15 @@ USAGE
 =====
 
 Please go to our main website for the documentation.
+
+BUILDING PROCEDURE (REQUIREMENTS)
+=================================
+ * .NET 2 framework
+ * Solution can be build by both VS2005 and VS2008. There are 2 solution files.
+ * Needs SubWCRev from TortoiseSVN installation for autmatic version numbering
+ * Uses the XMLRPC.NET library from http://www.xml-rpc.net/
+ * Requires Trac sites with an enabled [http://trac-hacks.org/wiki/XmlRpcPlugin XMLRPC plugin]
+ * Uses [http://wix.sourceforge.net/downloadv3.html WiX 3 beta] for the installation project 
      
 RELEASE PROCEDURE
 =================
