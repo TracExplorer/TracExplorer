@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A2C1F604-DF0D-4514-A2B0-8E2C30907F05}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -81,6 +81,7 @@
     <Compile Include="AddNewTicketQueryForm.Designer.cs">
       <DependentUpon>AddNewTicketQueryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AuthenticationTypes.cs" />
     <Compile Include="CertErrorForm.cs">
       <SubType>Form</SubType>
     </Compile>

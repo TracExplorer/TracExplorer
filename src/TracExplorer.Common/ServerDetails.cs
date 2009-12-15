@@ -31,7 +31,7 @@ namespace TracExplorer.Common
     {
         #region Private Variables
         private string server;
-        private bool authenticated;
+        private AuthenticationTypes requiredAuthentication;
         private string username;
         private byte[] encryptPassword;
         private List<TicketQueryDefinition> ticketQueries = new List<TicketQueryDefinition>();
@@ -46,10 +46,10 @@ namespace TracExplorer.Common
             set { this.server = value; }
         }
 
-        public bool Authenticated
+        public AuthenticationTypes RequiredAuthentication
         {
-            get { return this.authenticated; }
-            set { this.authenticated = value; }
+            get { return this.requiredAuthentication; }
+            set { this.requiredAuthentication = value; }
         }
 
         public string Username
@@ -127,15 +127,30 @@ namespace TracExplorer.Common
         public ServerDetails(string server)
         {
             this.Server = server;
+            this.RequiredAuthentication = AuthenticationTypes.None;
+        }
+
+        public ServerDetails(string server, bool bUseIntergratedAuthentication)
+        {
+            this.Server = server;
+            if (!bUseIntergratedAuthentication)
+            {
+                this.RequiredAuthentication = AuthenticationTypes.None;
+            }
+            else
+            {
+                this.requiredAuthentication = AuthenticationTypes.IntegratedAuthentication;
+            }
         }
 
         public ServerDetails(string server, string username, string password)
             : this(server)
         {
-            this.Authenticated = true;
+            this.RequiredAuthentication = AuthenticationTypes.BasicAuthentication;
             this.Username = username;
             this.Password = password;
         }
+
         #endregion
 
 

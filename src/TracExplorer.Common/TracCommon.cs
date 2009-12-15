@@ -94,8 +94,18 @@ namespace TracExplorer.Common
             trac.Proxy = WebRequest.DefaultWebProxy;
             trac.Url = serverDetails.XmlRpcUrl();
 
-            if (serverDetails.Authenticated)
-                trac.Credentials = new NetworkCredential(serverDetails.Username, serverDetails.Password);
+            switch (serverDetails.RequiredAuthentication)
+            {
+                case AuthenticationTypes.BasicAuthentication:
+                    trac.Credentials = new NetworkCredential(serverDetails.Username, serverDetails.Password);
+                    break;
+                case AuthenticationTypes.IntegratedAuthentication:
+                    trac.Credentials = CredentialCache.DefaultNetworkCredentials;
+                    break;
+                case AuthenticationTypes.None:
+                    trac.Credentials = null;
+                    break;
+            }
 
             return trac;
         }

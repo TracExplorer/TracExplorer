@@ -85,9 +85,33 @@ namespace TracExplorer.Common
                 MessageBox.Show("Please do not include the login/xmlrpc path. The basic trac path is sufficient.");
             }
             _server.Server = uriServer.ToString();
-            _server.Authenticated = chkAuthentication.Checked;
+            _server.RequiredAuthentication = SelectedAuthType();
             _server.Username = txtUsername.Text;
             _server.Password = txtPassword.Text;
+        }
+
+        public AuthenticationTypes SelectedAuthType()
+        {
+            AuthenticationTypes output = AuthenticationTypes.None;
+
+            if (rdoAuth_Basic.Checked)
+            {
+                output = AuthenticationTypes.BasicAuthentication;
+            }
+            else if (rdoAuth_Integrated.Checked)
+            {
+                output = AuthenticationTypes.IntegratedAuthentication;
+            }
+            else if (rdoAuth_None.Checked)
+            {
+                output = AuthenticationTypes.IntegratedAuthentication;
+            }
+            else
+            {
+                throw new ApplicationException("Unknown authentication type selected, which should be impossible!");
+            }
+
+            return output;
         }
 
         /// <summary>
@@ -99,15 +123,15 @@ namespace TracExplorer.Common
         {
             bool canMoveNext = true;
 
-            groupBox1.Enabled = chkAuthentication.Checked;
+            groupBox1.Enabled = rdoAuth_Basic.Checked;
 
             if (txtServer.Text.Trim().Length == 0)
                 canMoveNext = false;
 
-            if (chkAuthentication.Checked && txtUsername.Text.Trim().Length == 0)
+            if (rdoAuth_Basic.Checked && txtUsername.Text.Trim().Length == 0)
                 canMoveNext = false;
 
-            if (chkAuthentication.Checked && txtPassword.Text.Trim().Length == 0)
+            if (rdoAuth_Basic.Checked && txtPassword.Text.Trim().Length == 0)
                 canMoveNext = false;
 
             wizard1.NextEnabled = canMoveNext;
@@ -177,7 +201,18 @@ namespace TracExplorer.Common
                 txtServer.Text = _server.Server; 
                 txtUsername.Text = _server.Username; 
                 txtPassword.Text = _server.Password; 
-                chkAuthentication.Checked = _server.Authenticated; 
+                switch (_server.RequiredAuthentication)
+                {
+                    case AuthenticationTypes.BasicAuthentication:
+                        rdoAuth_Basic.Checked = true;
+                        break;
+                    case AuthenticationTypes.IntegratedAuthentication:
+                        rdoAuth_Integrated.Checked = true;
+                        break;
+                    case AuthenticationTypes.None:
+                        rdoAuth_None.Checked = true;
+                        break;
+                }
  
                 wizard1.NextEnabled = true; 
             } 
@@ -203,7 +238,7 @@ namespace TracExplorer.Common
             AddOnlyNewQuery(queries, new TicketQueryDefinition("All Tickets", "status!=non_existant_status"));
             AddOnlyNewQuery(queries,new TicketQueryDefinition("New Tickets", "status=new"));
             
-            if ( _server.Authenticated )
+            if ( _server.RequiredAuthentication != AuthenticationTypes.None )
             {
                 AddOnlyNewQuery(queries, new TicketQueryDefinition("My Active Tickets", "status!=closed&owner=" + _server.Username));
                 AddOnlyNewQuery(queries, new TicketQueryDefinition("My Active Tasks", "type=task&status!=closed&owner=" + _server.Username));
