@@ -2,10 +2,10 @@
 <Include Id="VersionNumberInclude">
   <!-- Manual settings -->
   <?define MajorVersion="0" ?>
-  <?define MinorVersion="1" ?>
+  <?define MinorVersion="2" ?>
   <?define MicroVersion="0" ?>
   <!-- SerStatusVersion to "Beta", "Alpha". For "Release" leave it blank -->
-  <?define StatusVersion="" ?>
+  <?define StatusVersion="Beta" ?>
   
 
   <!-- Automatic settings by SubWCRev from TortoiseSVN -->

@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("$WCURL$$WCMIXED?, Mixed version:$$WCMODS?, Local Modifications:$, Release")]
 #endif
 [assembly: AssemblyCompany("TracExplorer")]
-[assembly: AssemblyCopyright("Copyright ©  2008")]
+[assembly: AssemblyCopyright("Copyright ©  2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("TracExplorer Suite")]
@@ -25,6 +25,6 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion(              /*  Major.Minor.Build */ "0.1.0.$WCREV$")]
-[assembly: AssemblyFileVersion(          /*  Major.Minor.Build */ "0.1.0.$WCREV$")]
-[assembly: AssemblyInformationalVersion( /*  Major.Minor.Build */ "0.1.0.$WCREV$")]
+[assembly: AssemblyVersion(              /*  Major.Minor.Build */ "0.2.0.$WCREV$")]
+[assembly: AssemblyFileVersion(          /*  Major.Minor.Build */ "0.2.0.$WCREV$")]
+[assembly: AssemblyInformationalVersion( /*  Major.Minor.Build */ "0.2.0.$WCREV$")]
