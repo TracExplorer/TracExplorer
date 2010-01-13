@@ -114,7 +114,7 @@
       <Component Id="ApplicationShortcut" Guid="75B142AF-2BE2-4dce-B147-F8631E41B01B" Win64="no">
         <util:InternetShortcut Id="OnlineDocumentationShortcut"
                    Name="TracExplorer Online Documentation"
-                   Target="http://tracexplorer.devjavu.com/"/>
+                   Target="http://sourceforge.net/apps/trac/vstrac/wiki/"/>
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\TracExplorer" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
