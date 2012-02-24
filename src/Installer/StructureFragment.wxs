@@ -59,6 +59,7 @@
         <File Source='$(var.TracExplorer.VSTrac.ProjectDir)TracExplorer.VSTrac.AddIn' KeyPath="yes" Checksum="yes" />
         <RegistryValue Root="HKLM" Key="Software\Microsoft\VisualStudio\8.0\AutomationOptions\LookInFolders" Name="[INSTALL_BIN]" Type="string" Value="" Action="write"/>
         <RegistryValue Root="HKLM" Key="Software\Microsoft\VisualStudio\9.0\AutomationOptions\LookInFolders" Name="[INSTALL_BIN]" Type="string" Value="" Action="write"/>
+        <RegistryValue Root="HKLM" Key="Software\Microsoft\VisualStudio\10.0\AutomationOptions\LookInFolders" Name="[INSTALL_BIN]" Type="string" Value="" Action="write"/>
       </Component>
       <Component Id="CookComputing.XmlRpcV2.dll" Guid="A226D9F3-10A9-4391-924E-5B84099E70AE" Win64="no">
         <File Source="..\..\ext\xml-rpc.net\CookComputing.XmlRpcV2.dll" KeyPath="yes" Checksum="yes"/>
