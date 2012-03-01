@@ -169,8 +169,19 @@ namespace TracExplorer.Common
             try
             {
                 ITrac trac = TracCommon.GetTrac(ServerDetails);
-                
-                int[] tickets = trac.queryTickets(TicketDefinition.Filter);
+
+                List<int> tickets = new List<int>();
+
+                try
+                {
+                    for (int i = 1; i < 1000; i++)///TODO: replace 1000 by number of tickets/100
+                        tickets.AddRange(trac.queryTickets(string.Format("{0}&page={1}", TicketDefinition.Filter, i)));
+                }
+                catch (XmlRpcFaultException)
+                {
+                    //There are no more pages left to fetch   
+                }
+
                 List<MulticallItem> ticketItems = new List<MulticallItem>();
 
                 foreach (int id in tickets)
