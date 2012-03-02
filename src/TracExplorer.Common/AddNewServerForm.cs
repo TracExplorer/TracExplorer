@@ -123,7 +123,7 @@ namespace TracExplorer.Common
         {
             bool canMoveNext = true;
 
-            groupBox1.Enabled = rdoAuth_Basic.Checked;
+            grpBoxAuth.Enabled = rdoAuth_Basic.Checked;
 
             if (txtServer.Text.Trim().Length == 0)
                 canMoveNext = false;
@@ -324,6 +324,14 @@ namespace TracExplorer.Common
             {
                 chkSelectAll.CheckState = CheckState.Indeterminate;
             }
+        }
+
+        private void rdoAuth_Basic_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoAuth_Basic.Checked)
+                grpBoxAuth.Enabled = true;
+            else
+                grpBoxAuth.Enabled = false;
         }
     }
 }

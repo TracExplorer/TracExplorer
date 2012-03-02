@@ -30,6 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNewServerForm));
             this.wizard1 = new Gui.Wizard.Wizard();
+            this.wizardPage1 = new Gui.Wizard.WizardPage();
+            this.rdoAuth_Basic = new System.Windows.Forms.RadioButton();
+            this.rdoAuth_Integrated = new System.Windows.Forms.RadioButton();
+            this.rdoAuth_None = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.grpBoxAuth = new System.Windows.Forms.GroupBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtServer = new System.Windows.Forms.TextBox();
             this.wizardPage3 = new Gui.Wizard.WizardPage();
             this.chkSelectAll = new System.Windows.Forms.CheckBox();
             this.lstTicketQueries = new System.Windows.Forms.CheckedListBox();
@@ -38,23 +49,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblError = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.wizardPage1 = new Gui.Wizard.WizardPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtUsername = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtServer = new System.Windows.Forms.TextBox();
-            this.rdoAuth_None = new System.Windows.Forms.RadioButton();
-            this.rdoAuth_Integrated = new System.Windows.Forms.RadioButton();
-            this.rdoAuth_Basic = new System.Windows.Forms.RadioButton();
             this.wizard1.SuspendLayout();
+            this.wizardPage1.SuspendLayout();
+            this.grpBoxAuth.SuspendLayout();
             this.wizardPage3.SuspendLayout();
             this.wizardPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.wizardPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // wizard1
@@ -75,6 +75,128 @@
             this.wizard1.TabIndex = 0;
             this.wizard1.CloseFromCancel += new System.ComponentModel.CancelEventHandler(this.wizard1_CloseFromCancel);
             // 
+            // wizardPage1
+            // 
+            this.wizardPage1.Controls.Add(this.rdoAuth_Basic);
+            this.wizardPage1.Controls.Add(this.rdoAuth_Integrated);
+            this.wizardPage1.Controls.Add(this.rdoAuth_None);
+            this.wizardPage1.Controls.Add(this.label1);
+            this.wizardPage1.Controls.Add(this.grpBoxAuth);
+            this.wizardPage1.Controls.Add(this.txtServer);
+            this.wizardPage1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wizardPage1.IsFinishPage = false;
+            this.wizardPage1.Location = new System.Drawing.Point(0, 0);
+            this.wizardPage1.Name = "wizardPage1";
+            this.wizardPage1.Size = new System.Drawing.Size(411, 264);
+            this.wizardPage1.TabIndex = 1;
+            // 
+            // rdoAuth_Basic
+            // 
+            this.rdoAuth_Basic.AutoSize = true;
+            this.rdoAuth_Basic.Location = new System.Drawing.Point(12, 109);
+            this.rdoAuth_Basic.Name = "rdoAuth_Basic";
+            this.rdoAuth_Basic.Size = new System.Drawing.Size(122, 17);
+            this.rdoAuth_Basic.TabIndex = 6;
+            this.rdoAuth_Basic.Text = "Basic Authentication";
+            this.rdoAuth_Basic.UseVisualStyleBackColor = true;
+            this.rdoAuth_Basic.CheckedChanged += new System.EventHandler(this.rdoAuth_Basic_CheckedChanged);
+            // 
+            // rdoAuth_Integrated
+            // 
+            this.rdoAuth_Integrated.AutoSize = true;
+            this.rdoAuth_Integrated.Location = new System.Drawing.Point(12, 82);
+            this.rdoAuth_Integrated.Name = "rdoAuth_Integrated";
+            this.rdoAuth_Integrated.Size = new System.Drawing.Size(150, 17);
+            this.rdoAuth_Integrated.TabIndex = 5;
+            this.rdoAuth_Integrated.Text = "Integrated Authentication";
+            this.rdoAuth_Integrated.UseVisualStyleBackColor = true;
+            // 
+            // rdoAuth_None
+            // 
+            this.rdoAuth_None.AutoSize = true;
+            this.rdoAuth_None.Checked = true;
+            this.rdoAuth_None.Location = new System.Drawing.Point(12, 55);
+            this.rdoAuth_None.Name = "rdoAuth_None";
+            this.rdoAuth_None.Size = new System.Drawing.Size(111, 17);
+            this.rdoAuth_None.TabIndex = 4;
+            this.rdoAuth_None.TabStop = true;
+            this.rdoAuth_None.Text = "No Authentication";
+            this.rdoAuth_None.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Trac URL";
+            // 
+            // grpBoxAuth
+            // 
+            this.grpBoxAuth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpBoxAuth.Controls.Add(this.txtPassword);
+            this.grpBoxAuth.Controls.Add(this.label3);
+            this.grpBoxAuth.Controls.Add(this.txtUsername);
+            this.grpBoxAuth.Controls.Add(this.label2);
+            this.grpBoxAuth.Enabled = false;
+            this.grpBoxAuth.Location = new System.Drawing.Point(15, 136);
+            this.grpBoxAuth.Name = "grpBoxAuth";
+            this.grpBoxAuth.Size = new System.Drawing.Size(384, 103);
+            this.grpBoxAuth.TabIndex = 3;
+            this.grpBoxAuth.TabStop = false;
+            this.grpBoxAuth.Text = "Authentication";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPassword.Location = new System.Drawing.Point(6, 71);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(372, 21);
+            this.txtPassword.TabIndex = 3;
+            this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.TextChanged += new System.EventHandler(this.ControlChangedEvent);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 55);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Password";
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtUsername.Location = new System.Drawing.Point(6, 32);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(372, 21);
+            this.txtUsername.TabIndex = 1;
+            this.txtUsername.TextChanged += new System.EventHandler(this.ControlChangedEvent);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Username:";
+            // 
+            // txtServer
+            // 
+            this.txtServer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtServer.Location = new System.Drawing.Point(12, 25);
+            this.txtServer.Name = "txtServer";
+            this.txtServer.Size = new System.Drawing.Size(387, 21);
+            this.txtServer.TabIndex = 1;
+            this.txtServer.TextChanged += new System.EventHandler(this.ControlChangedEvent);
+            // 
             // wizardPage3
             // 
             this.wizardPage3.Controls.Add(this.chkSelectAll);
@@ -94,7 +216,7 @@
             this.chkSelectAll.AutoSize = true;
             this.chkSelectAll.Location = new System.Drawing.Point(16, 239);
             this.chkSelectAll.Name = "chkSelectAll";
-            this.chkSelectAll.Size = new System.Drawing.Size(143, 21);
+            this.chkSelectAll.Size = new System.Drawing.Size(118, 17);
             this.chkSelectAll.TabIndex = 2;
             this.chkSelectAll.Text = "Select / deselect all";
             this.chkSelectAll.UseVisualStyleBackColor = true;
@@ -106,7 +228,7 @@
             this.lstTicketQueries.FormattingEnabled = true;
             this.lstTicketQueries.Location = new System.Drawing.Point(12, 69);
             this.lstTicketQueries.Name = "lstTicketQueries";
-            this.lstTicketQueries.Size = new System.Drawing.Size(387, 156);
+            this.lstTicketQueries.Size = new System.Drawing.Size(387, 148);
             this.lstTicketQueries.TabIndex = 0;
             this.lstTicketQueries.SelectedValueChanged += new System.EventHandler(this.lstTicketQueries_SelectedValueChanged);
             // 
@@ -117,8 +239,8 @@
             this.label4.Size = new System.Drawing.Size(386, 62);
             this.label4.TabIndex = 1;
             this.label4.Text = "Please select which ticket queries you would like automatically added for this se" +
-                "rver. You can add more yourself once the server has been added the the Trac Expl" +
-                "orer.";
+    "rver. You can add more yourself once the server has been added the the Trac Expl" +
+    "orer.";
             // 
             // wizardPage2
             // 
@@ -156,134 +278,13 @@
             this.lblStatus.AutoSize = true;
             this.lblStatus.Location = new System.Drawing.Point(12, 9);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(76, 17);
+            this.lblStatus.Size = new System.Drawing.Size(62, 13);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Checking...";
             // 
-            // wizardPage1
-            // 
-            this.wizardPage1.Controls.Add(this.rdoAuth_Basic);
-            this.wizardPage1.Controls.Add(this.rdoAuth_Integrated);
-            this.wizardPage1.Controls.Add(this.rdoAuth_None);
-            this.wizardPage1.Controls.Add(this.label1);
-            this.wizardPage1.Controls.Add(this.groupBox1);
-            this.wizardPage1.Controls.Add(this.txtServer);
-            this.wizardPage1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wizardPage1.IsFinishPage = false;
-            this.wizardPage1.Location = new System.Drawing.Point(0, 0);
-            this.wizardPage1.Name = "wizardPage1";
-            this.wizardPage1.Size = new System.Drawing.Size(411, 264);
-            this.wizardPage1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Trac URL";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.txtPassword);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtUsername);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Enabled = false;
-            this.groupBox1.Location = new System.Drawing.Point(15, 136);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(384, 103);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Authentication";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPassword.Location = new System.Drawing.Point(6, 71);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(372, 24);
-            this.txtPassword.TabIndex = 3;
-            this.txtPassword.UseSystemPasswordChar = true;
-            this.txtPassword.TextChanged += new System.EventHandler(this.ControlChangedEvent);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 55);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Password";
-            // 
-            // txtUsername
-            // 
-            this.txtUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUsername.Location = new System.Drawing.Point(6, 32);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(372, 24);
-            this.txtUsername.TabIndex = 1;
-            this.txtUsername.TextChanged += new System.EventHandler(this.ControlChangedEvent);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Username:";
-            // 
-            // txtServer
-            // 
-            this.txtServer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtServer.Location = new System.Drawing.Point(12, 25);
-            this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(387, 24);
-            this.txtServer.TabIndex = 1;
-            this.txtServer.TextChanged += new System.EventHandler(this.ControlChangedEvent);
-            // 
-            // rdoAuth_None
-            // 
-            this.rdoAuth_None.AutoSize = true;
-            this.rdoAuth_None.Checked = true;
-            this.rdoAuth_None.Location = new System.Drawing.Point(12, 55);
-            this.rdoAuth_None.Name = "rdoAuth_None";
-            this.rdoAuth_None.Size = new System.Drawing.Size(138, 21);
-            this.rdoAuth_None.TabIndex = 4;
-            this.rdoAuth_None.TabStop = true;
-            this.rdoAuth_None.Text = "No Authentication";
-            this.rdoAuth_None.UseVisualStyleBackColor = true;
-            // 
-            // rdoAuth_Integrated
-            // 
-            this.rdoAuth_Integrated.AutoSize = true;
-            this.rdoAuth_Integrated.Location = new System.Drawing.Point(12, 82);
-            this.rdoAuth_Integrated.Name = "rdoAuth_Integrated";
-            this.rdoAuth_Integrated.Size = new System.Drawing.Size(185, 21);
-            this.rdoAuth_Integrated.TabIndex = 5;
-            this.rdoAuth_Integrated.Text = "Integrated Authentication";
-            this.rdoAuth_Integrated.UseVisualStyleBackColor = true;
-            // 
-            // rdoAuth_Basic
-            // 
-            this.rdoAuth_Basic.AutoSize = true;
-            this.rdoAuth_Basic.Location = new System.Drawing.Point(12, 109);
-            this.rdoAuth_Basic.Name = "rdoAuth_Basic";
-            this.rdoAuth_Basic.Size = new System.Drawing.Size(151, 21);
-            this.rdoAuth_Basic.TabIndex = 6;
-            this.rdoAuth_Basic.Text = "Basic Authentication";
-            this.rdoAuth_Basic.UseVisualStyleBackColor = true;
-            // 
             // AddNewServerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(411, 312);
             this.ControlBox = false;
@@ -296,15 +297,15 @@
             this.Text = "Add New Trac Server";
             this.Load += new System.EventHandler(this.AddNewServerForm_Load);
             this.wizard1.ResumeLayout(false);
+            this.wizardPage1.ResumeLayout(false);
+            this.wizardPage1.PerformLayout();
+            this.grpBoxAuth.ResumeLayout(false);
+            this.grpBoxAuth.PerformLayout();
             this.wizardPage3.ResumeLayout(false);
             this.wizardPage3.PerformLayout();
             this.wizardPage2.ResumeLayout(false);
             this.wizardPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.wizardPage1.ResumeLayout(false);
-            this.wizardPage1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -313,7 +314,7 @@
 
         private System.Windows.Forms.TextBox txtServer;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grpBoxAuth;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtUsername;
