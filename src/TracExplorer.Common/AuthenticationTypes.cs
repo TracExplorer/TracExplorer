@@ -8,6 +8,7 @@ namespace TracExplorer.Common
     {
         None,
         BasicAuthentication,
-        IntegratedAuthentication
+        IntegratedAuthentication,
+        ClientCertAuthentication
     }
 }

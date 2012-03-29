@@ -24,6 +24,7 @@ using System.Net;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using CookComputing.XmlRpc;
+using System.Windows;
 
 namespace TracExplorer.Common
 {
@@ -101,6 +102,37 @@ namespace TracExplorer.Common
                     break;
                 case AuthenticationTypes.IntegratedAuthentication:
                     trac.Credentials = CredentialCache.DefaultNetworkCredentials;
+                    break;
+                case AuthenticationTypes.ClientCertAuthentication:
+                    try
+                    {
+                        X509Store s = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+                        X509Certificate2Collection col;
+
+                        s.Open(OpenFlags.ReadOnly);
+                        col = s.Certificates.Find(X509FindType.FindBySubjectName, serverDetails.Username, true);
+                        if (col.Count == 1)
+                        {
+                            trac.ClientCertificates.Add(col[0]);
+                        }
+                        else
+                        {
+                            System.Windows.Forms.MessageBox.Show("No or multiple (" + col.Count + ") certificate with name [" + serverDetails.Username + "] found.");
+                        }
+                        s.Close();
+                    }
+                    catch (System.Security.Cryptography.CryptographicException s)
+                    {
+                        System.Windows.Forms.MessageBox.Show("CryptographicException: " + s.ToString());
+                    }
+                    catch (System.Security.SecurityException s)
+                    {
+                        System.Windows.Forms.MessageBox.Show("SecurityException: " + s.ToString());
+                    }
+                    catch (System.ArgumentException s)
+                    {
+                        System.Windows.Forms.MessageBox.Show("ArgumentException: " + s.ToString());
+                    }
                     break;
                 case AuthenticationTypes.None:
                     trac.Credentials = null;

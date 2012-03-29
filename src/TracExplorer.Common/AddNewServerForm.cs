@@ -102,6 +102,10 @@ namespace TracExplorer.Common
             {
                 output = AuthenticationTypes.IntegratedAuthentication;
             }
+            else if (rdoAuth_ClientCert.Checked)
+            {
+                output = AuthenticationTypes.ClientCertAuthentication;
+            }
             else if (rdoAuth_None.Checked)
             {
                 output = AuthenticationTypes.IntegratedAuthentication;
@@ -123,7 +127,8 @@ namespace TracExplorer.Common
         {
             bool canMoveNext = true;
 
-            grpBoxAuth.Enabled = rdoAuth_Basic.Checked;
+            grpBoxAuth.Enabled = rdoAuth_Basic.Checked || rdoAuth_ClientCert.Checked;
+            txtPassword.Enabled = rdoAuth_Basic.Checked;
 
             if (txtServer.Text.Trim().Length == 0)
                 canMoveNext = false;
@@ -132,6 +137,9 @@ namespace TracExplorer.Common
                 canMoveNext = false;
 
             if (rdoAuth_Basic.Checked && txtPassword.Text.Trim().Length == 0)
+                canMoveNext = false;
+
+            if (rdoAuth_ClientCert.Checked && txtUsername.Text.Trim().Length == 0)
                 canMoveNext = false;
 
             wizard1.NextEnabled = canMoveNext;
@@ -196,7 +204,7 @@ namespace TracExplorer.Common
         private void AddNewServerForm_Load(object sender, EventArgs e)
         {
             if (_server != null) 
-            { 
+            {
                 this.Text = Properties.Resources.CaptionEditServer; 
                 txtServer.Text = _server.Server; 
                 txtUsername.Text = _server.Username; 
@@ -208,6 +216,9 @@ namespace TracExplorer.Common
                         break;
                     case AuthenticationTypes.IntegratedAuthentication:
                         rdoAuth_Integrated.Checked = true;
+                        break;
+                    case AuthenticationTypes.ClientCertAuthentication:
+                        rdoAuth_ClientCert.Checked = true;
                         break;
                     case AuthenticationTypes.None:
                         rdoAuth_None.Checked = true;
@@ -326,12 +337,24 @@ namespace TracExplorer.Common
             }
         }
 
+        private void rdoAuth_None_CheckedChanged(object sender, EventArgs e)
+        {
+            ControlChangedEvent(sender, e);
+        }
+
+        private void rdoAuth_Integrated_CheckedChanged(object sender, EventArgs e)
+        {
+            ControlChangedEvent(sender, e);
+        }
+
         private void rdoAuth_Basic_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdoAuth_Basic.Checked)
-                grpBoxAuth.Enabled = true;
-            else
-                grpBoxAuth.Enabled = false;
+            ControlChangedEvent(sender, e);
+        }
+
+        private void rdoAuth_ClientCert_CheckedChanged(object sender, EventArgs e)
+        {
+            ControlChangedEvent(sender, e);
         }
     }
 }
