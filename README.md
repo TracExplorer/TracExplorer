@@ -13,7 +13,7 @@ This program comes with ABSOLUTELY NO WARRANTY; This is free software, and you a
 - Trac Explorer is developed and released under the GPL v3 licence.
 - XML-RPC.NET Copyright (c) 2006 Charles Cook
 - Wizard Control Copyright (c) 2004 Al Gardner http://www.codeproject.com/KB/miscctrl/DesignTimeWizard.aspx
-- SortableBindingList Copyright (c) 2007 Tim Van Wassenhove http://www.timvw.be/presenting-the-sortablebindinglistt/
+- SortableBindingList Copyright (c) 2007 Tim Van Wassenhove http://www.timvw.be/2008/08/02/presenting-the-sortablebindinglistt-take-two/
 
 
 ##DESCRIPTION
