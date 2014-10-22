@@ -1,4 +1,5 @@
 #Trac Explorer
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/TracExplorer/TracExplorer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ```
 Copyright (C) 2007-2008 Mladen Mihajlovic, Jan Linnenkohl
