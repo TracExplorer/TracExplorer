@@ -1,4 +1,9 @@
 #Trac Explorer
+
+[![Build status](https://ci.appveyor.com/api/projects/status/vjoyprlqmwpobqin?svg=true)](https://ci.appveyor.com/project/mmihajlovic/tracexplorer)
+
+[![openhub](https://www.openhub.net/p/tracexplorer/widgets/project_thin_badge.gif)](http://www.openhub.net/p/tracexplorer)
+
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/TracExplorer/TracExplorer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ```
