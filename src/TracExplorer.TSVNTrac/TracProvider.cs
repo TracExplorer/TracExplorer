@@ -245,8 +245,8 @@ namespace TracExplorer.TSVNTrac
         public string GetCommitMessage2(IntPtr hParentWnd, string parameters, string commonURL, string commonRoot, string[] pathList, string originalMessage, string bugID, out string bugIDOut, out string[] revPropNames, out string[] revPropValues)
         {
             bugIDOut = "";
-            revPropNames = null;
-            revPropValues = null;
+            revPropNames = new string[0];
+            revPropValues = new string[0];
             return GetCommitMessage(hParentWnd, parameters, commonRoot, pathList, originalMessage);
         }
 
